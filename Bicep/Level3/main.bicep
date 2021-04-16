@@ -22,7 +22,7 @@ param listOfAllowedSKUs array = [
 ]
 
 // RESOURCES
-module definitions './definitions.bicep' = {
+module definitions './r_definitions.bicep' = {
   name: 'definitions'
   params: {
     policySource: policySource
@@ -32,7 +32,7 @@ module definitions './definitions.bicep' = {
   }
 }
 
-module initiatives './initiatives.bicep' = {
+module initiatives './r_initiatives.bicep' = {
   name: 'initiatives'
   params: {
     policySource: policySource
@@ -43,7 +43,7 @@ module initiatives './initiatives.bicep' = {
   }
 }
 
-module assignments './assignments.bicep' = {
+module assignments './r_assignments.bicep' = {
   name: 'assignments'
   params: {
     policySource: policySource
