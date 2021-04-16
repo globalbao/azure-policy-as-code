@@ -1,5 +1,8 @@
 # Azure Policy As Code
 
+![Logo](Bicep/BicepPolicyExamples.png "Bicep Policy Examples")
+> *Bicep + Policy icons are from Microsoft*
+
 * Bicep
     * Level1
     * Level2
