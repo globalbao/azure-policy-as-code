@@ -34,6 +34,9 @@
         },
         "mandatoryTag1Value": {
             "value": "DevTest"
+        },
+        "nonComplianceMessageContactEmail": {
+            "value": "devtest-policyteam@mail.com"
         }
     }
 }

@@ -208,7 +208,7 @@ resource initiative2 'Microsoft.Authorization/policySetDefinitions@2019-09-01' =
   }
 }
 
-resource assignment1 'Microsoft.Authorization/policyAssignments@2019-09-01' = {
+resource assignment1 'Microsoft.Authorization/policyAssignments@2020-09-01' = {
   name: assignment1Name
   properties: {
     displayName: assignment1Name
@@ -230,7 +230,7 @@ resource assignment1 'Microsoft.Authorization/policyAssignments@2019-09-01' = {
   }
 }
 
-resource assignment2 'Microsoft.Authorization/policyAssignments@2019-09-01' = {
+resource assignment2 'Microsoft.Authorization/policyAssignments@2020-09-01' = {
   //level2
   name: assignment2Name
   location: assignmentIdentityLocation

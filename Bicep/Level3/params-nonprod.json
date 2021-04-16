@@ -32,6 +32,9 @@
         },
         "mandatoryTag1Value": {
             "value": "NonProd"
+        },
+        "nonComplianceMessageContactEmail": {
+            "value": "nonprod-policyteam@mail.com"
         }
     }
 }

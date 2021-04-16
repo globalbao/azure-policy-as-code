@@ -7,6 +7,7 @@ param assignmentEnforcementMode string = 'Default'
 param assignmentIdentityLocation string = 'australiaeast'
 param mandatoryTag1Key string = 'BicepTagName'
 param mandatoryTag1Value string = 'tempvalue'
+param nonComplianceMessageContactEmail string = 'tempemail@mail.com'
 param listOfAllowedLocations array = [
   'australiaeast'
   'australiasoutheast'
@@ -54,6 +55,7 @@ module assignments './r_assignments.bicep' = {
     listOfAllowedSKUs: listOfAllowedSKUs
     mandatoryTag1Key: mandatoryTag1Key
     mandatoryTag1Value: mandatoryTag1Value
+    nonComplianceMessageContactEmail: nonComplianceMessageContactEmail
     initiative1ID: initiatives.outputs.initiative1ID
     initiative2ID: initiatives.outputs.initiative2ID
   }

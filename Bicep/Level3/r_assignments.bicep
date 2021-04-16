@@ -11,6 +11,7 @@ param mandatoryTag1Key string
 param mandatoryTag1Value string
 param initiative1ID string //level3
 param initiative2ID string //level3
+param nonComplianceMessageContactEmail string //level3
 
 // VARIABLES
 var assignment1Name = 'Initiative1'
@@ -21,7 +22,7 @@ output assignment1ID string = assignment1.id
 output assignment2ID string = assignment2.id
 
 // RESOURCES
-resource assignment1 'Microsoft.Authorization/policyAssignments@2019-09-01' = {
+resource assignment1 'Microsoft.Authorization/policyAssignments@2020-09-01' = {
   name: assignment1Name
   properties: {
     displayName: assignment1Name
@@ -40,10 +41,15 @@ resource assignment1 'Microsoft.Authorization/policyAssignments@2019-09-01' = {
         value: listOfAllowedSKUs
       }
     }
+    nonComplianceMessages: [
+      {
+        message: 'Your Resource deployment is not compliant with the ${assignment1Name} policy. Please contact ${nonComplianceMessageContactEmail}'
+      }
+    ]
   }
 }
 
-resource assignment2 'Microsoft.Authorization/policyAssignments@2019-09-01' = {
+resource assignment2 'Microsoft.Authorization/policyAssignments@2020-09-01' = {
   //level2
   name: assignment2Name
   location: assignmentIdentityLocation
@@ -67,5 +73,10 @@ resource assignment2 'Microsoft.Authorization/policyAssignments@2019-09-01' = {
         value: mandatoryTag1Value
       }
     }
+    nonComplianceMessages: [
+      {
+        message: 'Your Resource deployment is not compliant with the ${assignment1Name} policy. Please contact ${nonComplianceMessageContactEmail}'
+      }
+    ]
   }
 }
