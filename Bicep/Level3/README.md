@@ -2,8 +2,8 @@
 
 * Uses built-in policies and custom policies
 * Uses multiple initiatives and assignments
-• Advanced modules organised per resource type
-• CI/CD workflow automation with GitHub Actions YAML
+* Advanced modules organised per resource type
+* CI/CD workflow automation with GitHub Actions YAML
 * Targeting multiple Azure environments with authentication via GitHub secrets
 * Uses parameter files for environment-specfic values passed during deployment
 
