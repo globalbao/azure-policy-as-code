@@ -7,6 +7,7 @@
     * Uses an initiative and assignment
     * 1x main.bicep
     * Manual CLI deployment
+
 * **Level 2**
     * Uses built-in policies and custom policies
     * Uses multiple initiatives and assignments
@@ -14,6 +15,7 @@
     * Manual CLI deployment
     * Targeting multiple Azure environments
     * Uses parameter files for environment-specfic values passed during deployment
+
 * **Level 3**
     * Uses built-in policies and custom policies
     * Uses multiple initiatives and assignments
