@@ -36,9 +36,6 @@ param listOfAllowedSKUs array = [
   'Standard_B4ms'
   'Standard_B4s'
 ]
-
-param mandatoryTag1Key string = 'BicepTagName' //level2
-param mandatoryTag1Value string //level2
 ```
 
 **Environment-specific**
@@ -65,7 +62,7 @@ az deployment sub create -f ./main.bicep -l australiaeast -p ./params-devtest.js
 az account set -s 'xxxx-xxxx-xxxx-xxxx-xxxx'
 az deployment sub create -f ./main.bicep -l australiaeast -p ./params-nonprod.json
 
-# required steps - deploy to nonprod
+# required steps - deploy to prod
 az account set -s 'xxxx-xxxx-xxxx-xxxx-xxxx'
 az deployment sub create -f ./main.bicep -l australiaeast -p ./params-prod.json
 
