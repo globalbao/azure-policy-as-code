@@ -1,0 +1,37 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "assignmentEnforcementMode": {
+            "value": "Default"
+        },
+        "listOfAllowedLocations": {
+            "value": [
+                "australiaeast",
+                "australiasoutheast"
+            ]
+        },
+        "listOfAllowedSKUs": {
+            "value": [
+                "Standard_B1ls",
+                "Standard_B1ms",
+                "Standard_B1s",
+                "Standard_B2ms",
+                "Standard_B2s",
+                "Standard_B4ms",
+                "Standard_B4s",
+                "Standard_D2s_v3",
+                "Standard_D4s_v3"
+            ]
+        },
+        "assignmentIdentityLocation": {
+            "value": "australiaeast"
+        },
+        "mandatoryTag1Key": {
+            "value": "BicepTagName"
+        },
+        "mandatoryTag1Value": {
+            "value": "NonProd"
+        }
+    }
+}

@@ -1,0 +1,23 @@
+name: Bicep-CI
+on:
+  push:
+    branches: [ main ]
+    paths:
+    - '**.bicep'
+  pull_request:
+    branches: [ main ]
+    paths:
+    - '**.bicep'
+  schedule:
+  - cron: "0 0 * * *" #at the end of every day
+    
+jobs:
+
+  Bicep-CI:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Bicep CI
+      uses: aliencube/bicep-build-actions@v0.1
+      with:
+        files: ./Bicep/Level3/main.bicep
