@@ -3,7 +3,24 @@
 ![Logo](BicepPolicyExamples.png "Bicep Policy Examples")
 > *Bicep + Policy icons are from Microsoft*
 
-* Bicep
-    * Level1
-    * Level2
-    * Level3
+## Bicep
+
+* **Level 1**
+    * Uses built-in policies
+    * Uses an initiative and assignment
+    * 1x main.bicep
+    * Manual CLI deployment
+* **Level 2**
+    * Uses built-in policies and custom policies
+    * Uses multiple initiatives and assignments
+    * 1x main.bicep
+    * Manual CLI deployment
+    * Targeting multiple Azure environments
+    * Uses parameter files for environment-specfic values passed during deployment
+* **Level 3**
+    * Uses built-in policies and custom policies
+    * Uses multiple initiatives and assignments
+    * Advanced modules organised per resource type
+    * CI/CD workflow automation with GitHub Actions YAML
+    * Targeting multiple Azure environments with authentication via GitHub secrets
+    * Uses parameter files for environment-specfic values passed during deployment
