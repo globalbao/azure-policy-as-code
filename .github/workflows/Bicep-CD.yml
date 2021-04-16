@@ -1,0 +1,94 @@
+name: Bicep-CD
+on:
+  push:
+    branches: [ main ]
+    paths:
+    - '**.bicep'
+  workflow_dispatch:
+#   schedule:
+#   - cron: "0 0 * * *" #at the end of every day
+    
+jobs:
+
+  DEVTEST-BICEP-CD:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS_DEVTEST }}
+    - name: Bicep CD
+      id: bicepCD
+      continue-on-error: true
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az deployment sub create -n devtest-bicep-cd -f ./Bicep/Level3/main.bicep -l australiaeast -p ./Bicep/Level3/params-devtest.json -o none
+    - name: Sleep for 30s
+      if: ${{ steps.bicepCD.outcome == 'failure' && steps.bicepCD.conclusion == 'success' }}
+      uses: juliangruber/sleep-action@v1
+      with:
+        time: 30s
+    - name: Bicep CD Retry
+      if: ${{ steps.bicepCD.outcome == 'failure' && steps.bicepCD.conclusion == 'success' }}
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az deployment sub create -n devtest-bicep-cd -f ./Bicep/Level3/main.bicep -l australiaeast -p ./Bicep/Level3/params-devtest.json -o none
+
+  NONPROD-BICEP-CD:
+    needs: DEVTEST-BICEP-CD
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS_NONPROD }}
+    - name: Bicep CD
+      id: bicepCD
+      continue-on-error: true
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az deployment sub create -n nonprod-bicep-cd -f ./Bicep/Level3/main.bicep -l australiaeast -p ./Bicep/Level3/params-nonprod.json -o none
+    - name: Sleep for 30s
+      if: ${{ steps.bicepCD.outcome == 'failure' && steps.bicepCD.conclusion == 'success' }}
+      uses: juliangruber/sleep-action@v1
+      with:
+        time: 30s
+    - name: Bicep CD Retry
+      if: ${{ steps.bicepCD.outcome == 'failure' && steps.bicepCD.conclusion == 'success' }}
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az deployment sub create -n nonprod-bicep-cd -f ./Bicep/Level3/main.bicep -l australiaeast -p ./Bicep/Level3/params-nonprod.json -o none
+
+  PROD-BICEP-CD:
+    needs: NONPROD-BICEP-CD
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS_PROD }}
+    - name: Bicep CD
+      id: bicepCD
+      continue-on-error: true
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az deployment sub create -n prod-bicep-cd -f ./Bicep/Level3/main.bicep -l australiaeast -p ./Bicep/Level3/params-prod.json -o none
+    - name: Sleep for 30s
+      if: ${{ steps.bicepCD.outcome == 'failure' && steps.bicepCD.conclusion == 'success' }}
+      uses: juliangruber/sleep-action@v1
+      with:
+        time: 30s
+    - name: Bicep CD Retry
+      if: ${{ steps.bicepCD.outcome == 'failure' && steps.bicepCD.conclusion == 'success' }}
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az deployment sub create -n prod-bicep-cd -f ./Bicep/Level3/main.bicep -l australiaeast -p ./Bicep/Level3/params-prod.json -o none
