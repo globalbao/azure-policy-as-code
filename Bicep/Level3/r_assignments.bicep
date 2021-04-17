@@ -77,6 +77,10 @@ resource assignment2 'Microsoft.Authorization/policyAssignments@2020-09-01' = {
       {
         message: 'Your Resource deployment is not compliant with the ${assignment1Name} policy. Please contact ${nonComplianceMessageContactEmail}'
       }
+      {
+        message: 'The mandatory tag key ${mandatoryTag1Key} is missing from your resource. Please add it or contact ${nonComplianceMessageContactEmail}'
+        policyDefinitionReferenceId: 'Add tag to resource group'
+      }
     ]
   }
 }

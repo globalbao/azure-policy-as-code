@@ -31,7 +31,7 @@ output initiative1ID string = initiative1.id
 output assignment1ID string = assignment1.id
 
 // RESOURCES
-resource initiative1 'Microsoft.Authorization/policySetDefinitions@2019-09-01' = {
+resource initiative1 'Microsoft.Authorization/policySetDefinitions@2020-09-01' = {
   name: initiative1Name
   properties: {
     policyType: 'Custom'

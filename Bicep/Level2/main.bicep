@@ -97,7 +97,7 @@ resource policy 'Microsoft.Authorization/policyDefinitions@2020-09-01' = {
   }
 }
 
-resource initiative1 'Microsoft.Authorization/policySetDefinitions@2019-09-01' = {
+resource initiative1 'Microsoft.Authorization/policySetDefinitions@2020-09-01' = {
   name: initiative1Name
   properties: {
     policyType: 'Custom'
@@ -163,7 +163,7 @@ resource initiative1 'Microsoft.Authorization/policySetDefinitions@2019-09-01' =
   }
 }
 
-resource initiative2 'Microsoft.Authorization/policySetDefinitions@2019-09-01' = {
+resource initiative2 'Microsoft.Authorization/policySetDefinitions@2020-09-01' = {
   //level2
   name: initiative2Name
   properties: {

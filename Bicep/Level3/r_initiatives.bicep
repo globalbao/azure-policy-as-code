@@ -16,7 +16,7 @@ output initiative1ID string = initiative1.id
 output initiative2ID string = initiative2.id
 
 // RESOURCES
-resource initiative1 'Microsoft.Authorization/policySetDefinitions@2019-09-01' = {
+resource initiative1 'Microsoft.Authorization/policySetDefinitions@2020-09-01' = {
   name: initiative1Name
   properties: {
     policyType: 'Custom'
@@ -49,6 +49,7 @@ resource initiative1 'Microsoft.Authorization/policySetDefinitions@2019-09-01' =
       {
         //Allowed locations for resource groups
         policyDefinitionId: '/providers/Microsoft.Authorization/policyDefinitions/e765b5de-1225-4ba3-bd56-1ac6695af988'
+        policyDefinitionReferenceId: 'Allowed locations for resource groups'
         parameters: {
           listOfAllowedLocations: {
             value: '[parameters(\'listOfAllowedLocations\')]'
@@ -58,6 +59,7 @@ resource initiative1 'Microsoft.Authorization/policySetDefinitions@2019-09-01' =
       {
         //Allowed locations
         policyDefinitionId: '/providers/Microsoft.Authorization/policyDefinitions/e56962a6-4747-49cd-b67b-bf8b01975c4c'
+        policyDefinitionReferenceId: 'Allowed locations'
         parameters: {
           listOfAllowedLocations: {
             value: '[parameters(\'listOfAllowedLocations\')]'
@@ -67,6 +69,7 @@ resource initiative1 'Microsoft.Authorization/policySetDefinitions@2019-09-01' =
       {
         //Allowed virtual machine size SKUs
         policyDefinitionId: '/providers/Microsoft.Authorization/policyDefinitions/cccc23c7-8427-4f53-ad12-b6a63eb452b3'
+        policyDefinitionReferenceId: 'Allowed virtual machine size SKUs'
         parameters: {
           listOfAllowedSKUs: {
             value: '[parameters(\'listOfAllowedSKUs\')]'
@@ -76,13 +79,14 @@ resource initiative1 'Microsoft.Authorization/policySetDefinitions@2019-09-01' =
       {
         //Audit virtual machines without disaster recovery configured
         policyDefinitionId: '/providers/Microsoft.Authorization/policyDefinitions/0015ea4d-51ff-4ce3-8d8c-f3f8f0179a56'
+        policyDefinitionReferenceId: 'Audit virtual machines without disaster recovery configured'
         parameters: {}
       }
     ]
   }
 }
 
-resource initiative2 'Microsoft.Authorization/policySetDefinitions@2019-09-01' = {
+resource initiative2 'Microsoft.Authorization/policySetDefinitions@2020-09-01' = {
   //level2
   name: initiative2Name
   properties: {
@@ -114,6 +118,7 @@ resource initiative2 'Microsoft.Authorization/policySetDefinitions@2019-09-01' =
       {
         //Add tag to resource group
         policyDefinitionId: customPolicyID //level3
+        policyDefinitionReferenceId: 'Add tag to resource group'
         parameters: {
           tagName: {
             value: '[parameters(\'tagName\')]'
