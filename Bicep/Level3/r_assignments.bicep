@@ -73,7 +73,7 @@ resource assignment2 'Microsoft.Authorization/policyAssignments@2020-09-01' = {
         value: mandatoryTag1Value
       }
     }
-    nonComplianceMessages: [
+    nonComplianceMessages: [ //level3
       {
         message: 'Your Resource deployment is not compliant with the ${assignment1Name} policy. Please contact ${nonComplianceMessageContactEmail}'
       }
