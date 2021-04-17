@@ -2,6 +2,8 @@
 
 * Uses built-in policies and custom policies
 * Uses multiple initiatives and assignments
+* Custom policyDefinitionReferenceId for initiatives
+* Custom non-compliance msgs for assignments targeted to the policyDefinitionReferenceId
 * Advanced modules organised per resource type
 * CI/CD workflow automation with GitHub Actions YAML
 * Targeting multiple Azure environments with authentication via GitHub secrets
