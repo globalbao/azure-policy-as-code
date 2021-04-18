@@ -7,6 +7,8 @@
 * Targeting multiple Azure environments
 * Uses parameter files for environment-specfic values passed during deployment
 
+[YouTube Video Timestamp 50m 3s](https://www.youtube.com/watch?v=qpnMJXw6pIg&t=50m3s)
+
 ## Minimum Prerequisities
 
 * [azure-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) version 2.20.0

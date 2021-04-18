@@ -5,6 +5,8 @@
 * 1x main.bicep
 * Manual CLI deployment
 
+[YouTube Video Timestamp 16m 10s](https://www.youtube.com/watch?v=qpnMJXw6pIg&t=16m10s)
+
 ## Minimum Prerequisities
 
 * [azure-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) version 2.20.0
