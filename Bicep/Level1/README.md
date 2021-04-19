@@ -50,7 +50,7 @@ az login
 az deployment sub create -f ./main.bicep -l australiaeast
 
 # optional step to trigger a subscription-level policy compliance scan 
-az policy state trigger-scan
+az policy state trigger-scan --no-wait
 ```
 
 ### Azure Resource Manager (ARM) Template References
