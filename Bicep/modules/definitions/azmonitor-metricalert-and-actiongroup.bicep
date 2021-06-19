@@ -11,6 +11,7 @@ param actionGroupID string
 
 // OUTPUTS
 output policyID string = policy.id
+output policyName string = policy.name
 output policyDisplayName string = policy.properties.displayName
 
 // RESOURCES

@@ -2,29 +2,29 @@ targetScope = 'subscription'
 
 // PARAMETERS
 param resourceGroupName string
-param resourceGrouplocation string
 param actionGroupName string
 param actionGroupID string
-param actionGroupEnabled bool
-param actionGroupShortName string
-param actionGroupEmailName string
-param actionGroupEmail string
-param actionGroupAlertSchema bool
-param assignmentEnforcementMode string
-param assignmentIdentityLocation string
 param dcrResourceID string
 param policySource string
 param policyCategory string
 param mandatoryTag1Key string
 param mandatoryTag1Value string
 
-// RESOURCES
-output policyID1 string = policy1.outputs.policyID
-output policyID2 string = policy2.outputs.policyID
-output policyID3 string = policy3.outputs.policyID
+// OUTPUTS
+output policyIDs array = [
+  policy0.outputs.policyID
+  policy1.outputs.policyID
+  policy2.outputs.policyID
+]
+
+output policyNames array = [
+  policy0.outputs.policyName
+  policy1.outputs.policyName
+  policy2.outputs.policyName
+]
 
 // RESOURCES
-module policy1 './azmonitor-metricalert-and-actiongroup.bicep' = {
+module policy0 './azmonitor-metricalert-and-actiongroup.bicep' = {
   name: 'azmonitor-metricalert-and-actiongroup'
   params: {
     policySource: policySource
@@ -35,7 +35,7 @@ module policy1 './azmonitor-metricalert-and-actiongroup.bicep' = {
   }
 }
 
-module policy2 './azmonitor-agent-and-dcr-association.bicep' = {
+module policy1 './azmonitor-agent-and-dcr-association.bicep' = {
   name: 'azmonitor-agent-and-dcr-association'
   params: {
     policySource: policySource
@@ -44,7 +44,7 @@ module policy2 './azmonitor-agent-and-dcr-association.bicep' = {
   }
 }
 
-module policy3 './add-tag-to-rg.bicep' = {
+module policy2 './add-tag-to-rg.bicep' = {
   name: 'add-tag-to-rg'
   params: {
     policySource: policySource

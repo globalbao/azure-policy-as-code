@@ -8,6 +8,17 @@ param nonComplianceMessageContactEmail string
 param monitoringGovernanceID string
 param tagGovernanceID string
 
+// OUTPUTS
+output assignmentNames array = [
+  monitoringGovernanceAssignment.name
+  tagGovernanceAssignment.name
+]
+
+output roleAssignmentIDs array = [
+  monitoringGovernanceRoleAssignment.id
+  tagGovernanceRoleAssignment.id
+]
+
 // RESOURCES
 resource monitoringGovernanceAssignment 'Microsoft.Authorization/policyAssignments@2020-09-01' = {
   name: 'monitoringGovernanceAssignment'

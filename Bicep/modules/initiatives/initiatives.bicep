@@ -8,8 +8,15 @@ param tagGovernancePolicyIDs array
 // VARIABLES
 
 // OUTPUTS
-output monitoringGovernanceID string = monitoringGovernance.id
-output tagGovernanceID string = tagGovernance.id
+output initiativeIDs array = [
+  monitoringGovernance.id
+  tagGovernance.id
+]
+
+output initiativeNames array = [
+  monitoringGovernance.name
+  tagGovernance.name
+]
 
 // RESOURCES
 
@@ -48,4 +55,3 @@ resource tagGovernance 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
     }]
   }
 }
-
