@@ -10,7 +10,8 @@ on:
     - '**.bicep'
   schedule:
   - cron: "0 0 * * *" #at the end of every day
-    
+  workflow_dispatch:
+
 jobs:
 
   Bicep-CI:
