@@ -48,7 +48,6 @@ module assignments './r_assignments.bicep' = {
   name: 'assignments'
   params: {
     policySource: policySource
-    policyCategory: policyCategory
     assignmentIdentityLocation: assignmentIdentityLocation
     assignmentEnforcementMode: assignmentEnforcementMode
     listOfAllowedLocations: listOfAllowedLocations
