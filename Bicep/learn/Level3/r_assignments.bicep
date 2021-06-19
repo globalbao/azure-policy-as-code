@@ -2,7 +2,6 @@ targetScope = 'subscription'
 
 // PARAMETERS
 param policySource string
-param policyCategory string
 param assignmentIdentityLocation string
 param assignmentEnforcementMode string
 param listOfAllowedLocations array
