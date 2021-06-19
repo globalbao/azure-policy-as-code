@@ -18,6 +18,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Bicep CI
-      uses: aliencube/bicep-build-actions@v0.1
+      uses: aliencube/bicep-build-actions@v0.3
       with:
-        files: ./Bicep/Level3/main.bicep
+        files: '**/*.bicep'
