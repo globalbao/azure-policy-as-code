@@ -14,9 +14,10 @@ param assignmentIdentityLocation string = 'australiaeast'
 param dcrResourceID string = '0123456789'
 param policySource string = 'globalbao/azure-policy-as-code'
 param policyCategory string = 'Custom'
-param nonComplianceMessageContactEmail string = 'testemail@mail.com'
 param mandatoryTag1Key string = 'CostCentre'
 param mandatoryTag1Value string = '123456'
+param mandatoryTag2Key string = 'Owner'
+param tagOwnerValue string = 'HBO Intern'
 
 // OUTPUTS
 
@@ -26,7 +27,8 @@ output resourceNamesForCleanup array = [
   initiatives.outputs.initiativeNames
   assignments.outputs.assignmentNames
   assignments.outputs.roleAssignmentIDs
-  definitions.outputs.policyNames
+  definitions.outputs.monitoringGovernancePolicies
+  definitions.outputs.tagGovernancePolicies
 ]
 
 // RESOURCES
@@ -35,6 +37,7 @@ module rg './other-resources/resourceGroups.bicep' = {
   params: {
     resourceGroupName: resourceGroupName
     resourceGrouplocation: resourceGrouplocation
+    tagOwnerValue: tagOwnerValue
   }
 }
 
@@ -65,6 +68,7 @@ module definitions './definitions/definitions.bicep' = {
     dcrResourceID: dcrResourceID
     mandatoryTag1Key: mandatoryTag1Key
     mandatoryTag1Value: mandatoryTag1Value
+    mandatoryTag2Key: mandatoryTag2Key
   }
 }
 
@@ -76,27 +80,19 @@ module initiatives './initiatives/initiatives.bicep' = {
   params: {
     policySource: policySource
     policyCategory: policyCategory
-    monitoringGovernancePolicyIDs: [
-      definitions.outputs.policyIDs[0]
-      definitions.outputs.policyIDs[1]
-    ]
-    tagGovernancePolicyIDs: [
-      definitions.outputs.policyIDs[2]
-    ]
+    tagGovernancePolicies: definitions.outputs.tagGovernancePolicies
+    monitoringGovernancePolicies: definitions.outputs.monitoringGovernancePolicies
   }
 }
 
 module assignments './assignments/assignments.bicep' = {
   name: 'assignments'
-  dependsOn: [
-    initiatives
-  ]
   params: {
     policySource: policySource
     assignmentIdentityLocation: assignmentIdentityLocation
     assignmentEnforcementMode: assignmentEnforcementMode
-    nonComplianceMessageContactEmail: nonComplianceMessageContactEmail
     monitoringGovernanceID: initiatives.outputs.initiativeIDs[0]
     tagGovernanceID: initiatives.outputs.initiativeIDs[1]
+    mandatoryTag2Key: mandatoryTag2Key
   }
 }

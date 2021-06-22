@@ -4,9 +4,9 @@ targetScope = 'subscription'
 param policySource string = 'Bicep'
 param assignmentIdentityLocation string
 param assignmentEnforcementMode string
-param nonComplianceMessageContactEmail string
 param monitoringGovernanceID string
 param tagGovernanceID string
+param mandatoryTag2Key string
 
 // OUTPUTS
 output assignmentNames array = [
@@ -35,11 +35,6 @@ resource monitoringGovernanceAssignment 'Microsoft.Authorization/policyAssignmen
       version: '0.1.0'
     }
     policyDefinitionId: monitoringGovernanceID
-    nonComplianceMessages: [
-      {
-        message: 'Your Resource deployment is not compliant with the Monitoring Governance Assignment/Initiative policy. Please contact ${nonComplianceMessageContactEmail}'
-      }
-    ]
   }
 }
 
@@ -60,7 +55,11 @@ resource tagGovernanceAssignment 'Microsoft.Authorization/policyAssignments@2020
     policyDefinitionId: tagGovernanceID
     nonComplianceMessages: [
       {
-        message: 'Your Resource deployment is not compliant with the Tag Governance Assignment/Initiative policy. Please contact ${nonComplianceMessageContactEmail}'
+        message: '***DENIED*** Missing Mandatory tag. ***DENIED***'
+      }
+      {
+        message: '***DENIED*** Missing ${mandatoryTag2Key} tag. Please update your resource to include the ${mandatoryTag2Key} tag. ***DENIED***'
+        policyDefinitionReferenceId: 'requireTagToRG_${mandatoryTag2Key}'
       }
     ]
   }

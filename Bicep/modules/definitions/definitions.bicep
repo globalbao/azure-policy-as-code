@@ -9,18 +9,29 @@ param policySource string
 param policyCategory string
 param mandatoryTag1Key string
 param mandatoryTag1Value string
+param mandatoryTag2Key string
 
 // OUTPUTS
-output policyIDs array = [
-  policy0.outputs.policyID
-  policy1.outputs.policyID
-  policy2.outputs.policyID
+output tagGovernancePolicies array = [
+  {
+    id: policy2.outputs.policyID
+    name: policy2.outputs.policyName
+  }
+  {
+    id: policy3.outputs.policyID
+    name: policy3.outputs.policyName
+  }
 ]
 
-output policyNames array = [
-  policy0.outputs.policyName
-  policy1.outputs.policyName
-  policy2.outputs.policyName
+output monitoringGovernancePolicies array = [
+  {
+    id: policy0.outputs.policyID
+    name: policy0.outputs.policyName
+  }
+  {
+    id: policy1.outputs.policyID
+    name: policy1.outputs.policyName
+  }
 ]
 
 // RESOURCES
@@ -51,5 +62,14 @@ module policy2 './add-tag-to-rg.bicep' = {
     policyCategory: policyCategory
     mandatoryTag1Key: mandatoryTag1Key
     mandatoryTag1Value: mandatoryTag1Value
+  }
+}
+
+module policy3 './require-tag-to-rg.bicep' = {
+  name: 'require-tag-to-rg'
+  params: {
+    policySource: policySource
+    policyCategory: policyCategory
+    mandatoryTag2Key: mandatoryTag2Key
   }
 }

@@ -3,8 +3,9 @@ targetScope = 'subscription'
 // PARAMETERS   
 param policySource string = 'Bicep'
 param policyCategory string = 'Custom'
-param monitoringGovernancePolicyIDs array
-param tagGovernancePolicyIDs array
+param tagGovernancePolicies array
+param monitoringGovernancePolicies array
+
 // VARIABLES
 
 // OUTPUTS
@@ -32,8 +33,9 @@ resource monitoringGovernance 'Microsoft.Authorization/policySetDefinitions@2020
       version: '0.1.0'
     }
     parameters: {}
-    policyDefinitions: [for (policy, index) in monitoringGovernancePolicyIDs: {
-      policyDefinitionId: '${policy}'
+    policyDefinitions: [for (policy, index) in monitoringGovernancePolicies: {
+      policyDefinitionId: '${policy.id}'
+      policyDefinitionReferenceId: '${policy.name}'
     }]
   }
 }
@@ -50,8 +52,9 @@ resource tagGovernance 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
       version: '0.1.0'
     }
     parameters: {}
-    policyDefinitions: [for (policy, index) in tagGovernancePolicyIDs: {
-      policyDefinitionId: '${policy}'
+    policyDefinitions: [for (policy, index) in tagGovernancePolicies: {
+      policyDefinitionId: '${policy.id}'
+      policyDefinitionReferenceId: '${policy.name}'
     }]
   }
 }
