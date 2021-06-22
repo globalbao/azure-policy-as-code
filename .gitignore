@@ -35,3 +35,4 @@ override.tf.json
 
 # Ignore shell script which may contain secrets for authN
 devscript.sh
+deleteResources.azcli
