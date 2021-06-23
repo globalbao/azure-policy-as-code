@@ -96,3 +96,13 @@ module assignments './assignments/assignments.bicep' = {
     mandatoryTag2Key: mandatoryTag2Key
   }
 }
+
+module exemptions './exemptions/exemptions.bicep' = {
+  scope: resourceGroup(resourceGroupName)
+  name: 'exemptions'
+  params: {
+    policySource: policySource
+    mandatoryTag2Key: mandatoryTag2Key
+    assignmentID: assignments.outputs.assignmentIDs[1]
+  }
+}

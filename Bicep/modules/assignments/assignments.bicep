@@ -19,6 +19,11 @@ output roleAssignmentIDs array = [
   tagGovernanceRoleAssignment.id
 ]
 
+output assignmentIDs array = [
+  monitoringGovernanceAssignment.id
+  tagGovernanceAssignment.id
+]
+
 // RESOURCES
 resource monitoringGovernanceAssignment 'Microsoft.Authorization/policyAssignments@2020-09-01' = {
   name: 'monitoringGovernanceAssignment'

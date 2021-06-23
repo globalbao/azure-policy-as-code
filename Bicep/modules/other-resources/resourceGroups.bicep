@@ -18,3 +18,11 @@ resource rg 'Microsoft.Resources/resourceGroups@2020-06-01' = {
     Owner: tagOwnerValue
   }
 }
+
+// resource rg2 'Microsoft.Resources/resourceGroups@2020-06-01' = {
+//   name: 'testRG'
+//   location: resourceGrouplocation
+//   // tags: {
+//   //   Owner: tagOwnerValue
+//   // }
+// }
