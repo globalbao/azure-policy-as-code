@@ -210,6 +210,7 @@ resource policy 'Microsoft.Authorization/policyDefinitions@2020-09-01' = {
                 details: {
                     type: 'Microsoft.Insights/dataCollectionRuleAssociations'
                     name: dcrAssociationName
+                    evaluationdelay: 'AfterProvisioningSuccess'
                     roleDefinitionIds: [
                         '/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c' // contributor RBAC role for deployIfNotExists effect
                     ]

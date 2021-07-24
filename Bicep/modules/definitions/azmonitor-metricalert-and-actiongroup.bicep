@@ -44,10 +44,11 @@ resource policy 'Microsoft.Authorization/policyDefinitions@2020-09-01' = {
             then: {
                 effect: 'deployIfNotExists'
                 details: {
-                    roleDefinitionIds: [
-                        '/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c' // contributor RBAC role for deployIfNotExists effect
-                    ]
                     type: 'Microsoft.Insights/metricAlerts'
+                    evaluationdelay: 'AfterProvisioningSuccess'
+                    roleDefinitionIds: [
+                        '/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c'
+                    ]
                     existenceCondition: {
                         allOf: [
                             {
