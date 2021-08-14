@@ -1,15 +1,33 @@
-name: Azure-Policy-as-Code-CD
+name: Terraform-Tests
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
+    paths:
+    - '**.tf'
   pull_request:
-    branches: [ master ]
-  #schedule:
-  #- cron: "0 0 * * *" #at the end of every day
+    branches: [ main ]
+    paths:
+    - '**.tf'
+  schedule:
+  - cron: "0 0 * * *" #at the end of every day
+  workflow_dispatch:
     
 jobs:
 
-  Azure-Policy-as-Code-CD:
+  Terraform-ValidationTests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Validate Terraform
+      uses: docker://ghcr.io/github/super-linter:slim-v4
+      env:
+        VALIDATE_ALL_CODEBASE: false
+        DEFAULT_BRANCH: main
+        VALIDATE_TERRAFORM: true
+        VALIDATE_TERRAFORM_TERRASCAN: true
+
+  Terraform-CD:
+    needs: Terraform-ValidationTests
     env:
         ARM_CLIENT_ID: ${{ secrets.az_client_id }}
         ARM_CLIENT_SECRET: ${{ secrets.az_client_secret }}
@@ -18,23 +36,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
     - uses: hashicorp/setup-terraform@v1.2.1
       with:
         cli_config_credentials_token: ${{ secrets.TF_TOKEN }}
         terraform_version: 0.13.4
       
-    - name: Terraform fmt
-      id: fmt
-      run: terraform fmt -recursive
-
     - name: Terraform Init
       id: init
       run: terraform init -backend-config=backend.hcl -no-color
 
-    - name: Terraform Validate
-      id: validate
-      run: terraform validate -no-color
-
     - name: Terraform Apply
       id: apply
       run: terraform apply -auto-approve -no-color
+
+    - name: Terraform Destroy
+      id: destroy
+      run: terraform destroy -auto-approve -no-color

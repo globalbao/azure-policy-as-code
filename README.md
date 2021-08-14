@@ -1,5 +1,5 @@
 # Azure-Policy-As-Code
-[![Bicep-CI](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Bicep-CI.yml/badge.svg)](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Bicep-CI.yml) [![Super Linter](https://github.com/globalbao/azure-policy-as-code/actions/workflows/super-linter.yml/badge.svg)](https://github.com/globalbao/azure-policy-as-code/actions/workflows/super-linter.yml)
+[![Bicep-Tests](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Bicep-Tests.yml/badge.svg)](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Bicep-Tests.yml)[![Terraform-Tests](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Terraform-Tests.yml/badge.svg)](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Terraform-Tests.yml)
 
 Azure Policy as Code is the combination of IaC and DevOps ensuring governance at scale is shifted away from click-ops and after-hours support towards a codified, policy-driven strategy.
 
