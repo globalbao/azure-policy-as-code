@@ -5,7 +5,6 @@
 *.tfstate
 *.tfstate.*
 *.lock.hcl
-backend.hcl
 
 # Crash log files
 crash.log
