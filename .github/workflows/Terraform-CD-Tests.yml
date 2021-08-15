@@ -1,10 +1,6 @@
-name: Terraform-Tests
+name: Terraform-CD-Tests
 on:
   push:
-    branches: [ main ]
-    paths:
-    - '**.tf'
-  pull_request:
     branches: [ main ]
     paths:
     - '**.tf'
@@ -22,13 +18,15 @@ jobs:
         fetch-depth: 0
     - name: Validate Terraform
       uses: docker://ghcr.io/github/super-linter:slim-v4
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
       env:
         VALIDATE_ALL_CODEBASE: false
         DEFAULT_BRANCH: main
         VALIDATE_TERRAFORM: true
         VALIDATE_TERRAFORM_TERRASCAN: true
 
-  Terraform-CD:
+  Terraform-CD-Tests:
     env:
       TF_IN_AUTOMATION: true
       TF_INPUT: false
