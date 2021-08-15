@@ -16,10 +16,10 @@ jobs:
 
   Terraform-ValidationTests:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: Terraform
     steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: Validate Terraform
       uses: docker://ghcr.io/github/super-linter:slim-v4
       env:
