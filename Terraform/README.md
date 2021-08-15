@@ -344,12 +344,16 @@ terraform apply
 
 * You can setup a new Azure [service principal](https://www.terraform.io/docs/providers/azurerm/guides/service_principal_client_secret.html) to your subscription for Terraform to use.
 * Assign the ["Resource Policy Contributor"](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#resource-policy-contributor) built-in role for least amount of privileges required for the resources in this module.
+* For the SPN to manage role assignments (required for policy assignments containing deployIfNotExists/modify policies) you can assign the ["User Access Administrator"](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#user-access-administrator) built-in role.
 
 ```azurecli
 az login
 az account list
 az account set --subscription="XXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXX"
 az ad sp create-for-rbac --name "Terraform-AzureRM-Policy" --role="Resource Policy Contributor" --scopes="/subscriptions/XXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXX"
+
+#optional
+az ad sp create-for-rbac --name "Terraform-AzureRM-Policy" --role="User Access Administrator" --scopes="/subscriptions/XXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXX"
 ```
 
 * Store your Azure service principal credentials as per below in a .tfvars file e.g. `subscriptionName1.tfvars` to call when using terraform plan/apply.
