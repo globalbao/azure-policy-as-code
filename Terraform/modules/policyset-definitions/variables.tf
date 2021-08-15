@@ -64,7 +64,6 @@ variable "builtin_policies_security_governance" {
     "Storage accounts should allow access from trusted Microsoft services",
     "RDP access from the Internet should be blocked",
     "SSH access from the Internet should be blocked",
-    "Disk encryption should be applied on virtual machines",
     "Automation account variables should be encrypted",
     "Azure subscriptions should have a log profile for Activity Log",
     "Email notification to subscription owner for high severity alerts should be enabled",
