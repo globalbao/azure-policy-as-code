@@ -14,19 +14,19 @@ on:
     
 jobs:
 
-  Terraform-ValidationTests:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        path: Terraform
-    - name: Validate Terraform
-      uses: docker://ghcr.io/github/super-linter:slim-v4
-      env:
-        VALIDATE_ALL_CODEBASE: false
-        DEFAULT_BRANCH: main
-        VALIDATE_TERRAFORM: true
-        VALIDATE_TERRAFORM_TERRASCAN: true
+#   Terraform-ValidationTests:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v2
+#       with:
+#         path: Terraform
+#     - name: Validate Terraform
+#       uses: docker://ghcr.io/github/super-linter:slim-v4
+#       env:
+#         VALIDATE_ALL_CODEBASE: false
+#         DEFAULT_BRANCH: main
+#         VALIDATE_TERRAFORM: true
+#         VALIDATE_TERRAFORM_TERRASCAN: true
 
   Terraform-CD:
     needs: Terraform-ValidationTests
