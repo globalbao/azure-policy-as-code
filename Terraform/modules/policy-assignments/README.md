@@ -22,11 +22,11 @@ Learning resources :books:
 
 | Resource Type | Resource name | Deployment Count
 |:--------------|:--------------|:----------------
-| azurerm_policy_assignment | `monitoring_governance` | 1
-| azurerm_policy_assignment | `tag_governance` | 1
-| azurerm_policy_assignment | `iam_governance` | 1
-| azurerm_policy_assignment | `security_governance` | 1
-| azurerm_policy_assignment | `data_protection_governance` | 1
+| azurerm_subscription_policy_assignment | `monitoring_governance` | 1
+| azurerm_subscription_policy_assignment | `tag_governance` | 1
+| azurerm_subscription_policy_assignment | `iam_governance` | 1
+| azurerm_subscription_policy_assignment | `security_governance` | 1
+| azurerm_subscription_policy_assignment | `data_protection_governance` | 1
 
 ## Terraform input variables (variables.tf)
 
@@ -42,11 +42,11 @@ Learning resources :books:
 
 | Name | Description | Value
 |:-------|:-----------|:----------
-| `monitoring_governance_assignment_id` | The policy assignment id for monitoring_governance | azurerm_policy_assignment.monitoring_governance.id
-| `monitoring_governance_assignment_identity` | The policy assignment identity for monitoring_governance | azurerm_policy_assignment.monitoring_governance.identity
-| `tag_governance_assignment_id` | The policy assignment id for tag_governance | azurerm_policy_assignment.tag_governance.id
-| `tag_governance_assignment_identity` | The policy assignment identity for tag_governance | azurerm_policy_assignment.tag_governance.identity
-| `iam_governance_assignment_id` | The policy assignment id for iam_governance | azurerm_policy_assignment.iam_governance.id
-| `security_governance_assignment_id` | The policy assignment id for security_governance | azurerm_policy_assignment.security_governance.id
-| `security_governance_assignment_identity` | The policy assignment identity for security_governance | azurerm_policy_assignment.security_governance.identity
-| `data_protection_governance_assignment_id` | The policy assignment id for data_protection_governance | azurerm_policy_assignment.data_protection_governance.id
+| `monitoring_governance_assignment_id` | The policy assignment id for monitoring_governance | azurerm_subscription_policy_assignment.monitoring_governance.id
+| `monitoring_governance_assignment_identity` | The policy assignment identity for monitoring_governance | azurerm_subscription_policy_assignment.monitoring_governance.identity
+| `tag_governance_assignment_id` | The policy assignment id for tag_governance | azurerm_subscription_policy_assignment.tag_governance.id
+| `tag_governance_assignment_identity` | The policy assignment identity for tag_governance | azurerm_subscription_policy_assignment.tag_governance.identity
+| `iam_governance_assignment_id` | The policy assignment id for iam_governance | azurerm_subscription_policy_assignment.iam_governance.id
+| `security_governance_assignment_id` | The policy assignment id for security_governance | azurerm_subscription_policy_assignment.security_governance.id
+| `security_governance_assignment_identity` | The policy assignment identity for security_governance | azurerm_subscription_policy_assignment.security_governance.identity
+| `data_protection_governance_assignment_id` | The policy assignment id for data_protection_governance | azurerm_subscription_policy_assignment.data_protection_governance.id

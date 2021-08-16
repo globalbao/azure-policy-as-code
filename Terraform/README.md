@@ -50,11 +50,11 @@ Learning resources :books:
 | policyset_definitions  | azurerm_policy_set_definition | `iam_governance`                         | 1
 | policyset_definitions  | azurerm_policy_set_definition | `security_governance`                    | 1
 | policyset_definitions  | azurerm_policy_set_definition | `data_protection_governance`             | 1
-| policy_assignments     | azurerm_policy_assignment     | `monitoring_governance`                  | 1
-| policy_assignments     | azurerm_policy_assignment     | `tag_governance`                         | 1
-| policy_assignments     | azurerm_policy_assignment     | `iam_governance`                         | 1
-| policy_assignments     | azurerm_policy_assignment     | `security_governance`                    | 1
-| policy_assignments     | azurerm_policy_assignment     | `data_protection_governance`             | 1
+| policy_assignments     | azurerm_subscription_policy_assignment     | `monitoring_governance`                  | 1
+| policy_assignments     | azurerm_subscription_policy_assignment     | `tag_governance`                         | 1
+| policy_assignments     | azurerm_subscription_policy_assignment     | `iam_governance`                         | 1
+| policy_assignments     | azurerm_subscription_policy_assignment     | `security_governance`                    | 1
+| policy_assignments     | azurerm_subscription_policy_assignment     | `data_protection_governance`             | 1
 
 
 ## Terraform input variables (variables.tf)
