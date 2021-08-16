@@ -50,8 +50,3 @@ jobs:
         id: apply
         run: terraform apply -auto-approve -no-color
         working-directory: Terraform
-
-      - name: Terraform Destroy
-        id: destroy
-        run: terraform destroy -auto-approve -no-color
-        working-directory: Terraform
