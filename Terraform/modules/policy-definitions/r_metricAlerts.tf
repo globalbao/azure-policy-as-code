@@ -23,6 +23,7 @@ METADATA
     "then": {
       "effect": "deployIfNotExists",
       "details": {
+        "evaluationdelay": "AfterProvisioningSuccess",
         "roleDefinitionIds": [
           "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
           ],
@@ -195,6 +196,7 @@ METADATA
     "then": {
       "effect": "deployIfNotExists",
       "details": {
+        "evaluationdelay": "AfterProvisioningSuccess",
         "roleDefinitionIds": [
           "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
           ],
@@ -372,6 +374,7 @@ METADATA
     "then": {
       "effect": "deployIfNotExists",
       "details": {
+        "evaluationdelay": "AfterProvisioningSuccess",
         "roleDefinitionIds": [
           "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
           ],
@@ -549,6 +552,7 @@ METADATA
     "then": {
       "effect": "deployIfNotExists",
       "details": {
+        "evaluationdelay": "AfterProvisioningSuccess",
         "roleDefinitionIds": [
           "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
           ],
@@ -726,6 +730,7 @@ METADATA
     "then": {
       "effect": "deployIfNotExists",
       "details": {
+        "evaluationdelay": "AfterProvisioningSuccess",
         "roleDefinitionIds": [
           "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
           ],
@@ -903,6 +908,7 @@ METADATA
     "then": {
       "effect": "deployIfNotExists",
       "details": {
+        "evaluationdelay": "AfterProvisioningSuccess",
         "roleDefinitionIds": [
           "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
           ],
@@ -1080,6 +1086,7 @@ METADATA
     "then": {
       "effect": "deployIfNotExists",
       "details": {
+        "evaluationdelay": "AfterProvisioningSuccess",
         "roleDefinitionIds": [
           "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
           ],
@@ -1264,6 +1271,7 @@ METADATA
     "then": {
       "effect": "deployIfNotExists",
       "details": {
+        "evaluationdelay": "AfterProvisioningSuccess",
         "roleDefinitionIds": [
           "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
           ],
@@ -1448,6 +1456,7 @@ METADATA
     "then": {
       "effect": "deployIfNotExists",
       "details": {
+        "evaluationdelay": "AfterProvisioningSuccess",
         "roleDefinitionIds": [
           "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
           ],
@@ -1632,6 +1641,7 @@ METADATA
     "then": {
       "effect": "deployIfNotExists",
       "details": {
+        "evaluationdelay": "AfterProvisioningSuccess",
         "roleDefinitionIds": [
           "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
           ],
@@ -1809,6 +1819,7 @@ METADATA
     "then": {
       "effect": "deployIfNotExists",
       "details": {
+        "evaluationdelay": "AfterProvisioningSuccess",
         "roleDefinitionIds": [
           "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
           ],
@@ -1986,6 +1997,7 @@ METADATA
     "then": {
       "effect": "deployIfNotExists",
       "details": {
+        "evaluationdelay": "AfterProvisioningSuccess",
         "roleDefinitionIds": [
           "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
           ],
@@ -2154,6 +2166,7 @@ METADATA
     "then": {
       "effect": "deployIfNotExists",
       "details": {
+        "evaluationdelay": "AfterProvisioningSuccess",
         "roleDefinitionIds": [
           "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
           ],
