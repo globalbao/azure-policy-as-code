@@ -169,7 +169,7 @@ METADATA
     reference_id         = "(linuxPerformanceLogs)Configure Association to link Linux virtual machines to Data Collection Rule"
     parameter_values = jsonencode(
       {
-        "DcrResourceId" : { value = "/subscriptions/42482d91-3f4f-4012-8e45-78bf7ad4d60c/resourceGroups/DataCollectionRules/providers/Microsoft.Insights/dataCollectionRules//subscriptions/42482d91-3f4f-4012-8e45-78bf7ad4d60c/resourceGroups/DataCollectionRules/providers/Microsoft.Insights/dataCollectionRules/linuxPerformanceLogs" }
+        "DcrResourceId" : { value = "/subscriptions/42482d91-3f4f-4012-8e45-78bf7ad4d60c/resourceGroups/DataCollectionRules/providers/Microsoft.Insights/dataCollectionRules/linuxPerformanceLogs" }
       }
     )
   }
