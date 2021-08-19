@@ -34,6 +34,12 @@ variable "custom_policies_sentinel_governance" {
   default     = []
 }
 
+variable "custom_policies_logging_governance" {
+  type        = list(map(string))
+  description = "List of custom policy definitions for the logging_governance policyset"
+  default     = []
+}
+
 variable "builtin_policies_iam_governance" {
   type        = list(any)
   description = "List of built-in policy definitions (display names) for the iam_governance policyset"
@@ -94,7 +100,6 @@ variable "builtin_policies_logging_governance" {
     "Deploy - Configure diagnostic settings for SQL Databases to Log Analytics workspace"
   ]
 }
-
 
 data "azurerm_policy_definition" "builtin_policies_iam_governance" {
   count        = length(var.builtin_policies_iam_governance)

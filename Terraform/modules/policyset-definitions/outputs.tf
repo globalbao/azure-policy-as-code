@@ -23,7 +23,12 @@ output "data_protection_governance_policyset_id" {
   description = "The policy set definition id for data_protection_governance"
 }
 
-output "logging_governance_policyset_id" {
-  value       = azurerm_policy_set_definition.logging_governance.id
-  description = "The policy set definition id for logging_governance"
+output "logging_governance_dev_policyset_id" {
+  value       = azurerm_policy_set_definition.logging_governance_dev.id
+  description = "The policy set definition id for logging_governance_dev"
+}
+
+output "logging_governance_prod_policyset_id" {
+  value       = azurerm_policy_set_definition.logging_governance_prod.id
+  description = "The policy set definition id for logging_governance_prod"
 }
