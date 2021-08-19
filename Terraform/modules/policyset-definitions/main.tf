@@ -159,7 +159,7 @@ METADATA
     reference_id         = "(linuxSecurityLogs)Configure Association to link Linux virtual machines to Data Collection Rule"
     parameter_values = jsonencode(
       {
-        "DcrResourceId" : { value = "/subscriptions/42482d91-3f4f-4012-8e45-78bf7ad4d60c/resourceGroups/DataCollectionRules/providers/Microsoft.Insights/dataCollectionRules/linuxSecurityLogs" }
+        "dcrResourceId" : { value = "/subscriptions/42482d91-3f4f-4012-8e45-78bf7ad4d60c/resourceGroups/DataCollectionRules/providers/Microsoft.Insights/dataCollectionRules/linuxSecurityLogs" }
       }
     )
   }
@@ -169,7 +169,7 @@ METADATA
     reference_id         = "(linuxPerformanceLogs)Configure Association to link Linux virtual machines to Data Collection Rule"
     parameter_values = jsonencode(
       {
-        "DcrResourceId" : { value = "/subscriptions/42482d91-3f4f-4012-8e45-78bf7ad4d60c/resourceGroups/DataCollectionRules/providers/Microsoft.Insights/dataCollectionRules/linuxPerformanceLogs" }
+        "dcrResourceId" : { value = "/subscriptions/42482d91-3f4f-4012-8e45-78bf7ad4d60c/resourceGroups/DataCollectionRules/providers/Microsoft.Insights/dataCollectionRules/linuxPerformanceLogs" }
       }
     )
   }
@@ -184,7 +184,7 @@ METADATA
     reference_id         = "(windowsSecurityLogs)Configure Association to link Windows virtual machines to Data Collection Rule"
     parameter_values = jsonencode(
       {
-        "DcrResourceId" : { value = "/subscriptions/42482d91-3f4f-4012-8e45-78bf7ad4d60c/resourceGroups/DataCollectionRules/providers/Microsoft.Insights/dataCollectionRules/windowsSecurityLogs" }
+        "dcrResourceId" : { value = "/subscriptions/42482d91-3f4f-4012-8e45-78bf7ad4d60c/resourceGroups/DataCollectionRules/providers/Microsoft.Insights/dataCollectionRules/windowsSecurityLogs" }
       }
     )
   }
@@ -194,7 +194,7 @@ METADATA
     reference_id         = "(windowsPerformanceLogs)Configure Association to link Windows virtual machines to Data Collection Rule"
     parameter_values = jsonencode(
       {
-        "DcrResourceId" : { value = "/subscriptions/42482d91-3f4f-4012-8e45-78bf7ad4d60c/resourceGroups/DataCollectionRules/providers/Microsoft.Insights/dataCollectionRules/windowsPerformanceLogs" }
+        "dcrResourceId" : { value = "/subscriptions/42482d91-3f4f-4012-8e45-78bf7ad4d60c/resourceGroups/DataCollectionRules/providers/Microsoft.Insights/dataCollectionRules/windowsPerformanceLogs" }
       }
     )
   }
