@@ -1,4 +1,3 @@
-
 output "expressRouteCircuit_arpAvailability_policy_id" {
   value       = azurerm_policy_definition.expressRouteCircuit_arpAvailability.id
   description = "The policy definition id for expressRouteCircuit_arpAvailability"
