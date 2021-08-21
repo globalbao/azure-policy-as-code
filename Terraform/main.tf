@@ -221,35 +221,3 @@ module "policyset_definitions" {
   ]
 
 }
-
-
-module "policy_exemptions" {
-  source  = "globalbao/policy-exemptions/azurerm"
-  version = "0.1.0"
-  policyExemptions = {
-    exemption1 = {
-      deploymentMode     = "Incremental"
-      name               = "logging_governance_prod"
-      displayName        = "logging_governance_prod exemption for CriticalInfrastructure RG"
-      description        = "logging_governance_prod exemption waives compliance on the CriticalInfrastructure RG"
-      resourceGroupName  = "CriticalInfrastructure"
-      policyAssignmentId = "/subscriptions/42482d91-3f4f-4012-8e45-78bf7ad4d60c/providers/Microsoft.Authorization/policyAssignments/logging_governance_prod"
-      policyDefinitionReferenceIds = [
-        "Configure Linux virtual machines with Azure Monitor Agent",
-        "(linuxSecurityLogs)Configure Association to link Linux virtual machines to Data Collection Rule",
-        "(linuxPerformanceLogs)Configure Association to link Linux virtual machines to Data Collection Rule",
-        "Configure Windows virtual machines with Azure Monitor Agent",
-        "(windowsSecurityLogs)Configure Association to link Windows virtual machines to Data Collection Rule",
-        "(windowsPerformanceLogs)Configure Association to link Windows virtual machines to Data Collection Rule"
-      ]
-      exemptionCategory = "Waiver"
-      expiresOn         = "2022-01-30"
-      metadata = {
-        "requestedBy" : "Critical Infra Team",
-        "approvedBy" : "JesseLoudon",
-        "approvedOn" : "2021-08-19",
-        "ticketRef" : "SR-123456"
-      }
-    }
-  }
-}
