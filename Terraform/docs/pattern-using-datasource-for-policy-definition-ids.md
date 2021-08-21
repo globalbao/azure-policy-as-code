@@ -67,11 +67,11 @@ resource "azurerm_policy_set_definition" "security_governance" {
   display_name = "Security Governance"
   description  = "Contains common Security Governance policies"
 
-  metadata = <<METADATA
+  metadata = jsonencode(
     {
     "category": "${var.policyset_definition_category}"
     }
-METADATA
+)
 
   policy_definitions = <<POLICY_DEFINITIONS
     [

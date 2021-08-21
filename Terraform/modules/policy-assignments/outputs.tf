@@ -38,22 +38,12 @@ output "data_protection_governance_assignment_id" {
   description = "The policy assignment id for data_protection_governance"
 }
 
-output "logging_governance_dev_assignment_id" {
-  value       = azurerm_resource_group_policy_assignment.logging_governance_dev.id
-  description = "The policy assignment id for logging_governance_dev"
-}
-
-output "logging_governance_dev_assignment_identity" {
-  value       = azurerm_resource_group_policy_assignment.logging_governance_dev.identity
-  description = "The policy assignment identity for logging_governance_dev"
-}
-
-output "logging_governance_prod_assignment_id" {
-  value       = azurerm_subscription_policy_assignment.logging_governance_prod.id
+output "logging_governance_assignment_id" {
+  value       = azurerm_subscription_policy_assignment.logging_governance.id
   description = "The policy assignment id for logging_governance_prod"
 }
 
-output "logging_governance_prod_assignment_identity" {
-  value       = azurerm_subscription_policy_assignment.logging_governance_prod.identity
-  description = "The policy assignment identity for logging_governance_prod"
+output "logging_governance_assignment_identity" {
+  value       = azurerm_subscription_policy_assignment.logging_governance.identity
+  description = "The policy assignment identity for logging_governance"
 }

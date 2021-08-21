@@ -22,8 +22,7 @@ module "policy_assignments" {
   iam_governance_policyset_id             = module.policyset_definitions.iam_governance_policyset_id
   security_governance_policyset_id        = module.policyset_definitions.security_governance_policyset_id
   data_protection_governance_policyset_id = module.policyset_definitions.data_protection_governance_policyset_id
-  logging_governance_dev_policyset_id     = module.policyset_definitions.logging_governance_dev_policyset_id
-  logging_governance_prod_policyset_id    = module.policyset_definitions.logging_governance_prod_policyset_id
+  logging_governance_policyset_id         = module.policyset_definitions.logging_governance_policyset_id
 }
 
 module "policy_definitions" {

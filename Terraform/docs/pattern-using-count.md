@@ -56,13 +56,13 @@ Specific variable index items can also be referenced using `${var.variableName[0
   mode         = "All"
   display_name = "Add tag ${var.mandatory_tag_keys[count.index]} to resource group"
   description  = "Adds the mandatory tag key ${var.mandatory_tag_keys[count.index]} when any resource group missing this tag is created or updated. \nExisting resource groups can be remediated by triggering a remediation task.\nIf the tag exists with a different value it will not be changed."
-  metadata = <<METADATA
+  metadata = jsonencode(
     {
     "category": "${var.policy_definition_category}",
     "version" : "1.0.0"
     }
-METADATA
-  policy_rule = <<POLICY_RULE
+)
+  policy_rule = jsonencode(
     {
         "if": {
           "allOf": [
@@ -92,8 +92,8 @@ METADATA
           }
         }
   }
-POLICY_RULE
-  parameters = <<PARAMETERS
+)
+  parameters = jsonencode(
     {
         "tagName": {
           "type": "String",
@@ -112,7 +112,7 @@ POLICY_RULE
           "defaultValue": "'${var.mandatory_tag_value}'"
         }
   }
-PARAMETERS
+)
 }
 ```
 

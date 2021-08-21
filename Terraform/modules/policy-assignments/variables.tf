@@ -26,12 +26,7 @@ variable "data_protection_governance_policyset_id" {
   description = "The policy set definition id for data_protection_governance"
 }
 
-variable "logging_governance_dev_policyset_id" {
+variable "logging_governance_policyset_id" {
   type        = string
-  description = "The policy set definition id for logging_governance_dev"
-}
-
-variable "logging_governance_prod_policyset_id" {
-  type        = string
-  description = "The policy set definition id for logging_governance_prod"
+  description = "The policy set definition id for logging_governance"
 }
