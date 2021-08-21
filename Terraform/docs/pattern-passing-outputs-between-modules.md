@@ -73,11 +73,11 @@ resource "azurerm_policy_set_definition" "tag_governance" {
   policy_type  = "Custom"
   display_name = "Tag Governance"
   description  = "Contains common Tag Governance policies"
-  metadata = <<METADATA
+  metadata = jsonencode(
     {
     "category": "${var.policyset_definition_category}"
     }
-METADATA
+)
   policy_definitions = <<POLICY_DEFINITIONS
     [
         {
