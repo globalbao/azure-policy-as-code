@@ -1,4 +1,4 @@
-# AzureRM Policy - Terraform parent module
+# Azure-Policy-As-Code/Terraform
 
 Get in touch :octocat:
 

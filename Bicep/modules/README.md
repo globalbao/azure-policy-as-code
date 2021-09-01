@@ -1,9 +1,24 @@
-# Bicep\modules
+# Azure-Policy-As-Code/Bicep/Modules
 
-![RepoLogo](x_docs/BicepPolicyExamples.png "Bicep Policy Examples")
+Get in touch :octocat:
 
-Collection of Azure Policy examples using Bicep :muscle: by @jesseloudon
-> *Bicep + Policy icons are from Microsoft*
+* Twitter: [@coder_au](https://twitter.com/coder_au)
+* LinkedIn: [@JesseLoudon](https://www.linkedin.com/in/jesseloudon/)
+* Web: [jloudon.com](https://jloudon.com)
+* GitHub: [@JesseLoudon](https://github.com/jesseloudon)
+
+Learning resources :books:
+* [https://docs.microsoft.com/en-us/azure/governance/policy/overview](https://docs.microsoft.com/en-us/azure/governance/policy/overview)
+* [policy definitions](https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/policydefinitions?tabs=bicep)
+* [policyset definitions (initiatives)](https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/policysetdefinitions?tabs=bicep)
+* [policy assignments](https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/policyassignments?tabs=bicep)
+
+## Blogs that might interest you :pencil:
+
+* [Global Azure: Policy as Code with Bicep for Enterprise Scale](https://jloudon.com/cloud/Global-Azure-Policy-as-Code-with-Bicep-for-Enterprise-Scale/)
+* [Azure Spring Clean: DINE to Automate your Monitoring Governance with Azure Monitor Metric Alerts](https://jloudon.com/cloud/Azure-Spring-Clean-DINE-to-Automate-your-Monitoring-Governance-with-Azure-Monitor-Metric-Alerts/)
+* [Cloud Governance with Azure Policy Part 1](https://jloudon.com/cloud/Cloud-Governance-with-Azure-Policy-Part-1/)
+* [Cloud Governance with Azure Policy Part 2](https://jloudon.com/cloud/Cloud-Governance-with-Azure-Policy-Part-2/)
 
 ### Authored & Tested with
 

@@ -1,4 +1,4 @@
-# Bicep\Learn
+# Azure-Policy-As-Code/Bicep/Learn
 
 Contains example code and video walkthrough structured into 3x levels so that beginners could start with a small proof of concept deployment (e.g. Level1) and then scale up in complexity and advanced logic (Level3) as comfort levels increase with Bicep and Azure Policy
 

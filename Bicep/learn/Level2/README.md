@@ -1,4 +1,4 @@
-# Level 2 - Policy as Code with Bicep
+# Azure-Policy-As-Code/Bicep/Learn/Level2
 
 * Uses built-in policies and custom policies
 * Uses multiple initiatives and assignments
