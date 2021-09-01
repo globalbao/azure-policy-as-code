@@ -1,3 +1,5 @@
+# Quick powershell script to get azure policy state for a specific policy. More examples here https://docs.microsoft.com/en-us/powershell/module/az.policyinsights/get-azpolicystate?view=azps-6.3.0
+
 # Define path for exported files
 $FilePath = 'C:\Temp'
 
