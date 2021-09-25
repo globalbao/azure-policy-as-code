@@ -68,8 +68,6 @@ variable "builtin_policies_security_governance" {
     "Storage accounts should restrict network access",
     "Secure transfer to storage accounts should be enabled",
     "Storage accounts should allow access from trusted Microsoft services",
-    "RDP access from the Internet should be blocked",
-    "SSH access from the Internet should be blocked",
     "Automation account variables should be encrypted",
     "Azure subscriptions should have a log profile for Activity Log",
     "Email notification to subscription owner for high severity alerts should be enabled",
@@ -94,7 +92,7 @@ variable "builtin_policies_logging_governance" {
   type        = list(any)
   description = "List of policy definitions (display names) for the logging_governance policyset"
   default = [
-    #"Deploy - Configure diagnostic settings for Azure Key Vault to Log Analytics workspace",
+    "Deploy - Configure diagnostic settings for Azure Key Vault to Log Analytics workspace",
     "Configure diagnostic settings for storage accounts to Log Analytics workspace",
     "Deploy - Configure diagnostic settings for Azure Kubernetes Service to Log Analytics workspace",
     "Deploy - Configure diagnostic settings for SQL Databases to Log Analytics workspace"
