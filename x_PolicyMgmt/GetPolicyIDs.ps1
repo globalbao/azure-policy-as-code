@@ -1,6 +1,6 @@
 ########################################
 # Description: Queries built-in Azure Policy resources (policies/policysets), builds a hashtable object with the results, and exports to JSON for consumption via Bicep.
-# Note1: Excluded policies: 'Static' (type), '[Deprecated]' (DisplayName), and '[Preview]' (DisplayName)
+# Note1: Excluded policies: 'Static' (type), 'Deprecated' (Metadata.deprecated), and 'Preview' (Metadata.preview)
 # Note2: This script is modified from Justin Grote's original input as mentioned here: https://github.com/Azure/bicep/issues/1895
 ########################################
 
