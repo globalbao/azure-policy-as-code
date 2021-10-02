@@ -10,6 +10,9 @@ This repo contains code examples for Bicep and Terraform, and YAML workflows whi
 - [x] :star: Slides available for download (PDF)
 - [x] :star: Recorded sessions (YouTube)
 
+### How To: Build Your Own Policy ID Library (JSON) with PowerShell [ :floppy_disk: [slides](https://jloudon.com/assets/pdfs/HowTo-JSONPolicyLibraryWithPowerShell.pdf) ]
+
+
 ### DevOps Sydney 2021: Automating Infrastructure Governance with Azure Policy [ :floppy_disk: [slides](https://jloudon.com/assets/pdfs/SydDevOps2021_AutomateInfraGovWithAzPolicy.pdf) ]
 [![DevOps Sydney 2021: Automating Infrastructure Governance with Azure Policy](https://img.youtube.com/vi/dPwy8nlNyNM/0.jpg)](https://youtu.be/dPwy8nlNyNM?t=570)
 
