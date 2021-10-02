@@ -1,6 +1,6 @@
 ########################################
 # Description: Queries built-in Azure Policy resources (policies/policysets), builds a hashtable object with the results, and exports to JSON for consumption via Bicep.
-# Note1: Excluded policies: 'Static' (type), 'Deprecated' (DisplayName), and 'Preview' (DisplayName)
+# Note1: Excluded policies: 'Static' (type), '[Deprecated]' (DisplayName), and '[Preview]' (DisplayName)
 # Note2: This script is modified from Justin Grote's original input as mentioned here: https://github.com/Azure/bicep/issues/1895
 ########################################
 
@@ -21,7 +21,7 @@ Get-AzSubscription
 
 # Query policy definitions and build hashtable
 $policies = Get-AzPolicyDefinition | 
-    Where-Object {$_.properties.PolicyType -match 'BuiltIn' -and $_.properties.DisplayName -cnotmatch 'Deprecated' -and $_.properties.DisplayName -cnotmatch 'Preview'}|
+    Where-Object {$_.properties.PolicyType -match 'BuiltIn' -and $_.properties.Metadata.deprecated -ne 'True' -and $_.properties.Metadata.preview -ne 'True'}|
     Select-Object @{N='Name';E=$PolicyNameResolver}, PolicyDefinitionId |
     Sort-Object Name |
     Foreach-Object {
@@ -33,7 +33,7 @@ ConvertTo-Json -InputObject $policies -Depth 10 | Out-File $FilePath\builtin_pol
 
 # Query policyset definitions and build hashtable
 $policysets = Get-AzPolicySetDefinition | 
-    Where-Object {$_.properties.PolicyType -match 'BuiltIn' -and $_.properties.DisplayName -cnotmatch 'Deprecated' -and $_.properties.DisplayName -cnotmatch 'Preview'}|
+    Where-Object {$_.properties.PolicyType -match 'BuiltIn' -and $_.properties.Metadata.deprecated -ne 'True' -and $_.properties.Metadata.preview -ne 'True'}|
     Select-Object @{N='Name';E=$PolicyNameResolver}, PolicySetDefinitionId |
     Sort-Object Name |
     Foreach-Object {
