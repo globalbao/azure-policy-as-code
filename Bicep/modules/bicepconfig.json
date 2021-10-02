@@ -1,37 +1,51 @@
+// To learn about Bicep linter rules refer to - https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/linter
+// For the latest default bicepconfig.json refer to - https://github.com/Azure/bicep/blob/main/src/Bicep.Core/Configuration/bicepconfig.json
 {
-    "analyzers": {
-      "core": {
-        "enabled": true,
-        "rules": {
-          "no-hardcoded-env-urls": {
-            "level": "warning",
-            "disallowedHosts": [
-              "management.core.windows.net",
-              "gallery.azure.com",
-              "management.core.windows.net",
-              //"management.azure.com", comment out as needed for deployIfNotExist policies, see https://github.com/Azure/bicep/issues/2948
-              "database.windows.net",
-              "core.windows.net",
-              "login.microsoftonline.com",
-              "graph.windows.net",
-              "trafficmanager.net",
-              "vault.azure.net",
-              "datalake.azure.net",
-              "azuredatalakestore.net",
-              "azuredatalakeanalytics.net",
-              "vault.azure.net",
-              "api.loganalytics.io",
-              "api.loganalytics.iov1",
-              "asazure.windows.net",
-              "region.asazure.windows.net",
-              "api.loganalytics.iov1",
-              "api.loganalytics.io",
-              "asazure.windows.net",
-              "region.asazure.windows.net",
-              "batch.core.windows.net"
-            ]
-          }
+  "analyzers": {
+    "core": {
+      "verbose": false,
+      "enabled": true,
+      "rules": {
+        "no-hardcoded-env-urls": {
+          "level": "warning",
+          "disallowedhosts": [
+            "gallery.azure.com",
+            "management.core.windows.net",
+            "management.azure.com",
+            "database.windows.net",
+            "core.windows.net",
+            "login.microsoftonline.com",
+            "graph.windows.net",
+            "trafficmanager.net",
+            "datalake.azure.net",
+            "azuredatalakestore.net",
+            "azuredatalakeanalytics.net",
+            "vault.azure.net",
+            "api.loganalytics.io",
+            "asazure.windows.net",
+            "region.asazure.windows.net",
+            "batch.core.windows.net"
+          ],
+          "excludedhosts": [
+            "schema.management.azure.com"
+          ]
+        },
+        "no-unused-params": {
+          "level": "error"
+        },
+        "no-unused-vars": {
+          "level": "error"
+        },
+        "prefer-interpolation": {
+          "level": "warning"
+        },
+        "secure-parameter-default": {
+          "level": "error"
+        },
+        "simplify-interpolation": {
+          "level": "warning"
         }
       }
     }
   }
+}
