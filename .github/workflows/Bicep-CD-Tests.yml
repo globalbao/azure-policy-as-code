@@ -27,7 +27,7 @@ jobs:
       with:
         files: '**/*.bicep'
 
-  Bicep-CD-Tests:
+  Bicep-CD-Tests-MG-Scope:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -53,3 +53,30 @@ jobs:
       with:
         inlineScript: |
           az deployment mg create -f ./Bicep/modules/mg_main.bicep -l australiaeast -m PRODUCTION -p ./Bicep/modules/mg_main_params.json
+
+  Bicep-CD-Tests-Sub-Scope:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS_PROD }}
+    - name: Bicep CD
+      id: bicepCD
+      continue-on-error: true
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az deployment sub create -f ./Bicep/modules/sub_main.bicep -l australiaeast -p ./Bicep/modules/sub_main_params.json --what-if
+    - name: Sleep for 30s
+      if: ${{ steps.bicepCD.outcome == 'failure' && steps.bicepCD.conclusion == 'success' }}
+      uses: juliangruber/sleep-action@v1
+      with:
+        time: 30s
+    - name: Bicep CD Retry
+      if: ${{ steps.bicepCI.outcome == 'failure' && steps.bicepCD.conclusion == 'success' }}
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az deployment sub create -f ./Bicep/modules/sub_main.bicep -l australiaeast -p ./Bicep/modules/sub_main_params.json --what-if
