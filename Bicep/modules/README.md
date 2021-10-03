@@ -7,26 +7,20 @@ Get in touch :octocat:
 * Web: [jloudon.com](https://jloudon.com)
 * GitHub: [@JesseLoudon](https://github.com/jesseloudon)
 
-Learning resources :books:
-* [https://docs.microsoft.com/en-us/azure/governance/policy/overview](https://docs.microsoft.com/en-us/azure/governance/policy/overview)
-* [policy definitions](https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/policydefinitions?tabs=bicep)
-* [policyset definitions (initiatives)](https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/policysetdefinitions?tabs=bicep)
-* [policy assignments](https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/policyassignments?tabs=bicep)
-
-## Blogs that might interest you :pencil:
-
-* [Global Azure: Policy as Code with Bicep for Enterprise Scale](https://jloudon.com/cloud/Global-Azure-Policy-as-Code-with-Bicep-for-Enterprise-Scale/)
-* [Azure Spring Clean: DINE to Automate your Monitoring Governance with Azure Monitor Metric Alerts](https://jloudon.com/cloud/Azure-Spring-Clean-DINE-to-Automate-your-Monitoring-Governance-with-Azure-Monitor-Metric-Alerts/)
-* [Cloud Governance with Azure Policy Part 1](https://jloudon.com/cloud/Cloud-Governance-with-Azure-Policy-Part-1/)
-* [Cloud Governance with Azure Policy Part 2](https://jloudon.com/cloud/Cloud-Governance-with-Azure-Policy-Part-2/)
-
 ### Authored & Tested with
 
 * [azure-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) version 2.27.2
 * bicep cli version 0.4.613
 * [bicep](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep) v0.4.613 vscode extension
 
-### Example Deployment Steps
+### Automatic Deployment Buttons
+
+|Deployment Button                  | Description        | 
+|:-----------------------|:------------------------------|
+| [![Deploy Policies Management Group Scope to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fglobalbao%2Fazure-policy-as-code%2Fmain%2FBicep%2Fmodules%2Fmg_main.json)  | Deploys Policies to **Management Group** Scope |
+| [![Deploy Policies Subscription Scope to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fglobalbao%2Fazure-policy-as-code%2Fmain%2FBicep%2Fmodules%2Fsub_main.json)  | Deploys Policies to **Subscription** Scope |
+
+### Manual Deployment Steps
 
 ```s
 # (optional) step to view the JSON/ARM template
@@ -40,7 +34,6 @@ az account show
 # (required) choose either Subscription (sub) or Management Group (mg) deployment
 # subscription deployment
 az deployment sub create -f ./sub_main.bicep -l australiaeast -p ./sub_main_params.json --confirm-with-what-if
-
 # management group deployment
 az deployment mg create -f ./mg_main.bicep -l australiaeast -m PRODUCTION -p ./mg_main_params.json --confirm-with-what-if
 
@@ -225,3 +218,16 @@ jobs:
         inlineScript: |
           az deployment sub create -n prod-bicep-cd -f ./main.bicep -l australiaeast -o none
 ```
+
+Learning resources :books:
+* [https://docs.microsoft.com/en-us/azure/governance/policy/overview](https://docs.microsoft.com/en-us/azure/governance/policy/overview)
+* [policy definitions](https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/policydefinitions?tabs=bicep)
+* [policyset definitions (initiatives)](https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/policysetdefinitions?tabs=bicep)
+* [policy assignments](https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/policyassignments?tabs=bicep)
+
+## Blogs that might interest you :pencil:
+
+* [Global Azure: Policy as Code with Bicep for Enterprise Scale](https://jloudon.com/cloud/Global-Azure-Policy-as-Code-with-Bicep-for-Enterprise-Scale/)
+* [Azure Spring Clean: DINE to Automate your Monitoring Governance with Azure Monitor Metric Alerts](https://jloudon.com/cloud/Azure-Spring-Clean-DINE-to-Automate-your-Monitoring-Governance-with-Azure-Monitor-Metric-Alerts/)
+* [Cloud Governance with Azure Policy Part 1](https://jloudon.com/cloud/Cloud-Governance-with-Azure-Policy-Part-1/)
+* [Cloud Governance with Azure Policy Part 2](https://jloudon.com/cloud/Cloud-Governance-with-Azure-Policy-Part-2/)
