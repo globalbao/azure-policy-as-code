@@ -1,0 +1,55 @@
+name: Bicep-CD-Tests
+on:
+  push:
+    branches: [ main ]
+    paths:
+    - '**.bicep'
+    - '**.json'
+  schedule:
+   - cron: "0 0 * * *" #at the end of every day
+  workflow_dispatch:
+    
+jobs:
+
+  Bicep-ValidationTests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: ARM TTK
+      uses: docker://ghcr.io/github/super-linter:slim-v4
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        VALIDATE_ALL_CODEBASE: false
+        DEFAULT_BRANCH: main
+        VALIDATE_JSON: true
+    - name: Bicep Build
+      uses: aliencube/bicep-build-actions@v0.3
+      with:
+        files: '**/*.bicep'
+
+  Bicep-CD-Tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS_PROD }}
+    - name: Bicep CD
+      id: bicepCD
+      continue-on-error: true
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az deployment mg create -f ./Bicep/modules/mg_main.bicep -l australiaeast -m PRODUCTION -p ./Bicep/modules/mg_main_params.json
+    - name: Sleep for 30s
+      if: ${{ steps.bicepCD.outcome == 'failure' && steps.bicepCD.conclusion == 'success' }}
+      uses: juliangruber/sleep-action@v1
+      with:
+        time: 30s
+    - name: Bicep CD Retry
+      if: ${{ steps.bicepCI.outcome == 'failure' && steps.bicepCD.conclusion == 'success' }}
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az deployment mg create -f ./Bicep/modules/mg_main.bicep -l australiaeast -m PRODUCTION -p ./Bicep/modules/mg_main_params.json
