@@ -1,3 +1,0 @@
-# Policy Initiatives Index
-
-**WIP**

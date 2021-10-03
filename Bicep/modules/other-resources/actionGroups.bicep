@@ -8,10 +8,6 @@ param actionGroupEmailName string
 param actionGroupEmail string
 param actionGroupAlertSchema bool
 
-// OUTPUTS
-output actionGroupID string = actionGroup.id
-output actionGroupName string = actionGroup.name
-
 // RESOURCES
 resource actionGroup 'microsoft.insights/actionGroups@2019-06-01' = {
   location: 'global'
@@ -28,3 +24,8 @@ resource actionGroup 'microsoft.insights/actionGroups@2019-06-01' = {
     ]
   }
 }
+
+
+// OUTPUTS
+output actionGroupID string = actionGroup.id
+output actionGroupName string = actionGroup.name

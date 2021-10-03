@@ -1,0 +1,67 @@
+{
+  "properties": {
+    "displayName": "Add mandatory tag to resource group",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Adds the mandatory tag key when any resource group missing this tag is created or updated. If the tag exists with a different value it will not be changed.",
+    "metadata": {
+      "category": "Custom",
+      "source": "github.com/globalbao/azure-policy-as-code",
+      "version": "1.0.0"
+    },
+    "parameters": {
+      "tagName": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Tag name",
+          "description": "Name of the tag, such as 'CostCenter'"
+        }
+      },
+      "tagValue": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Tag value",
+          "description": "Value of the tag e.g. '12345'"
+        }
+      },
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": ["Audit", "Modify", "Disabled"],
+        "defaultValue": "Modify"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+          },
+          {
+            "field": "[concat('tags[', parameters('tagName'), ']')]",
+            "exists": "false"
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "roleDefinitionIds": [
+            "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+          ],
+          "operations": [
+            {
+              "operation": "add",
+              "field": "[concat('tags[', parameters('tagName'), ']')]",
+              "value": "[parameters('tagValue')]"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

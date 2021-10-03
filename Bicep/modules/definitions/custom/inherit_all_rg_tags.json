@@ -1,0 +1,53 @@
+{
+  "properties": {
+    "displayName": "Inherit all tags from the resource group",
+    "policyType": "Custom",
+    "mode": "Indexed",
+    "description": "Adds all tags with its value from the parent resource group when any resource missing these tags is created or updated. If the tag exists with a different value it will not be changed.",
+    "metadata": {
+      "category": "Custom",
+      "source": "github.com/globalbao/azure-policy-as-code",
+      "version": "1.0.0"
+    },
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": ["Audit", "Modify", "Disabled"],
+        "defaultValue": "Modify"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "tags",
+            "exists": "false"
+          },
+          {
+            "value": "[resourceGroup().tags]",
+            "notEquals": ""
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "roleDefinitionIds": [
+            "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+          ],
+          "operations": [
+            {
+              "operation": "add",
+              "field": "tags",
+              "value": "[resourceGroup().tags]"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

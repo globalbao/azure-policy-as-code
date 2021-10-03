@@ -1,0 +1,23 @@
+{
+  "AllowedVirtualMachineSizeSkus": "/providers/Microsoft.Authorization/policyDefinitions/cccc23c7-8427-4f53-ad12-b6a63eb452b3",
+  "AuditVirtualMachinesWithoutDisasterRecoveryConfigured": "/providers/Microsoft.Authorization/policyDefinitions/0015ea4d-51ff-4ce3-8d8c-f3f8f0179a56",
+  "AuditVmsThatDoNotUseManagedDisks": "/providers/Microsoft.Authorization/policyDefinitions/06a78e20-9358-41c9-923c-fb736d382a4d",
+  "ConfigureDisasterRecoveryOnVirtualMachinesByEnablingReplication": "/providers/Microsoft.Authorization/policyDefinitions/ac34a73f-9fa5-4067-9247-a3ecae514468",
+  "ConfigureDiskAccessResourcesToUsePrivateDNSZones": "/providers/Microsoft.Authorization/policyDefinitions/bc05b96c-0b36-4ca9-82f0-5c53f96ce05a",
+  "ConfigureDiskAccessResourcesWithPrivateEndpoints": "/providers/Microsoft.Authorization/policyDefinitions/582bd7a6-a5f6-4dc6-b9dc-9cb81fe0d4c5",
+  "ConfigureManagedDisksToDisablePublicNetworkAccess": "/providers/Microsoft.Authorization/policyDefinitions/8426280e-b5be-43d9-979e-653d12a08638",
+  "DeployDefaultMicrosoftIaasantimalwareExtensionForWindowsServer": "/providers/Microsoft.Authorization/policyDefinitions/2835b622-407b-4114-9198-6f7064cbe0dc",
+  "DiskAccessResourcesShouldUsePrivateLink": "/providers/Microsoft.Authorization/policyDefinitions/f39f5f49-4abf-44de-8c70-0756997bfb51",
+  "ManagedDisksShouldBeDoubleEncryptedWithBothPlatformmanagedAndCustomermanagedKeys": "/providers/Microsoft.Authorization/policyDefinitions/ca91455f-eace-4f96-be59-e6e2c35b4816",
+  "ManagedDisksShouldDisablePublicNetworkAccess": "/providers/Microsoft.Authorization/policyDefinitions/8405fdab-1faf-48aa-b702-999c9c172094",
+  "ManagedDisksShouldUseASpecificSetOfDiskEncryptionSetsForTheCustomermanagedKeyEncryption": "/providers/Microsoft.Authorization/policyDefinitions/d461a302-a187-421a-89ac-84acdb4edc04",
+  "MicrosoftAntimalwareForAzureShouldBeConfiguredToAutomaticallyUpdateProtectionSignatures": "/providers/Microsoft.Authorization/policyDefinitions/c43e4a30-77cb-48ab-a4dd-93f175c63b57",
+  "MicrosoftIaasantimalwareExtensionShouldBeDeployedOnWindowsServers": "/providers/Microsoft.Authorization/policyDefinitions/9b597639-28e4-48eb-b506-56b05d366257",
+  "OnlyApprovedVMExtensionsShouldBeInstalled": "/providers/Microsoft.Authorization/policyDefinitions/c0e996f8-39cf-4af9-9f45-83fbde810432",
+  "OSAndDataDisksShouldBeEncryptedWithACustomermanagedKey": "/providers/Microsoft.Authorization/policyDefinitions/702dd420-7fcc-42c5-afe8-4026edd20fe0",
+  "RequireAutomaticOSImagePatchingOnVirtualMachineScaleSets": "/providers/Microsoft.Authorization/policyDefinitions/465f0161-0087-490a-9ad9-ad6217f4f43a",
+  "ResourceLogsInVirtualMachineScaleSetsShouldBeEnabled": "/providers/Microsoft.Authorization/policyDefinitions/7c1b1214-f927-48bf-8882-84f0af6588b1",
+  "UnattachedDisksShouldBeEncrypted": "/providers/Microsoft.Authorization/policyDefinitions/2c89a2e5-7285-40fe-afe0-ae8654b92fb2",
+  "VirtualMachinesAndVirtualMachineScaleSetsShouldHaveEncryptionAtHostEnabled": "/providers/Microsoft.Authorization/policyDefinitions/fc4d8e41-e223-45ea-9bf5-eada37891d87",
+  "VirtualMachinesShouldBeMigratedToNewAzureResourceManagerResources": "/providers/Microsoft.Authorization/policyDefinitions/1d84d5fb-01f6-4d12-ba4f-4a26081d403d"
+}

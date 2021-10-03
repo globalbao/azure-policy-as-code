@@ -22,72 +22,125 @@ Learning resources :books:
 
 ### Authored & Tested with
 
-* [azure-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) version 2.20.0
-* bicep cli version 0.3.255 (589f0375df)
-* [bicep](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep) 0.3.1 vscode extension
+* [azure-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) version 2.27.2
+* bicep cli version 0.4.613
+* [bicep](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep) v0.4.613 vscode extension
 
 ### Example Deployment Steps
 
 ```s
-# optional step to view the JSON/ARM template
-az bicep build -f ./main.bicep
+# (optional) step to view the JSON/ARM template
+az bicep build -f ./sub_main.bicep
+az bicep build -f ./mg_main.bicep
 
-# required steps
+# (required) authenticate
 az login
-az deployment sub create -f ./main.bicep -l australiaeast --confirm-with-what-if
+az account show
+
+# (required) choose either Subscription (sub) or Management Group (mg) deployment
+# subscription deployment
+az deployment sub create -f ./sub_main.bicep -l australiaeast -p ./sub_main_params.json --confirm-with-what-if
+
+# management group deployment
+az deployment mg create -f ./mg_main.bicep -l australiaeast -m PRODUCTION -p ./mg_main_params.json --confirm-with-what-if
 
 # optional step to trigger a subscription-level policy compliance scan 
 az policy state trigger-scan --no-wait
 ```
 
-> Note regarding Resources with dependencies on other resources e.g. Bicep role assignments for new service principals (SP) created by policy assignments will sometimes fail to find the new SP upon 1st run (even though a dependency exists between the resources). This role assignment failure will not reoccur upon a 2nd run of the main.bicep file. The same can apply for policy assignments, policy initiatives, and policy definitions.
-
 ### GitHub Actions Workflows
 
-* **Bicep-CI.yml**
-* ensures .bicep files are building successfully to ARM/JSON
+* **Bicep-CI-Tests.yml**
+* ensures .bicep files are building successfully to ARM/JSON upon pull requests trigger & checks for invalid JSON
 
 ```yaml
-name: Bicep-CI
+name: Bicep-CI-Tests
 on:
-  push:
-    branches: [ main ]
-    paths:
-    - '**.bicep'
   pull_request:
     branches: [ main ]
     paths:
     - '**.bicep'
-  schedule:
-  - cron: "0 0 * * *" #at the end of every day
+    - '**.json'
+  workflow_dispatch:
     
 jobs:
 
-  Bicep-CI:
+  Bicep-ValidationTests:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Bicep CI
-      uses: aliencube/bicep-build-actions@v0.1
+    - name: ARM TTK
+      uses: docker://ghcr.io/github/super-linter:slim-v4
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        VALIDATE_ALL_CODEBASE: false
+        DEFAULT_BRANCH: main
+        VALIDATE_JSON: true
+    - name: Bicep Build
+      uses: aliencube/bicep-build-actions@v0.3
       with:
-        files: ./main.bicep
+        files: '**/*.bicep'
+
+  Bicep-CI-Tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS_PROD }}
+    - name: Bicep CI Tests
+      id: bicepCI
+      continue-on-error: true
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az deployment mg create -f ./Bicep/modules/mg_main.bicep -l australiaeast -m PRODUCTION -p ./Bicep/modules/mg_main_params.json --what-if
+    - name: Sleep for 30s
+      if: ${{ steps.bicepCI.outcome == 'failure' && steps.bicepCI.conclusion == 'success' }}
+      uses: juliangruber/sleep-action@v1
+      with:
+        time: 30s
+    - name: Bicep CI Retry
+      if: ${{ steps.bicepCI.outcome == 'failure' && steps.bicepCI.conclusion == 'success' }}
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az deployment mg create -f ./Bicep/modules/mg_main.bicep -l australiaeast -m PRODUCTION -p ./Bicep/modules/mg_main_params.json --what-if
 ```
 
-* **Bicep-CD.yml**
-* ensures .bicep files are deploying successfully to 3x Azure environments (DevTest,NonProd,Prod)
+* **Bicep-CD-Tests.yml**
+* ensures .bicep files are deploying successfully to 3x Azure environments (DevTest,NonProd,Prod) 
 
 ```yaml
-name: Bicep-CD
+name: Bicep-CD-Tests
 on:
   push:
     branches: [ main ]
     paths:
     - '**.bicep'
-  workflow_dispatch:
+    - '**.json'
   schedule:
   - cron: "0 0 * * *" #at the end of every day
+  workflow_dispatch:
     
 jobs:
+
+  Bicep-ValidationTests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: ARM TTK
+      uses: docker://ghcr.io/github/super-linter:slim-v4
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        VALIDATE_ALL_CODEBASE: false
+        DEFAULT_BRANCH: main
+        VALIDATE_JSON: true
+    - name: Bicep Build
+      uses: aliencube/bicep-build-actions@v0.3
+      with:
+        files: '**/*.bicep'
 
   DEVTEST-BICEP-CD:
     runs-on: ubuntu-latest

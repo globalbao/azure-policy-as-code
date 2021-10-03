@@ -1,0 +1,50 @@
+{
+  "properties": {
+    "displayName": "Audit role assignments",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policy checks for any specified Role Assignments. Use to audit IAM assignments to resources/RGs which are out of compliance with your governance standards",
+    "metadata": {
+      "category": "Custom",
+      "source": "github.com/globalbao/azure-policy-as-code",
+      "version": "1.0.0"
+    },
+    "parameters": {
+      "principalType": {
+        "type": "String",
+        "metadata": {
+          "description": "Which principalType to audit against e.g. 'User'",
+          "displayName": "principalType"
+        },
+        "allowedValues": ["User", "Group", "ServicePrincipal"],
+        "defaultValue": "User"
+      },
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": ["Audit", "Disabled"],
+        "defaultValue": "Audit"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Authorization/roleAssignments"
+          },
+          {
+            "field": "Microsoft.Authorization/roleAssignments/principalType",
+            "equals": "[parameters('principalType')]"
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]"
+      }
+    }
+  }
+}

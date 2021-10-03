@@ -1,27 +1,32 @@
 // PARAMETERS
 param policySource string = 'Bicep'
-param mandatoryTag2Key string
-param assignmentID string
-
-// VARIABLES
-
-// OUTPUTS
+param exemptionPolicyAssignmentId string
+param exemptionPolicyDefinitionReferenceIds array
+param exemptionCategory string = 'Mitigated'
+param exemptionExpiryDate string
+param exemptionDisplayName string
+param exemptionDescription string
 
 // RESOURCES
-resource policyExemption 'Microsoft.Authorization/policyExemptions@2020-07-01-preview' = {
-  name: 'exemption1'
+resource exemption_1 'Microsoft.Authorization/policyExemptions@2020-07-01-preview' = {
+  name: 'exemption_1'
   properties: {
-    policyAssignmentId: assignmentID
+    policyAssignmentId: exemptionPolicyAssignmentId
     policyDefinitionReferenceIds: [
-      'requireTagToRG_${mandatoryTag2Key}'
+      exemptionPolicyDefinitionReferenceIds[0]
     ]
-    exemptionCategory: 'Mitigated'
-    //expiresOn: '2022-12-05'
-    displayName: 'Exempt resource from requireTagToRG_${mandatoryTag2Key}'
-    description: 'Exempts resource from requireTagToRG_${mandatoryTag2Key} until expiry date'
+    exemptionCategory: exemptionCategory
+    expiresOn: exemptionExpiryDate
+    displayName: exemptionDisplayName
+    description: exemptionDescription
     metadata: {
-      version: '0.1.0'
+      version: '1.0.0'
       source: policySource
     }
   }
 }
+
+// OUTPUTS
+output exemptionIds array = [
+  exemption_1.id
+]

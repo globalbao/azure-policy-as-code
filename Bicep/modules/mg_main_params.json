@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "assignmentEnforcementMode": {
+      "value": "Default"
+    },
+    "assignmentIdentityLocation": {
+      "value": "australiaeast"
+    },
+    "policySource": {
+      "value": "github.com/globalbao/azure-policy-as-code"
+    },
+    "tagNames": {
+      "value": ["CostCenter", "Application", "Environment"]
+    },
+    "tagValue": {
+      "value": "TBC"
+    },
+    "tagValuesToIgnore": {
+      "value": ["TBC", "tbc", "to be confirmed"]
+    },
+    "subscriptionId": {
+      "value": "e303a5bc-2143-4577-bda3-b908cb7bae67"
+    },
+    "effect": {
+      "value": "Modify"
+    },
+    "managementGroupId": {
+      "value": "PRODUCTION"
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "properties": {
+    "displayName": "Audit resource locks",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policy audits if a resource lock 'CanNotDelete' or 'ReadOnly' has been applied to the specified resource types.",
+    "metadata": {
+      "category": "Custom",
+      "source": "github.com/globalbao/azure-policy-as-code",
+      "version": "1.0.0"
+    },
+    "parameters": {
+      "resourceTypes": {
+        "type": "Array",
+        "metadata": {
+          "description": "Azure resource types to audit for locks e.g. 'microsoft.network/expressroutecircuits' and 'microsoft.network/expressroutegateways'",
+          "displayName": "Resource types to audit for locks"
+        }
+      },
+      "lockLevel": {
+        "type": "Array",
+        "metadata": {
+          "description": "Resource lock level to audit for",
+          "displayName": "Lock level"
+        },
+        "allowedValues": ["ReadOnly", "CanNotDelete"],
+        "defaultValue": ["ReadOnly", "CanNotDelete"]
+      },
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": ["AuditIfNotExists", "Disabled"],
+        "defaultValue": "AuditIfNotExists"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "field": "type",
+        "in": "[parameters('resourceTypes')]"
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "type": "Microsoft.Authorization/locks",
+          "existenceCondition": {
+            "field": "Microsoft.Authorization/locks/level",
+            "in": "[parameters('lockLevel')]"
+          }
+        }
+      }
+    }
+  }
+}

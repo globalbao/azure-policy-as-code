@@ -1,6 +1,9 @@
 # Local .terraform directories
 **/.terraform/*
 
+# Local Scripts
+*.LocalGetPolicyIDs.ps1
+
 # .tfstate files
 *.tfstate
 *.tfstate.*

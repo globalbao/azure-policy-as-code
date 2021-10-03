@@ -1,0 +1,15 @@
+{
+  "AzureCosmosDBAccountsShouldHaveFirewallRules": "/providers/Microsoft.Authorization/policyDefinitions/862e97cf-49fc-4a5c-9de4-40d4e2e7c8eb",
+  "AzureCosmosDBAccountsShouldUseCustomermanagedKeysToEncryptDataAtRest": "/providers/Microsoft.Authorization/policyDefinitions/1f905d99-2ab7-462c-a6b0-f709acca6c8f",
+  "AzureCosmosDBAllowedLocations": "/providers/Microsoft.Authorization/policyDefinitions/0473574d-2d43-4217-aefe-941fcdf7e684",
+  "AzureCosmosDBKeyBasedMetadataWriteAccessShouldBeDisabled": "/providers/Microsoft.Authorization/policyDefinitions/4750c32b-89c0-46af-bfcb-2e4541a818d5",
+  "AzureCosmosDBShouldDisablePublicNetworkAccess": "/providers/Microsoft.Authorization/policyDefinitions/797b37f7-06b8-444c-b1ad-fc62867f335a",
+  "AzureCosmosDBThroughputShouldBeLimited": "/providers/Microsoft.Authorization/policyDefinitions/0b7ef78e-a035-4f23-b9bd-aff122a1b1cf",
+  "ConfigureCosmosdbAccountsToDisablePublicNetworkAccess": "/providers/Microsoft.Authorization/policyDefinitions/da69ba51-aaf1-41e5-8651-607cd0b37088",
+  "ConfigureCosmosdbAccountsToUsePrivateDNSZones": "/providers/Microsoft.Authorization/policyDefinitions/a63cc0bd-cda4-4178-b705-37dc439d3e0f",
+  "ConfigureCosmosdbAccountsWithPrivateEndpoints": "/providers/Microsoft.Authorization/policyDefinitions/b609e813-3156-4079-91fa-a8494c1471c4",
+  "ConfigureCosmosDBDatabaseAccountsToDisableLocalAuthentication": "/providers/Microsoft.Authorization/policyDefinitions/dc2d41d1-4ab1-4666-a3e1-3d51c43e0049",
+  "CosmosdbAccountsShouldUsePrivateLink": "/providers/Microsoft.Authorization/policyDefinitions/58440f8a-10c5-4151-bdce-dfbaad4a20b7",
+  "CosmosDBDatabaseAccountsShouldHaveLocalAuthenticationMethodsDisabled": "/providers/Microsoft.Authorization/policyDefinitions/5450f5bd-9c72-4390-a9c4-a7aba4edfdd2",
+  "DeployAdvancedThreatProtectionForCosmosDBAccounts": "/providers/Microsoft.Authorization/policyDefinitions/b5f04e03-92a3-4b09-9410-2cc5e5047656"
+}

@@ -1,0 +1,75 @@
+{
+  "properties": {
+    "displayName": "Inherit mandatory tag from the resource group and overwrite existing",
+    "policyType": "Custom",
+    "mode": "Indexed",
+    "description": "Overwrites the specified mandatory tag and existing value using the RG's tag value. Applicable when any Resource containing the mandatory tag is created or updated. Ignores scenarios where tag values are the same for both Resource and RG, or when the RG's tag value is one of the parameters('tagValuesToIgnore').",
+    "metadata": {
+      "category": "Custom",
+      "source": "github.com/globalbao/azure-policy-as-code",
+      "version": "1.0.0"
+    },
+    "parameters": {
+      "tagName": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Tag name",
+          "description": "Name of the tag, such as 'CostCenter'"
+        }
+      },
+      "tagValuesToIgnore": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Tag values to ignore for inheritance",
+          "description": "A list of tag values to ignore when evaluating tag inheritance from the RG"
+        }
+      },
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": ["Audit", "Modify", "Disabled"],
+        "defaultValue": "Modify"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "[concat('tags[', parameters('tagName'), ']')]",
+            "exists": "true"
+          },
+          {
+            "value": "[resourceGroup().tags[parameters('tagName')]]",
+            "notEquals": ""
+          },
+          {
+            "field": "[concat('tags[', parameters('tagName'), ']')]",
+            "notEquals": "[resourceGroup().tags[parameters('tagName')]]"
+          },
+          {
+            "value": "[resourceGroup().tags[parameters('tagName')]]",
+            "notIn": "[parameters('tagValuesToIgnore')]"
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "operations": [
+            {
+              "field": "[concat('tags[', parameters('tagName'), ']')]",
+              "operation": "addOrReplace",
+              "value": "[resourceGroup().tags[parameters('tagName')]]"
+            }
+          ],
+          "roleDefinitionIds": [
+            "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+          ]
+        }
+      }
+    }
+  }
+}
