@@ -12,14 +12,14 @@ This repo contains code examples for Bicep and Terraform, and YAML workflows whi
 
 ### How To: Build Your Own Policy ID Library (JSON) with PowerShell [ :floppy_disk: [slides](https://jloudon.com/assets/pdfs/HowTo-JSONPolicyLibraryWithPowerShell.pdf) ]
 
+### Azure Back to School 2021: Bicep Builders: Azure Sentinel and Policy as Code
+[![AzureBacktoSchool 2021: Bicep Builders: Azure Sentinel and Policy as Code](https://jloudon.com/assets/images/AzureBackToSchool2021-BicepBuildersAzureSentinelPolicyAsCode.png)](https://youtu.be/B03V3Tazcec)
 
 ### DevOps Sydney 2021: Automating Infrastructure Governance with Azure Policy [ :floppy_disk: [slides](https://jloudon.com/assets/pdfs/SydDevOps2021_AutomateInfraGovWithAzPolicy.pdf) ]
 [![DevOps Sydney 2021: Automating Infrastructure Governance with Azure Policy](https://img.youtube.com/vi/dPwy8nlNyNM/0.jpg)](https://youtu.be/dPwy8nlNyNM?t=570)
 
-
 ### Azure Sydney User Group 2021: Azure Policy as Code - Zero to Hero in 60 minutes [ :floppy_disk: [slides](https://jloudon.com/assets/pdfs/AzureSydUserGroup2021_PolicyAsCode_ZeroToHero60min.pdf) ]
 [![Azure Sydney User Group 2021: Azure Policy as Code - Zero to Hero in 60 minutes](https://img.youtube.com/vi/AVn5glYBz84/0.jpg)](https://youtu.be/AVn5glYBz84?t=2380)
-
 
 ### Global Azure 2021: Policy as Code with Bicep for Enterprise Scale [ :floppy_disk: [slides](https://jloudon.com/assets/pdfs/GlobalAzure2021_PolicyAsCodeWithBicepForEnterpriseScale.pdf) ]
 [![Global Azure 2021: Policy as Code with Bicep for Enterprise Scale](https://img.youtube.com/vi/qpnMJXw6pIg/0.jpg)](https://youtu.be/qpnMJXw6pIg)
