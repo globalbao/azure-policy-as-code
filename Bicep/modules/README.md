@@ -1,6 +1,6 @@
 # Azure-Policy-As-Code/Bicep/Modules
 
-Get in touch :octocat:
+## Get in touch :octocat:
 
 Twitter: [@coder_au](https://twitter.com/coder_au) | LinkedIn: [@JesseLoudon](https://www.linkedin.com/in/jesseloudon/) | Web: [jloudon.com](https://jloudon.com) | GitHub: [@JesseLoudon](https://github.com/jesseloudon)
 
@@ -196,7 +196,7 @@ jobs:
       with:
         time: 30s
     - name: Bicep CD Retry
-      if: ${{ steps.bicepCI.outcome == 'failure' && steps.bicepCD.conclusion == 'success' }}
+      if: ${{ steps.bicepCD.outcome == 'failure' && steps.bicepCD.conclusion == 'success' }}
       uses: azure/CLI@v1
       with:
         inlineScript: |
@@ -224,18 +224,20 @@ jobs:
       with:
         time: 30s
     - name: Bicep CD Retry
-      if: ${{ steps.bicepCI.outcome == 'failure' && steps.bicepCD.conclusion == 'success' }}
+      if: ${{ steps.bicepCD.outcome == 'failure' && steps.bicepCD.conclusion == 'success' }}
       uses: azure/CLI@v1
       with:
         inlineScript: |
           az deployment mg create -f ./Bicep/modules/mg_main.bicep -l australiaeast -m PRODUCTION -p ./Bicep/modules/mg_main_params.json
 ```
 
-Learning resources :books:
-* [https://docs.microsoft.com/en-us/azure/governance/policy/overview](https://docs.microsoft.com/en-us/azure/governance/policy/overview)
-* [policy definitions](https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/policydefinitions?tabs=bicep)
-* [policyset definitions (initiatives)](https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/policysetdefinitions?tabs=bicep)
-* [policy assignments](https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/policyassignments?tabs=bicep)
+## Learning resources :books:
+* [Azure Policy Overview](https://docs.microsoft.com/en-us/azure/governance/policy/overview)
+* [Azure Policy Definitions](https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/policydefinitions?tabs=bicep)
+* [Azure PolicySet Definitions (Initiatives)](https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/policysetdefinitions?tabs=bicep)
+* [Azure Policy Assignments](https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/policyassignments?tabs=bicep)
+* [Azure Policy Exemptions](https://docs.microsoft.com/en-us/azure/templates/microsoft.authorization/policyexemptions?tabs=bicep)
+* [Azure Policy Remediations](https://docs.microsoft.com/en-us/azure/templates/microsoft.policyinsights/remediations?tabs=bicep)
 
 ## Blogs that might interest you :pencil:
 
