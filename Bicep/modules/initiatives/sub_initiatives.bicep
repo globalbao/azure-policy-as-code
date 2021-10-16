@@ -6,7 +6,7 @@ param policyCategory string = 'Custom'
 param customPolicyIds array
 param customPolicyNames array
 
-//RESOURCES
+// POLICYSET MODULES
 module tagging_initiative './sub_tagging.bicep' = {
   name: 'tagging_initiative'
   params: {
