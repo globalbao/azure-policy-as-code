@@ -1,14 +1,12 @@
 # Azure-Policy-As-Code/Bicep/Modules
 
-## Get in touch :octocat:
-
-Twitter: [@coder_au](https://twitter.com/coder_au) | LinkedIn: [@JesseLoudon](https://www.linkedin.com/in/jesseloudon/) | Web: [jloudon.com](https://jloudon.com) | GitHub: [@JesseLoudon](https://github.com/jesseloudon)
-
-## Authored & Tested with
+## Authored & Tested With
 
 * [azure-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) version 2.27.2
 * bicep cli version 0.4.613
 * [bicep](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep) v0.4.613 vscode extension
+
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/globalbao/azure-policy-as-code)
 
 ## Automatic Deployment
 
@@ -245,3 +243,7 @@ jobs:
 * [Azure Spring Clean: DINE to Automate your Monitoring Governance with Azure Monitor Metric Alerts](https://jloudon.com/cloud/Azure-Spring-Clean-DINE-to-Automate-your-Monitoring-Governance-with-Azure-Monitor-Metric-Alerts/)
 * [Cloud Governance with Azure Policy Part 1](https://jloudon.com/cloud/Cloud-Governance-with-Azure-Policy-Part-1/)
 * [Cloud Governance with Azure Policy Part 2](https://jloudon.com/cloud/Cloud-Governance-with-Azure-Policy-Part-2/)
+
+## Get in touch :octocat:
+
+Twitter: [@coder_au](https://twitter.com/coder_au) | LinkedIn: [@JesseLoudon](https://www.linkedin.com/in/jesseloudon/) | Web: [jloudon.com](https://jloudon.com) | GitHub: [@JesseLoudon](https://github.com/jesseloudon)
