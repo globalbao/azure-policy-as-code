@@ -28,19 +28,8 @@ param exemptionDisplayName string = ''
 param exemptionDescription string = ''
 param exemptionExpiryDate string = ''
 param effect string = 'Modify'
-param managementGroupId string = ''
 
-// OUTPUTS 
-output resourceNamesForCleanup array = [ // outputs here can be consumed by an .azcli script to delete deployed resources
-  rg.outputs.resourceGroupName
-  ag.outputs.actionGroupName
-  mg_definitions.outputs.customPolicyIds
-  mg_initiatives.outputs.customInitiativeIds
-  mg_assignments.outputs.policyAssignmentIds
-  mg_assignments.outputs.roleAssignmentIds
-]
-
-// RESOURCES
+// RESOURCE GROUPS MODULE
 module rg './other-resources/resourceGroups.bicep' = {
   name: 'resourceGroups'
   scope: subscription(subscriptionId)
@@ -50,6 +39,7 @@ module rg './other-resources/resourceGroups.bicep' = {
   }
 }
 
+// ACTION GROUPS MODULE
 module ag './other-resources/actionGroups.bicep' = {
   name: 'actionGroups'
   scope: resourceGroup(subscriptionId, resourceGroupName)
@@ -66,11 +56,12 @@ module ag './other-resources/actionGroups.bicep' = {
   }
 }
 
+// POLICY DEFINITIONS MODULE
 module mg_definitions './definitions/mg_definitions.bicep' = {
   name: 'mg_definitions'
 }
 
-
+// POLICYSET DEFINITIONS MODULE
 module mg_initiatives './initiatives/mg_initiatives.bicep' = {
   name: 'mg_initiatives'
   dependsOn: [
@@ -81,10 +72,10 @@ module mg_initiatives './initiatives/mg_initiatives.bicep' = {
     policyCategory: policyCategory
     customPolicyIds: mg_definitions.outputs.customPolicyIds
     customPolicyNames: mg_definitions.outputs.customPolicyNames
-    managementGroupId: managementGroupId
   }
 }
 
+// POLICY ASSIGNMENTS MODULE
 module mg_assignments './assignments/mg_assignments.bicep' = {
   name: 'mg_assignments'
   dependsOn: [
@@ -95,7 +86,6 @@ module mg_assignments './assignments/mg_assignments.bicep' = {
     assignmentIdentityLocation: assignmentIdentityLocation
     assignmentEnforcementMode: assignmentEnforcementMode
     customInitiativeIds: mg_initiatives.outputs.customInitiativeIds
-    managementGroupId: managementGroupId
     tagNames: tagNames
     tagValue: tagValue
     tagValuesToIgnore: tagValuesToIgnore
@@ -103,6 +93,7 @@ module mg_assignments './assignments/mg_assignments.bicep' = {
   }
 }
 
+// POLICY EXEMPTIONS MODULE
 module exemptions './exemptions/exemptions.bicep' = if (exemptionTrigger == true) {
   scope: resourceGroup(subscriptionId, exemptionResourceGroupName)
   name: 'exemptions'
@@ -117,6 +108,7 @@ module exemptions './exemptions/exemptions.bicep' = if (exemptionTrigger == true
   }
 }
 
+// POLICY REMEDIATIONS MODULE
 module mg_remediations './remediations/mg_remediations.bicep' = if (remediationTrigger == true) {
   name: 'mg_remediations'
   dependsOn: [
@@ -128,3 +120,13 @@ module mg_remediations './remediations/mg_remediations.bicep' = if (remediationT
     remediationDiscoveryMode: remediationDiscoveryMode
   }
 }
+
+// OUTPUTS 
+output resourceNamesForCleanup array = [ // outputs here can be consumed by an .azcli script to delete deployed resources
+  rg.outputs.resourceGroupName
+  ag.outputs.actionGroupName
+  mg_definitions.outputs.customPolicyIds
+  mg_initiatives.outputs.customInitiativeIds
+  mg_assignments.outputs.policyAssignmentIds
+  mg_assignments.outputs.roleAssignmentIds
+]

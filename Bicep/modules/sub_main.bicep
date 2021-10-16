@@ -28,17 +28,7 @@ param exemptionDescription string = ''
 param exemptionExpiryDate string = ''
 param effect string = 'Modify'
 
-// OUTPUTS 
-output resourceNamesForCleanup array = [ // outputs here can be consumed by an .azcli script to delete deployed resources
-  rg.outputs.resourceGroupName
-  ag.outputs.actionGroupName
-  sub_definitions.outputs.customPolicyIds
-  sub_initiatives.outputs.customInitiativeIds
-  sub_assignments.outputs.policyAssignmentIds
-  sub_assignments.outputs.roleAssignmentIds
-]
-
-// RESOURCES
+// RESOURCE GROUPS MODULE
 module rg './other-resources/resourceGroups.bicep' = {
   name: 'resourceGroups'
   params: {
@@ -47,6 +37,7 @@ module rg './other-resources/resourceGroups.bicep' = {
   }
 }
 
+// ACTION GROUPS MODULE
 module ag './other-resources/actionGroups.bicep' = {
   name: 'actionGroups'
   scope: resourceGroup(resourceGroupName)
@@ -63,11 +54,12 @@ module ag './other-resources/actionGroups.bicep' = {
   }
 }
 
+// POLICY DEFINITIONS MODULE
 module sub_definitions './definitions/sub_definitions.bicep' = {
   name: 'sub_definitions'
 }
 
-
+// POLICYSET DEFINITIONS MODULE
 module sub_initiatives './initiatives/sub_initiatives.bicep' = {
   name: 'sub_initiatives'
   dependsOn: [
@@ -81,6 +73,7 @@ module sub_initiatives './initiatives/sub_initiatives.bicep' = {
   }
 }
 
+// POLICY ASSIGNMENTS MODULE
 module sub_assignments './assignments/sub_assignments.bicep' = {
   name: 'sub_assignments'
   dependsOn: [
@@ -98,6 +91,7 @@ module sub_assignments './assignments/sub_assignments.bicep' = {
   }
 }
 
+// POLICY EXEMPTIONS MODULE
 module exemptions './exemptions/exemptions.bicep' = if (exemptionTrigger == true) {
   scope: resourceGroup(exemptionResourceGroupName)
   name: 'exemptions'
@@ -112,6 +106,7 @@ module exemptions './exemptions/exemptions.bicep' = if (exemptionTrigger == true
   }
 }
 
+// POLICY REMEDIATIONS MODULE
 module sub_remediations './remediations/sub_remediations.bicep' = if (remediationTrigger == true) {
   name: 'sub_remediations'
   dependsOn: [
@@ -123,3 +118,13 @@ module sub_remediations './remediations/sub_remediations.bicep' = if (remediatio
     remediationDiscoveryMode: remediationDiscoveryMode
   }
 }
+
+// OUTPUTS 
+output resourceNamesForCleanup array = [ // outputs here can be consumed by an .azcli script to delete deployed resources
+  rg.outputs.resourceGroupName
+  ag.outputs.actionGroupName
+  sub_definitions.outputs.customPolicyIds
+  sub_initiatives.outputs.customInitiativeIds
+  sub_assignments.outputs.policyAssignmentIds
+  sub_assignments.outputs.roleAssignmentIds
+]

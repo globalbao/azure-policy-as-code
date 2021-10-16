@@ -5,14 +5,10 @@ param policySource string = 'Bicep'
 param assignmentIdentityLocation string
 param assignmentEnforcementMode string
 param customInitiativeIds array
-param managementGroupId string
 param tagNames array
 param tagValue string
 param tagValuesToIgnore array
 param effect string
-
-// VARIABLES
-var mgResourceId = '/providers/Microsoft.Management/managementGroups/${managementGroupId}'
 
 // POLICY ASSIGNMENTS
 resource tagging_assignment 'Microsoft.Authorization/policyAssignments@2020-09-01' = {
@@ -29,7 +25,7 @@ resource tagging_assignment 'Microsoft.Authorization/policyAssignments@2020-09-0
       source: policySource
       version: '1.0.0'
     }
-    policyDefinitionId: '${mgResourceId}/providers/${customInitiativeIds[1]}'
+    policyDefinitionId: customInitiativeIds[1]
     parameters: {
       tagName1: {
         value: tagNames[0]
@@ -67,7 +63,7 @@ resource iam_assignment 'Microsoft.Authorization/policyAssignments@2020-09-01' =
       source: policySource
       version: '1.0.0'
     }
-    policyDefinitionId: '${mgResourceId}/providers/${customInitiativeIds[0]}'
+    policyDefinitionId: customInitiativeIds[0]
   }
 }
 

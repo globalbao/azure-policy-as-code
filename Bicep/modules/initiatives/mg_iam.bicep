@@ -3,14 +3,12 @@ targetScope = 'managementGroup'
 // PARAMETERS
 param policySource string = 'Bicep'
 param policyCategory string = 'Custom'
-param managementGroupId string
 param customPolicyIds array
 param customPolicyNames array
 
 // VARAIBLES
 var builtinPolicies1 = json(loadTextContent('./id_library/general.json'))
 var builtinPolicies2 = json(loadTextContent('./id_library/securitycenter.json'))
-var mgResourceId = '/providers/Microsoft.Management/managementGroups/${managementGroupId}'
 
 // CUSTOM POLICYSETS
 resource iam_initiative 'Microsoft.Authorization/policySetDefinitions@2020-09-01' = {
@@ -88,7 +86,7 @@ resource iam_initiative 'Microsoft.Authorization/policySetDefinitions@2020-09-01
     }
     policyDefinitions: [
       {
-        policyDefinitionId: '${mgResourceId}/providers/${customPolicyIds[1]}' //auditResourceLocks
+        policyDefinitionId: customPolicyIds[1] //auditResourceLocks
         policyDefinitionReferenceId: customPolicyNames[1]
         parameters: {
           resourceTypes: {
@@ -103,7 +101,7 @@ resource iam_initiative 'Microsoft.Authorization/policySetDefinitions@2020-09-01
         }
       }
       {
-        policyDefinitionId: '${mgResourceId}/providers/${customPolicyIds[2]}' //auditRoleAssignments
+        policyDefinitionId: customPolicyIds[2] //auditRoleAssignments
         policyDefinitionReferenceId: customPolicyNames[2]
         parameters: {
           principalType: {

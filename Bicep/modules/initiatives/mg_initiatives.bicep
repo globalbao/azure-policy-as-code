@@ -3,11 +3,10 @@ targetScope = 'managementGroup'
 // PARAMETERS
 param policySource string = 'globalbao/azure-policy-as-code'
 param policyCategory string = 'Custom'
-param managementGroupId string
 param customPolicyIds array
 param customPolicyNames array
 
-//RESOURCES
+// POLICYSET MODULES
 module tagging_initiative './mg_tagging.bicep' = {
   name: 'tagging_initiative'
   params: {
@@ -15,7 +14,6 @@ module tagging_initiative './mg_tagging.bicep' = {
     policyCategory: policyCategory
     customPolicyIds: customPolicyIds
     customPolicyNames: customPolicyNames
-    managementGroupId: managementGroupId
   }
 }
 
@@ -26,7 +24,6 @@ module iam_initiative './mg_iam.bicep' = {
     policyCategory: policyCategory
     customPolicyIds: customPolicyIds
     customPolicyNames: customPolicyNames
-    managementGroupId: managementGroupId
   }
 }
 

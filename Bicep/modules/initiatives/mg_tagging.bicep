@@ -3,12 +3,8 @@ targetScope = 'managementGroup'
 // PARAMETERS
 param policySource string = 'Bicep'
 param policyCategory string = 'Custom'
-param managementGroupId string
 param customPolicyIds array
 param customPolicyNames array
-
-// VARIABLES
-var mgResourceId = '/providers/Microsoft.Management/managementGroups/${managementGroupId}'   
 
 // CUSTOM POLICYSETS
 resource tagging_initiative 'Microsoft.Authorization/policySetDefinitions@2020-09-01' = {
@@ -79,7 +75,7 @@ resource tagging_initiative 'Microsoft.Authorization/policySetDefinitions@2020-0
     }
     policyDefinitions: [
       {
-        policyDefinitionId: '${mgResourceId}/providers/${customPolicyIds[3]}' //policy to add tagName1 to RGs
+        policyDefinitionId: customPolicyIds[3] //policy to add tagName1 to RGs
         policyDefinitionReferenceId: 'tagName1-${customPolicyNames[3]}'
         parameters: {
           tagName: {
@@ -94,7 +90,7 @@ resource tagging_initiative 'Microsoft.Authorization/policySetDefinitions@2020-0
         }
       }
       {
-        policyDefinitionId: '${mgResourceId}/providers/${customPolicyIds[3]}' //policy to add tagName2 to RGs
+        policyDefinitionId: customPolicyIds[3] //policy to add tagName2 to RGs
         policyDefinitionReferenceId: 'tagName2-${customPolicyNames[3]}'
         parameters: {
           tagName: {
@@ -109,7 +105,7 @@ resource tagging_initiative 'Microsoft.Authorization/policySetDefinitions@2020-0
         }
       }
       {
-        policyDefinitionId: '${mgResourceId}/providers/${customPolicyIds[3]}' //policy to add tagName3 to RGs
+        policyDefinitionId: customPolicyIds[3] //policy to add tagName3 to RGs
         policyDefinitionReferenceId: 'tagName3-${customPolicyNames[3]}'
         parameters: {
           tagName: {
@@ -124,7 +120,7 @@ resource tagging_initiative 'Microsoft.Authorization/policySetDefinitions@2020-0
         }
       }
       {
-        policyDefinitionId: '${mgResourceId}/providers/${customPolicyIds[6]}' //policy to inherit tagName1 from RGs & overwrite existing
+        policyDefinitionId: customPolicyIds[6] //policy to inherit tagName1 from RGs & overwrite existing
         policyDefinitionReferenceId: 'tagName1-${customPolicyNames[6]}'
         parameters: {
           tagName: {
@@ -139,7 +135,7 @@ resource tagging_initiative 'Microsoft.Authorization/policySetDefinitions@2020-0
         }
       }
       {
-        policyDefinitionId: '${mgResourceId}/providers/${customPolicyIds[6]}' //policy to inherit tagName2 from RGs & overwrite existing
+        policyDefinitionId: customPolicyIds[6] //policy to inherit tagName2 from RGs & overwrite existing
         policyDefinitionReferenceId: 'tagName2-${customPolicyNames[6]}'
         parameters: {
           tagName: {
@@ -154,7 +150,7 @@ resource tagging_initiative 'Microsoft.Authorization/policySetDefinitions@2020-0
         }
       }
       {
-        policyDefinitionId: '${mgResourceId}/providers/${customPolicyIds[6]}' //policy to inherit tagName3 from RGs & overwrite existing
+        policyDefinitionId: customPolicyIds[6] //policy to inherit tagName3 from RGs & overwrite existing
         policyDefinitionReferenceId: 'tagName3-${customPolicyNames[6]}'
         parameters: {
           tagName: {
@@ -169,7 +165,7 @@ resource tagging_initiative 'Microsoft.Authorization/policySetDefinitions@2020-0
         }
       }
       {
-        policyDefinitionId: '${mgResourceId}/providers/${customPolicyIds[5]}' //policy to inherit tagName1 from RGs when no tag exists
+        policyDefinitionId: customPolicyIds[5] //policy to inherit tagName1 from RGs when no tag exists
         policyDefinitionReferenceId: 'tagName1-${customPolicyNames[5]}'
         parameters: {
           tagName: {
@@ -181,7 +177,7 @@ resource tagging_initiative 'Microsoft.Authorization/policySetDefinitions@2020-0
         }
       }
       {
-        policyDefinitionId: '${mgResourceId}/providers/${customPolicyIds[5]}' //policy to inherit tagName2 from RGs when no tag exists
+        policyDefinitionId: customPolicyIds[5] //policy to inherit tagName2 from RGs when no tag exists
         policyDefinitionReferenceId: 'tagName2-${customPolicyNames[5]}'
         parameters: {
           tagName: {
@@ -193,7 +189,7 @@ resource tagging_initiative 'Microsoft.Authorization/policySetDefinitions@2020-0
         }
       }
       {
-        policyDefinitionId: '${mgResourceId}/providers/${customPolicyIds[5]}' //policy to inherit tagName3 from RGs when no tag exists
+        policyDefinitionId: customPolicyIds[5] //policy to inherit tagName3 from RGs when no tag exists
         policyDefinitionReferenceId: 'tagName3-${customPolicyNames[5]}'
         parameters: {
           tagName: {

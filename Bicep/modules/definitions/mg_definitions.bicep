@@ -8,12 +8,7 @@ var add_tag_to_rg = json(loadTextContent('./custom/add_tag_to_rg.json'))
 var inherit_all_rg_tags = json(loadTextContent('./custom/inherit_all_rg_tags.json'))
 var inherit_rg_tag = json(loadTextContent('./custom/inherit_rg_tag.json'))
 var inherit_rg_tag_overwrite_existing = json(loadTextContent('./custom/inherit_rg_tag_overwrite_existing.json'))
-var deploy_alert_appGateway_clientRtt = json(loadTextContent('./custom/deploy_alert_appGateway_clientRtt.json'))
-var deploy_alert_appGateway_cpuUtilization = json(loadTextContent('./custom/deploy_alert_appGateway_cpuUtilization.json'))
-var deploy_alert_appGateway_failedRequests = json(loadTextContent('./custom/deploy_alert_appGateway_failedRequests.json'))
-var deploy_alert_appGateway_healthyHostCount = json(loadTextContent('./custom/deploy_alert_appGateway_healthyHostCount.json'))
-var deploy_alert_appGateway_totalRequests = json(loadTextContent('./custom/deploy_alert_appGateway_totalRequests.json'))
-var deploy_alert_appGateway_unhealthyHostCount = json(loadTextContent('./custom/deploy_alert_appGateway_unhealthyHostCount.json'))
+var deploy_alert_appGateway = json(loadTextContent('./custom/deploy_alert_appGateway.json'))
 
 // CUSTOM DEFINITIONS
 resource deployDiagSettingsKeyVault 'Microsoft.Authorization/policyDefinitions@2020-09-01' = {
@@ -51,34 +46,9 @@ resource inheritRgTagOverwriteExisting 'Microsoft.Authorization/policyDefinition
   properties: inherit_rg_tag_overwrite_existing.properties
 }
 
-resource deployAlertAppGatewayClientRtt 'Microsoft.Authorization/policyDefinitions@2020-09-01' = {
-  name: 'deploy_alert_appGateway_clientRtt'
-  properties: deploy_alert_appGateway_clientRtt.properties
-}
-
-resource deployAlertAppGatewayCpuUtilization 'Microsoft.Authorization/policyDefinitions@2020-09-01' = {
-  name: 'deploy_alert_appGateway_cpuUtilization'
-  properties: deploy_alert_appGateway_cpuUtilization.properties
-}
-
-resource deployAlertAppGatewayFailedRequests 'Microsoft.Authorization/policyDefinitions@2020-09-01' = {
-  name: 'deploy_alert_appGateway_failedRequests'
-  properties: deploy_alert_appGateway_failedRequests.properties
-}
-
-resource deployAlertAppGatewayHealthyHostCount 'Microsoft.Authorization/policyDefinitions@2020-09-01' = {
-  name: 'deploy_alert_appGateway_healthyHostCount'
-  properties: deploy_alert_appGateway_healthyHostCount.properties
-}
-
-resource deployAlertAppGatewayTotalRequests 'Microsoft.Authorization/policyDefinitions@2020-09-01' = {
-  name: 'deploy_alert_appGateway_totalRequests'
-  properties: deploy_alert_appGateway_totalRequests.properties
-}
-
-resource deployAlertAppGatewayUnhealthyHostCount 'Microsoft.Authorization/policyDefinitions@2020-09-01' = {
-  name: 'deploy_alert_appGateway_unhealthyHostCount'
-  properties: deploy_alert_appGateway_unhealthyHostCount.properties
+resource deployAlertAppGateway 'Microsoft.Authorization/policyDefinitions@2020-09-01' = {
+  name: 'deploy_alert_appGateway'
+  properties: deploy_alert_appGateway.properties
 }
 
 output customPolicyIds array = [
@@ -89,12 +59,7 @@ output customPolicyIds array = [
     inheritAllRgTags.id
     inheritRgTag.id
     inheritRgTagOverwriteExisting.id
-    deployAlertAppGatewayClientRtt.id
-    deployAlertAppGatewayCpuUtilization.id
-    deployAlertAppGatewayFailedRequests.id
-    deployAlertAppGatewayHealthyHostCount.id
-    deployAlertAppGatewayTotalRequests.id
-    deployAlertAppGatewayUnhealthyHostCount.id
+    deployAlertAppGateway.id
 ]
 
 output customPolicyNames array = [
@@ -105,10 +70,5 @@ output customPolicyNames array = [
     inheritAllRgTags.properties.displayName
     inheritRgTag.properties.displayName
     inheritRgTagOverwriteExisting.properties.displayName
-    deployAlertAppGatewayClientRtt.properties.displayName
-    deployAlertAppGatewayCpuUtilization.properties.displayName
-    deployAlertAppGatewayFailedRequests.properties.displayName
-    deployAlertAppGatewayHealthyHostCount.properties.displayName
-    deployAlertAppGatewayTotalRequests.properties.displayName
-    deployAlertAppGatewayUnhealthyHostCount.properties.displayName
+    deployAlertAppGateway.properties.displayName
 ]
