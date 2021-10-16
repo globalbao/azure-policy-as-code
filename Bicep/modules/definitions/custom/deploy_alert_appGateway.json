@@ -1,0 +1,414 @@
+{
+  "properties": {
+    "displayName": "Deploy alert for Application Gateway",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Deploys a v2 metric alert for Application Gateway if an alert for the specified metric name does not exist on the target resource",
+    "metadata": {
+      "category": "Custom",
+      "source": "github.com/globalbao/azure-policy-as-code",
+      "version": "1.0.0"
+    },
+    "parameters": {
+      "actionGroupName": {
+        "type": "String",
+        "metadata": {
+          "description": "Name of the Action Group",
+          "displayName": "actionGroupName"
+        }
+      },
+      "actionGroupRG": {
+        "type": "String",
+        "metadata": {
+          "description": "Resource Group containing the Action Group",
+          "displayName": "actionGroupRG"
+        }
+      },
+      "autoMitigate": {
+        "type": "Boolean",
+        "metadata": {
+          "description": "Indicates whether the alert should be auto resolved or not",
+          "displayName": "autoMitigate"
+        },
+        "defaultValue": true
+      },
+      "alertSensitivity": {
+        "type": "String",
+        "metadata": {
+          "description": "The extent of deviation required to trigger an alert. This will affect how tight the threshold is to the metric series pattern.",
+          "displayName": "alertSensitivity"
+        },
+        "allowedValues": ["High", "Medium", "Low"],
+        "defaultValue": "Medium"
+      },
+      "dimensions": {
+        "type": "Object",
+        "metadata": {
+          "description": "List of dimension conditions. See https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-supported",
+          "displayName": "dimensions"
+        }
+      },
+      "minFailingPeriodsToAlert": {
+        "type": "Integer",
+        "metadata": {
+          "description": "The number of violations to trigger an alert. Should be smaller or equal to numberOfEvaluationPeriods.",
+          "displayName": "minFailingPeriodsToAlert"
+        },
+        "defaultValue": 1
+      },
+      "numberOfEvaluationPeriods": {
+        "type": "Integer",
+        "metadata": {
+          "description": "The number of aggregated lookback points. The lookback time window is calculated based on the aggregation granularity (windowSize) and the selected number of aggregated points.",
+          "displayName": "numberOfEvaluationPeriods"
+        },
+        "defaultValue": 2
+      },
+      "metricName": {
+        "type": "String",
+        "metadata": {
+          "description": "Name of the metric",
+          "displayName": "metricName"
+        }
+      },
+      "operator": {
+        "type": "String",
+        "metadata": {
+          "description": "The criteria operator",
+          "displayName": "operator"
+        },
+        "allowedValues": [
+          "Equals",
+          "GreaterThan",
+          "GreaterThanOrEqual",
+          "LessThan",
+          "LessThanOrEqual",
+          "NotEquals"
+        ]
+      },
+      "timeAggregation": {
+        "type": "String",
+        "metadata": {
+          "description": "The criteria time aggregation types",
+          "displayName": "timeAggregation"
+        },
+        "allowedValues": ["Average", "Count", "Maximum", "Minimum", "Total"]
+      },
+      "description": {
+        "type": "String",
+        "metadata": {
+          "description": "The description of the metric alert that will be included in the alert email",
+          "displayName": "description"
+        }
+      },
+      "evaluationFrequency": {
+        "type": "String",
+        "metadata": {
+          "description": "How often the metric alert is evaluated represented in ISO 8601 duration format e.g. PT15M",
+          "displayName": "evaluationFrequency"
+        },
+        "defaultValue": "PT15M"
+      },
+      "severity": {
+        "type": "Integer",
+        "metadata": {
+          "description": "Alert severity",
+          "displayName": "severity"
+        },
+        "allowedValues": [0, 1, 2, 3, 4],
+        "defaultValue": 3
+      },
+      "windowSize": {
+        "type": "String",
+        "metadata": {
+          "description": "The period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold e.g. PT1H",
+          "displayName": "windowSize"
+        },
+        "defaultValue": "PT1H"
+      },
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": ["DeployIfNotExists", "Disabled"],
+        "defaultValue": "DeployIfNotExists"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Network/applicationGateways"
+          },
+          {
+            "field": "Microsoft.Network/applicationGateways/sku.tier",
+            "equals": "Standard_v2"
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+          "type": "Microsoft.Insights/metricAlerts",
+          "evaluationDelay": "AfterProvisioningSuccess",
+          "roleDefinitionIds": [
+            "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+          ],
+          "existenceCondition": {
+            "allOf": [
+              {
+                "field": "Microsoft.Insights/metricAlerts/criteria.Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria.allOf[*].metricNamespace",
+                "equals": "Microsoft.Network/applicationGateways"
+              },
+              {
+                "field": "Microsoft.Insights/metricAlerts/criteria.Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria.allOf[*].metricName",
+                "equals": "[parameters('metricName')]"
+              },
+              {
+                "field": "Microsoft.Insights/metricalerts/scopes[*]",
+                "equals": "[concat(subscription().id, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Network/applicationGateways/', field('fullName'))]"
+              }
+            ]
+          },
+          "deployment": {
+            "properties": {
+              "mode": "incremental",
+              "template": {
+                "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                "contentVersion": "1.0.0.0",
+                "parameters": {
+                  "actionGroupId": {
+                    "type": "string",
+                    "metadata": {
+                      "description": "The ID of the action group that is triggered when the alert is activated or deactivated",
+                      "displayName": "actionGroupId"
+                    },
+                    "defaultValue": "[resourceId(parameters('actionGroupRG'), 'Microsoft.Insights/ActionGroups', parameters('actionGroupName'))]"
+                  },
+                  "actionGroupName": {
+                    "type": "string",
+                    "metadata": {
+                      "description": "Name of the Action Group",
+                      "displayName": "actionGroupName"
+                    }
+                  },
+                  "actionGroupRG": {
+                    "type": "string",
+                    "metadata": {
+                      "description": "Resource Group containing the Action Group",
+                      "displayName": "actionGroupRG"
+                    }
+                  },
+                  "resourceId": {
+                    "type": "string",
+                    "metadata": {
+                      "description": "Resource ID of the resource emitting the metric that will be used for the comparison",
+                      "displayName": "resourceId"
+                    },
+                    "defaultValue": "[resourceId('Microsoft.Network/applicationGateways', parameters('resourceName'))]"
+                  },
+                  "resourceLocation": {
+                    "type": "string",
+                    "metadata": {
+                      "description": "Location of the resource",
+                      "displayName": "resourceLocation"
+                    }
+                  },
+                  "resourceName": {
+                    "type": "string",
+                    "metadata": {
+                      "description": "Name of the resource",
+                      "displayName": "resourceName"
+                    }
+                  },
+                  "autoMitigate": {
+                    "type": "bool",
+                    "metadata": {
+                      "description": "Indicates whether the alert should be auto resolved or not",
+                      "displayName": "autoMitigate"
+                    }
+                  },
+                  "alertSensitivity": {
+                    "type": "string",
+                    "metadata": {
+                      "description": "The extent of deviation required to trigger an alert. This will affect how tight the threshold is to the metric series pattern",
+                      "displayName": "alertSensitivity"
+                    }
+                  },
+                  "dimensions": {
+                    "type": "object",
+                    "metadata": {
+                      "description": "List of dimension conditions",
+                      "displayName": "dimensions"
+                    }
+                  },
+                  "minFailingPeriodsToAlert": {
+                    "type": "int",
+                    "metadata": {
+                      "description": "The number of violations to trigger an alert. Should be smaller or equal to numberOfEvaluationPeriods",
+                      "displayName": "minFailingPeriodsToAlert"
+                    }
+                  },
+                  "numberOfEvaluationPeriods": {
+                    "type": "int",
+                    "metadata": {
+                      "description": "The number of aggregated lookback points. The lookback time window is calculated based on the aggregation granularity (windowSize) and the selected number of aggregated points",
+                      "displayName": "numberOfEvaluationPeriods"
+                    }
+                  },
+                  "metricName": {
+                    "type": "string",
+                    "metadata": {
+                      "description": "Name of the metric",
+                      "displayName": "metricName"
+                    }
+                  },
+                  "operator": {
+                    "type": "string",
+                    "metadata": {
+                      "description": "The criteria operator",
+                      "displayName": "operator"
+                    }
+                  },
+                  "timeAggregation": {
+                    "type": "string",
+                    "metadata": {
+                      "description": "The criteria time aggregation types",
+                      "displayName": "timeAggregation"
+                    }
+                  },
+                  "description": {
+                    "type": "string",
+                    "metadata": {
+                      "description": "The description of the metric alert that will be included in the alert email",
+                      "displayName": "description"
+                    }
+                  },
+                  "evaluationFrequency": {
+                    "type": "string",
+                    "metadata": {
+                      "description": "How often the metric alert is evaluated represented in ISO 8601 duration format e.g. PT15M",
+                      "displayName": "evaluationFrequency"
+                    }
+                  },
+                  "severity": {
+                    "type": "int",
+                    "metadata": {
+                      "description": "Alert severity",
+                      "displayName": "severity"
+                    }
+                  },
+                  "windowSize": {
+                    "type": "string",
+                    "metadata": {
+                      "description": "The period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold e.g. PT1H",
+                      "displayName": "windowSize"
+                    }
+                  }
+                },
+                "resources": [
+                  {
+                    "apiVersion": "2018-03-01",
+                    "type": "Microsoft.Insights/metricAlerts",
+                    "location": "global",
+                    "name": "[concat(parameters('resourceName'), '-appGateway_', parameters('metricName'))]",
+                    "properties": {
+                      "actions": [
+                        {
+                          "actionGroupId": "[parameters('actionGroupId')]",
+                          "webHookProperties": {}
+                        }
+                      ],
+                      "autoMitigate": "[parameters('autoMitigate')]",
+                      "criteria": {
+                        "allOf": [
+                          {
+                            "alertSensitivity": "[parameters('alertSensitivity')]",
+                            "criterionType": "DynamicThresholdCriterion",
+                            "dimensions": "[parameters('dimensions')]",
+                            "failingPeriods": {
+                              "minFailingPeriodsToAlert": "[parameters('minFailingPeriodsToAlert')]",
+                              "numberOfEvaluationPeriods": "[parameters('numberOfEvaluationPeriods')]"
+                            },
+                            "metricName": "[parameters('metricName')]",
+                            "metricNamespace": "Microsoft.Network/applicationGateways",
+                            "name": "Metric1",
+                            "operator": "[parameters('operator')]",
+                            "timeAggregation": "[parameters('timeAggregation')]"
+                          }
+                        ],
+                        "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria"
+                      },
+                      "description": "[parameters('description')]",
+                      "enabled": true,
+                      "evaluationFrequency": "[parameters('evaluationFrequency')]",
+                      "scopes": ["[parameters('resourceId')]"],
+                      "severity": ["[parameters('severity')]"],
+                      "targetResourceRegion": "[parameters('resourceLocation')]",
+                      "targetResourceType": "Microsoft.Network/applicationGateways",
+                      "windowSize": ["[parameters('windowSize')]"]
+                    }
+                  }
+                ],
+                "variables": {}
+              },
+              "parameters": {
+                "actionGroupName": {
+                  "value": "[parameters('actionGroupName')]"
+                },
+                "actionGroupRG": {
+                  "value": "[parameters('actionGroupRG')]"
+                },
+                "resourceLocation": {
+                  "value": "[field('location')]"
+                },
+                "resourceName": {
+                  "value": "[field('fullName')]"
+                },
+                "autoMitigate": {
+                  "value": "[parameters('autoMitigate')]"
+                },
+                "alertSensitivity": {
+                  "value": "[parameters('alertSensitivity')]"
+                },
+                "dimensions": {
+                  "value": "[parameters('dimensions')]"
+                },
+                "minFailingPeriodsToAlert": {
+                  "value": "[parameters('minFailingPeriodsToAlert')]"
+                },
+                "numberOfEvaluationPeriods": {
+                  "value": "[parameters('numberOfEvaluationPeriods')]"
+                },
+                "metricName": {
+                  "value": "[parameters('metricName')]"
+                },
+                "operator": {
+                  "value": "[parameters('operator')]"
+                },
+                "timeAggregation": {
+                  "value": "[parameters('timeAggregation')]"
+                },
+                "description": {
+                  "value": "[parameters('description')]"
+                },
+                "evaluationFrequency": {
+                  "value": "[parameters('evaluationFrequency')]"
+                },
+                "severity": {
+                  "value": "[parameters('severity')]"
+                },
+                "windowSize": {
+                  "value": "[parameters('windowSize')]"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
