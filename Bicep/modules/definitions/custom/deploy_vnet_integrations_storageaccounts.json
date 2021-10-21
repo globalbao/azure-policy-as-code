@@ -1,0 +1,137 @@
+{
+	"properties": {
+	  "displayName": "Modify - set selected network for storage account (test add)",
+	  "policyType": "Custom",
+	  "mode": "All",
+	  
+	  "parameters": {
+		"effect": {
+		  "type": "String",
+		  "metadata": {
+			"displayName": "Effect",
+			"description": "Enable or disable the execution of the policy"
+		  },
+		  "allowedValues": [
+			"Audit",
+			"Modify",
+			"Disabled"
+		  ],
+		  "defaultValue": "Audit"
+		},
+		"allowedIPs": {
+		  "type": "Array",
+		  "metadata": {
+			"displayName": "Allowed IPs",
+			"description": "Only storage accounts that have this IP entered will be evaluated by policy"
+		  },
+		  "defaultValue": [
+			"input IP here"
+		  ]
+		},
+		"allowedNetworks": {
+		  "type": "Array",
+		  "metadata": {
+			"displayName": "Allowed Networks",
+			"description": "The list of allowed virtual networks"
+		  },
+		  "defaultValue": [
+			{
+			  "id": "input subnet id here",
+			  "action": "Allow",
+			  "state": "Succeeded"
+			},
+			{
+			  "id": "input subnet id here",
+			  "action": "Allow",
+			  "state": "Succeeded"
+			}
+		  ]
+		}
+	  },
+	  "policyRule": {
+		"if": {
+		  "allOf": [
+			{
+			  "field": "type",
+			  "equals": "Microsoft.Storage/storageAccounts"
+			},
+			{
+			  "count": {
+				"field": "Microsoft.Storage/storageAccounts/networkAcls.ipRules[*]",
+				"where": {
+				  "count": {
+					"value": "[parameters('allowedIPs')]",
+					"name": "approvedPrefix",
+					"where": {
+					  "value": "[ipRangeContains(current('approvedPrefix'), current('Microsoft.Storage/storageAccounts/networkAcls.ipRules[*].value'))]",
+					  "equals": true
+					}
+				  },
+				  "greater": 0
+				}
+			  },
+			  "greater": 0
+			},
+			{
+			  "count": {
+				"value": "[parameters('allowednetworks')]",
+				"name": "allowedNetworks",
+				"where": {
+				  "count": {
+					"field": "Microsoft.Storage/storageAccounts/networkAcls.virtualNetworkRules[*]",
+					"where": {
+					  "allOf": [
+						{
+						  "field": "Microsoft.Storage/storageAccounts/networkAcls.virtualNetworkRules[*].id",
+						  "equals": "[current('allowedNetworks').id]"
+						},
+						{
+						  "field": "Microsoft.Storage/storageAccounts/networkAcls.virtualNetworkRules[*].action",
+						  "equals": "[current('allowedNetworks').action]"
+						},
+						{
+						  "field": "Microsoft.Storage/storageAccounts/networkAcls.virtualNetworkRules[*].state",
+						  "equals": "[current('allowedNetworks').state]"
+						}
+					  ]
+					}
+				  },
+				  "equals": 1
+				}
+			  },
+			  "notEquals": "[length(parameters('allowednetworks'))]"
+			}
+		  ]
+		},
+		"then": {
+		  "effect": "[parameters('effect')]",
+		  "details": {
+			"roleDefinitionIds": [
+			  "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+			],
+			"conflictEffect": "audit",
+			"operations": [
+			  {
+				"operation": "add",
+				"field": "Microsoft.Storage/storageAccounts/networkAcls.virtualNetworkRules[*]",
+				"value": {
+				  "id": "[parameters('allowednetworks')[0].id]",
+				  "action": "Allow",
+				  "state": "Succeeded"
+				}
+			  },
+			  {
+				"operation": "add",
+				"field": "Microsoft.Storage/storageAccounts/networkAcls.virtualNetworkRules[*]",
+				"value": {
+				  "id": "[parameters('allowednetworks')[1].id]",
+				  "action": "Allow",
+				  "state": "Succeeded"
+				}
+			  }
+			]
+		  }
+		}
+	  }
+	}
+  }
