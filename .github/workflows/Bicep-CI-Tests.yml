@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: ARM TTK
       uses: docker://ghcr.io/github/super-linter:slim-v4
       env:
