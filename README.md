@@ -1,11 +1,14 @@
 # Azure-Policy-As-Code
-[![Bicep-CI-Tests](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Bicep-CI-Tests.yml/badge.svg)](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Bicep-CI-Tests.yml) [![Bicep-CD-Tests](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Bicep-CD-Tests.yml/badge.svg)](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Bicep-CD-Tests.yml) [![Terraform-CI-Tests](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Terraform-CI-Tests.yml/badge.svg)](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Terraform-CI-Tests.yml) [![Terraform-CD-Tests](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Terraform-CD-Tests.yml/badge.svg)](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Terraform-CD-Tests.yml)
+[![Bicep-CI-Tests](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Bicep-CI-Tests.yml/badge.svg)](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Bicep-CI-Tests.yml) [![Bicep-CD-Tests](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Bicep-CD-Tests.yml/badge.svg)](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Bicep-CD-Tests.yml) [![Terraform-CI-Tests](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Terraform-CI-Tests.yml/badge.svg)](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Terraform-CI-Tests.yml) [![Terraform-CD-Tests](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Terraform-CD-Tests.yml/badge.svg)](https://github.com/globalbao/azure-policy-as-code/actions/workflows/Terraform-CD-Tests.yml)[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/globalbao/azure-policy-as-code)
 
 Azure Policy as Code is the combination of IaC and DevOps ensuring governance at scale is shifted away from click-ops and after-hours support towards a codified, policy-driven strategy.
 
-This repo contains working modules for Bicep and Terraform usage, plus YAML CI/CD workflows which you can use today.
+This repo contains working modules for `Bicep` and `Terraform` usage, plus `YAML` CI/CD workflows which you can use today.
 
-[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/globalbao/azure-policy-as-code)
+## Contributors
+<a href="https://github.com/globalbao/azure-policy-as-code/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=globalbao/azure-policy-as-code" />
+</a>
 
 ## Community Content | Azure Policy as Code
 
