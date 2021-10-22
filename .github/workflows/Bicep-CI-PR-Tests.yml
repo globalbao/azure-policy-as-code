@@ -1,0 +1,28 @@
+name: Bicep-CI-Tests
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+    - '**.bicep'
+    - '**.json'
+  workflow_dispatch:
+    
+jobs:
+
+  Bicep-ValidationTests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: ARM TTK
+      uses: docker://ghcr.io/github/super-linter:slim-v4
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        VALIDATE_ALL_CODEBASE: false
+        DEFAULT_BRANCH: main
+        VALIDATE_JSON: true
+    - name: Bicep Build
+      uses: aliencube/bicep-build-actions@v0.3
+      with:
+        files: '**/*.bicep'

@@ -1,10 +1,5 @@
 name: Bicep-CD-Tests
 on:
-  push:
-    branches: [ main ]
-    paths:
-    - '**.bicep'
-    - '**.json'
   schedule:
    - cron: "0 0 * * *" #at the end of every day
   workflow_dispatch:
@@ -15,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: ARM TTK
       uses: docker://ghcr.io/github/super-linter:slim-v4
       env:
