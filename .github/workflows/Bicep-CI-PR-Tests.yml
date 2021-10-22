@@ -1,4 +1,4 @@
-name: Bicep-CI-Tests
+name: Bicep-CI-PR-Tests
 on:
   pull_request:
     branches: [ main ]
