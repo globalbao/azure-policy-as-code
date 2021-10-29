@@ -126,4 +126,4 @@ POLICY_DEFINITIONS
 ```
 
 ### Home
-[terraform-azurerm-policy](https://globalbao.github.io/terraform-azurerm-policy/)
+[azure-policy-as-code](https://globalbao.github.io/terraform-azurerm-policy/)
