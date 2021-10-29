@@ -117,4 +117,4 @@ Specific variable index items can also be referenced using `${var.variableName[0
 ```
 
 ### Home
-[terraform-azurerm-policy](https://globalbao.github.io/terraform-azurerm-policy/)
+[azure-policy-as-code](https://globalbao.github.io/azure-policy-as-code/)
