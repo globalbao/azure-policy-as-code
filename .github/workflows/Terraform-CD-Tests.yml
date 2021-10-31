@@ -28,10 +28,10 @@ jobs:
     env:
       TF_IN_AUTOMATION: true
       TF_INPUT: false
-      ARM_CLIENT_ID: ${{ secrets.AZURE_BATCAVE_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.AZURE_BATCAVE_SECRET }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_BATCAVE_SUBSCRIPTION }}
-      ARM_TENANT_ID: ${{ secrets.AZURE_BATCAVE_TENANT }}
+      ARM_CLIENT_ID: ${{ secrets.SP_GLOBALBAO_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.SP_GLOBALBAO_SEC }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.SP_GLOBALBAO_SUB }}
+      ARM_TENANT_ID: ${{ secrets.SP_GLOBALBAO_TEN }}
     needs: Terraform-ValidationTests
     runs-on: ubuntu-latest
     steps:

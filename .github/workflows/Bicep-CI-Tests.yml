@@ -35,7 +35,7 @@ jobs:
     - name: Azure Login
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS_PROD }}
+        creds: ${{ secrets.SP_LAB }}
     - name: Bicep CI Tests
       id: bicepCI
       continue-on-error: true
@@ -63,14 +63,14 @@ jobs:
     - name: Azure Login
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS_PROD }}
+        creds: ${{ secrets.SP_LAB }}
     - name: Bicep CI Tests
       id: bicepCI
       continue-on-error: true
       uses: azure/CLI@v1
       with:
         inlineScript: |
-          az deployment mg create -f ./Bicep/modules/mg_main.bicep -l australiaeast -m PRODUCTION -p ./Bicep/modules/mg_main_params.json --what-if
+          az deployment mg create -f ./Bicep/modules/mg_main.bicep -l australiaeast -m production -p ./Bicep/modules/mg_main_params.json --what-if
     - name: Sleep for 30s
       if: ${{ steps.bicepCI.outcome == 'failure' && steps.bicepCI.conclusion == 'success' }}
       uses: juliangruber/sleep-action@v1
@@ -81,4 +81,4 @@ jobs:
       uses: azure/CLI@v1
       with:
         inlineScript: |
-          az deployment mg create -f ./Bicep/modules/mg_main.bicep -l australiaeast -m PRODUCTION -p ./Bicep/modules/mg_main_params.json --what-if
+          az deployment mg create -f ./Bicep/modules/mg_main.bicep -l australiaeast -m production -p ./Bicep/modules/mg_main_params.json --what-if
