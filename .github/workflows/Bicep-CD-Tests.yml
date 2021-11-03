@@ -38,6 +38,7 @@ jobs:
       continue-on-error: true
       uses: azure/CLI@v1
       with:
+        azcliversion: 2.29.2
         inlineScript: |
           az deployment sub create -f ./Bicep/modules/sub_main.bicep -l australiaeast -p ./Bicep/modules/sub_main_params.json -o none
     - name: Sleep for 30s
@@ -49,6 +50,7 @@ jobs:
       if: ${{ steps.bicepCD.outcome == 'failure' && steps.bicepCD.conclusion == 'success' }}
       uses: azure/CLI@v1
       with:
+        azcliversion: 2.29.2
         inlineScript: |
           az deployment sub create -f ./Bicep/modules/sub_main.bicep -l australiaeast -p ./Bicep/modules/sub_main_params.json -o none
 
@@ -66,6 +68,7 @@ jobs:
       continue-on-error: true
       uses: azure/CLI@v1
       with:
+        azcliversion: 2.29.2
         inlineScript: |
           az deployment mg create -f ./Bicep/modules/mg_main.bicep -l australiaeast -m production -p ./Bicep/modules/mg_main_params.json -o none
     - name: Sleep for 30s
@@ -77,5 +80,6 @@ jobs:
       if: ${{ steps.bicepCD.outcome == 'failure' && steps.bicepCD.conclusion == 'success' }}
       uses: azure/CLI@v1
       with:
+        azcliversion: 2.29.2
         inlineScript: |
           az deployment mg create -f ./Bicep/modules/mg_main.bicep -l australiaeast -m production -p ./Bicep/modules/mg_main_params.json -o none
