@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1008.15138",
-      "templateHash": "5362082578999936764"
+      "templateHash": "7061226618769398454"
     }
   },
   "parameters": {
@@ -492,7 +492,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1008.15138",
-              "templateHash": "11703135732979206801"
+              "templateHash": "3365208818394019522"
             }
           },
           "parameters": {
@@ -544,7 +544,7 @@
                     "_generator": {
                       "name": "bicep",
                       "version": "0.4.1008.15138",
-                      "templateHash": "285290408301758528"
+                      "templateHash": "7128745795499507190"
                     }
                   },
                   "parameters": {
@@ -572,7 +572,7 @@
                       "properties": {
                         "policyType": "Custom",
                         "displayName": "Tagging Governance Initiative - MG Scope",
-                        "description": "[format('Tagging Governance Initiative MG Scope via {0}', parameters('policySource'))]",
+                        "description": "[format('Tagging Governance Initiative - MG Scope via {0}', parameters('policySource'))]",
                         "metadata": {
                           "category": "[parameters('policyCategory')]",
                           "source": "[parameters('policySource')]",
@@ -804,7 +804,7 @@
                     "_generator": {
                       "name": "bicep",
                       "version": "0.4.1008.15138",
-                      "templateHash": "12792410055961027900"
+                      "templateHash": "10157773319254455088"
                     }
                   },
                   "parameters": {
@@ -836,7 +836,7 @@
                       "properties": {
                         "policyType": "Custom",
                         "displayName": "IAM Governance Initiative - MG Scope",
-                        "description": "[format('Identity & Access Management Governance Initiative MG Scope via {0}', parameters('policySource'))]",
+                        "description": "[format('Identity & Access Management Governance Initiative - MG Scope via {0}', parameters('policySource'))]",
                         "metadata": {
                           "category": "[parameters('policyCategory')]",
                           "source": "[parameters('policySource')]",
@@ -1351,7 +1351,7 @@
                     "_generator": {
                       "name": "bicep",
                       "version": "0.4.1008.15138",
-                      "templateHash": "4025402885616590425"
+                      "templateHash": "780618848636069472"
                     }
                   },
                   "parameters": {
@@ -1382,7 +1382,7 @@
                       "properties": {
                         "policyType": "Custom",
                         "displayName": "KeyVault Governance Initiative - MG Scope",
-                        "description": "[format('KeyVault Governance Initiative MG Scope via {0}', parameters('policySource'))]",
+                        "description": "[format('KeyVault Governance Initiative - MG Scope via {0}', parameters('policySource'))]",
                         "metadata": {
                           "category": "[parameters('policyCategory')]",
                           "source": "[parameters('policySource')]",
@@ -1477,19 +1477,6 @@
                               4096
                             ],
                             "defaultValue": 2048
-                          },
-                          "effect": {
-                            "type": "String",
-                            "metadata": {
-                              "displayName": "Effect",
-                              "description": "Enable or disable the execution of the policy"
-                            },
-                            "allowedValues": [
-                              "Audit",
-                              "Deny",
-                              "Disabled"
-                            ],
-                            "defaultValue": "Audit"
                           }
                         },
                         "policyDefinitions": [
@@ -1504,21 +1491,11 @@
                           },
                           {
                             "policyDefinitionId": "[variables('builtinPolicies1').KeyVaultsShouldHavePurgeProtectionEnabled]",
-                            "policyDefinitionReferenceId": "KeyVaultsShouldHavePurgeProtectionEnabled",
-                            "parameters": {
-                              "effect": {
-                                "value": "[[parameters('effect')]"
-                              }
-                            }
+                            "policyDefinitionReferenceId": "KeyVaultsShouldHavePurgeProtectionEnabled"
                           },
                           {
                             "policyDefinitionId": "[variables('builtinPolicies1').KeyVaultsShouldHaveSoftDeleteEnabled]",
-                            "policyDefinitionReferenceId": "KeyVaultsShouldHaveSoftDeleteEnabled",
-                            "parameters": {
-                              "effect": {
-                                "value": "[[parameters('effect')]"
-                              }
-                            }
+                            "policyDefinitionReferenceId": "KeyVaultsShouldHaveSoftDeleteEnabled"
                           },
                           {
                             "policyDefinitionId": "[variables('builtinPolicies1').CertificatesShouldBeIssuedByTheSpecifiedIntegratedCertificateAuthority]",
@@ -1526,9 +1503,6 @@
                             "parameters": {
                               "allowedCAs": {
                                 "value": "[[parameters('allowedCAs')]"
-                              },
-                              "effect": {
-                                "value": "[[parameters('effect')]"
                               }
                             }
                           },
@@ -1538,9 +1512,6 @@
                             "parameters": {
                               "allowedKeyTypes": {
                                 "value": "[[parameters('allowedKeyTypesCertificates')]"
-                              },
-                              "effect": {
-                                "value": "[[parameters('effect')]"
                               }
                             }
                           },
@@ -1550,9 +1521,6 @@
                             "parameters": {
                               "minimumRSAKeySize": {
                                 "value": "[[parameters('minimumRSAKeySize')]"
-                              },
-                              "effect": {
-                                "value": "[[parameters('effect')]"
                               }
                             }
                           },
@@ -1562,20 +1530,12 @@
                             "parameters": {
                               "allowedKeyTypes": {
                                 "value": "[[parameters('allowedKeyTypes')]"
-                              },
-                              "effect": {
-                                "value": "[[parameters('effect')]"
                               }
                             }
                           },
                           {
                             "policyDefinitionId": "[variables('builtinPolicies1').KeyVaultKeysShouldHaveAnExpirationDate]",
-                            "policyDefinitionReferenceId": "KeyVaultKeysShouldHaveAnExpirationDate",
-                            "parameters": {
-                              "effect": {
-                                "value": "[[parameters('effect')]"
-                              }
-                            }
+                            "policyDefinitionReferenceId": "KeyVaultKeysShouldHaveAnExpirationDate"
                           },
                           {
                             "policyDefinitionId": "[variables('builtinPolicies1').KeysShouldHaveMoreThanTheSpecifiedNumberOfDaysBeforeExpiration]",
@@ -1583,9 +1543,6 @@
                             "parameters": {
                               "minimumDaysBeforeExpiration": {
                                 "value": "[[parameters('minimumDaysBeforeExpiration')]"
-                              },
-                              "effect": {
-                                "value": "[[parameters('effect')]"
                               }
                             }
                           },
@@ -1595,9 +1552,6 @@
                             "parameters": {
                               "maximumValidityInDays": {
                                 "value": "[[parameters('maximumValidityInDays')]"
-                              },
-                              "effect": {
-                                "value": "[[parameters('effect')]"
                               }
                             }
                           },
@@ -1607,9 +1561,6 @@
                             "parameters": {
                               "maximumValidityInDays": {
                                 "value": "[[parameters('maximumValidityInDays')]"
-                              },
-                              "effect": {
-                                "value": "[[parameters('effect')]"
                               }
                             }
                           },
@@ -1619,29 +1570,16 @@
                             "parameters": {
                               "minimumRSAKeySize": {
                                 "value": "[[parameters('minimumRSAKeySize')]"
-                              },
-                              "effect": {
-                                "value": "[[parameters('effect')]"
                               }
                             }
                           },
                           {
                             "policyDefinitionId": "[variables('builtinPolicies1').SecretsShouldHaveContentTypeSet]",
-                            "policyDefinitionReferenceId": "SecretsShouldHaveContentTypeSet",
-                            "parameters": {
-                              "effect": {
-                                "value": "[[parameters('effect')]"
-                              }
-                            }
+                            "policyDefinitionReferenceId": "SecretsShouldHaveContentTypeSet"
                           },
                           {
                             "policyDefinitionId": "[variables('builtinPolicies1').KeyVaultSecretsShouldHaveAnExpirationDate]",
-                            "policyDefinitionReferenceId": "KeyVaultSecretsShouldHaveAnExpirationDate",
-                            "parameters": {
-                              "effect": {
-                                "value": "[[parameters('effect')]"
-                              }
-                            }
+                            "policyDefinitionReferenceId": "KeyVaultSecretsShouldHaveAnExpirationDate"
                           },
                           {
                             "policyDefinitionId": "[variables('builtinPolicies1').SecretsShouldHaveMoreThanTheSpecifiedNumberOfDaysBeforeExpiration]",
@@ -1649,9 +1587,6 @@
                             "parameters": {
                               "minimumDaysBeforeExpiration": {
                                 "value": "[[parameters('minimumDaysBeforeExpiration')]"
-                              },
-                              "effect": {
-                                "value": "[[parameters('effect')]"
                               }
                             }
                           },
@@ -1661,9 +1596,6 @@
                             "parameters": {
                               "maximumValidityInDays": {
                                 "value": "[[parameters('maximumValidityInDays')]"
-                              },
-                              "effect": {
-                                "value": "[[parameters('effect')]"
                               }
                             }
                           },
@@ -1673,9 +1605,6 @@
                             "parameters": {
                               "maximumValidityInDays": {
                                 "value": "[[parameters('maximumValidityInDays')]"
-                              },
-                              "effect": {
-                                "value": "[[parameters('effect')]"
                               }
                             }
                           }
@@ -1717,7 +1646,7 @@
                     "_generator": {
                       "name": "bicep",
                       "version": "0.4.1008.15138",
-                      "templateHash": "7680065884635525777"
+                      "templateHash": "12828685647059043002"
                     }
                   },
                   "parameters": {
@@ -1742,8 +1671,8 @@
                       "name": "data_protection_initiative",
                       "properties": {
                         "policyType": "Custom",
-                        "displayName": "Data Protection Governance Initiative",
-                        "description": "[format('Data Protection Governance Initiative via {0}', parameters('policySource'))]",
+                        "displayName": "Data Protection Governance Initiative - MG Scope",
+                        "description": "[format('Data Protection Governance Initiative - MG Scope via {0}', parameters('policySource'))]",
                         "metadata": {
                           "category": "[parameters('policyCategory')]",
                           "source": "[parameters('policySource')]",
@@ -1840,7 +1769,7 @@
                           },
                           {
                             "policyDefinitionId": "[variables('builtinPolicies2').AuditVirtualMachinesWithoutDisasterRecoveryConfigured]",
-                            "policyDefinitionReferenceId": "Compute_AuditVirtualMachinesWithoutDisasterRecoveryConfigured"
+                            "policyDefinitionReferenceId": "AuditVirtualMachinesWithoutDisasterRecoveryConfigured"
                           }
                         ]
                       }
@@ -1926,7 +1855,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1008.15138",
-              "templateHash": "18122507162919410059"
+              "templateHash": "3812708395648602123"
             }
           },
           "parameters": {
@@ -2087,9 +2016,6 @@
                 "parameters": {
                   "logAnalytics": {
                     "value": "[parameters('logAnalytics')]"
-                  },
-                  "effect": {
-                    "value": "Audit"
                   }
                 }
               }
