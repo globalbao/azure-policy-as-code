@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1008.15138",
-      "templateHash": "2628997391571807231"
+      "templateHash": "4337484099195058772"
     }
   },
   "parameters": {
@@ -1849,7 +1849,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1008.15138",
-              "templateHash": "9643589475006069147"
+              "templateHash": "4659925975839164403"
             }
           },
           "parameters": {
@@ -2066,7 +2066,7 @@
             {
               "type": "Microsoft.Authorization/roleAssignments",
               "apiVersion": "2020-04-01-preview",
-              "name": "[guid('monitoring_assignment', 'Microsoft.Authorization/policyAssignments')]",
+              "name": "[guid('monitoring_assignment', 'Microsoft.Authorization/policyAssignments', subscription().subscriptionId)]",
               "properties": {
                 "principalId": "[reference(subscriptionResourceId('Microsoft.Authorization/policyAssignments', 'monitoring_assignment'), '2020-09-01', 'full').identity.principalId]",
                 "principalType": "ServicePrincipal",
@@ -2079,7 +2079,7 @@
             {
               "type": "Microsoft.Authorization/roleAssignments",
               "apiVersion": "2020-04-01-preview",
-              "name": "[guid('dp_assignment', 'Microsoft.Authorization/policyAssignments')]",
+              "name": "[guid('dp_assignment', 'Microsoft.Authorization/policyAssignments', subscription().subscriptionId)]",
               "properties": {
                 "principalId": "[reference(subscriptionResourceId('Microsoft.Authorization/policyAssignments', 'dp_assignment'), '2020-09-01', 'full').identity.principalId]",
                 "principalType": "ServicePrincipal",
@@ -2105,8 +2105,8 @@
               "type": "array",
               "value": [
                 "[subscriptionResourceId('Microsoft.Authorization/roleAssignments', guid('tagging_assignment', 'Microsoft.Authorization/policyAssignments', subscription().subscriptionId))]",
-                "[subscriptionResourceId('Microsoft.Authorization/roleAssignments', guid('monitoring_assignment', 'Microsoft.Authorization/policyAssignments'))]",
-                "[subscriptionResourceId('Microsoft.Authorization/roleAssignments', guid('dp_assignment', 'Microsoft.Authorization/policyAssignments'))]"
+                "[subscriptionResourceId('Microsoft.Authorization/roleAssignments', guid('monitoring_assignment', 'Microsoft.Authorization/policyAssignments', subscription().subscriptionId))]",
+                "[subscriptionResourceId('Microsoft.Authorization/roleAssignments', guid('dp_assignment', 'Microsoft.Authorization/policyAssignments', subscription().subscriptionId))]"
               ]
             }
           }

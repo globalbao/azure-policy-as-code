@@ -180,7 +180,7 @@ resource tagging_roleassignment 'Microsoft.Authorization/roleAssignments@2020-04
 }
 
 resource monitoring_roleassignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
-  name: guid(monitoring_assignment.name, monitoring_assignment.type)
+  name: guid(monitoring_assignment.name, monitoring_assignment.type, subscription().subscriptionId)
   properties: {
     principalId: monitoring_assignment.identity.principalId
     principalType: 'ServicePrincipal'
@@ -189,7 +189,7 @@ resource monitoring_roleassignment 'Microsoft.Authorization/roleAssignments@2020
 }
 
 resource dp_roleassignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
-  name: guid(dp_assignment.name, dp_assignment.type)
+  name: guid(dp_assignment.name, dp_assignment.type, subscription().subscriptionId)
   properties: {
     principalId: dp_assignment.identity.principalId
     principalType: 'ServicePrincipal'
