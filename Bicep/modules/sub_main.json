@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1008.15138",
-      "templateHash": "208793370927759185"
+      "templateHash": "2628997391571807231"
     }
   },
   "parameters": {
@@ -1849,7 +1849,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1008.15138",
-              "templateHash": "7033751103504622990"
+              "templateHash": "9643589475006069147"
             }
           },
           "parameters": {
@@ -2038,8 +2038,8 @@
                   "inclusionTagName": {
                     "value": "[parameters('vmBackup').ConfigureBackupOnVirtualMachinesWithAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation.inclusionTagName]"
                   },
-                  "inclusionTagValue": {
-                    "value": "[parameters('vmBackup').ConfigureBackupOnVirtualMachinesWithAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation.inclusionTagValue]"
+                  "inclusionTagValues": {
+                    "value": "[parameters('vmBackup').ConfigureBackupOnVirtualMachinesWithAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation.inclusionTagValues]"
                   },
                   "backupPolicyId": {
                     "value": "[parameters('vmBackup').ConfigureBackupOnVirtualMachinesWithAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation.backupPolicyId]"

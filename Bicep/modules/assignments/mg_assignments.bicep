@@ -156,8 +156,8 @@ resource dp_assignment 'Microsoft.Authorization/policyAssignments@2020-09-01' = 
       inclusionTagName: {
         value: vmBackup.ConfigureBackupOnVirtualMachinesWithAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation.inclusionTagName
       }
-      inclusionTagValue: {
-        value: vmBackup.ConfigureBackupOnVirtualMachinesWithAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation.inclusionTagValue
+      inclusionTagValues: {
+        value: vmBackup.ConfigureBackupOnVirtualMachinesWithAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation.inclusionTagValues
       }
       backupPolicyId: {
         value: vmBackup.ConfigureBackupOnVirtualMachinesWithAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation.backupPolicyId
