@@ -58,7 +58,9 @@
         "ConfigureBackupOnVirtualMachinesWithAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation": {
           "vaultLocation": "AustraliaEast",
           "inclusionTagName": "Environment",
-          "inclusionTagValue": "Production",
+          "inclusionTagValue": [
+            "Production"
+          ],
           "backupPolicyId": "/subscriptions/<SubscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.RecoveryServices/vaults/<VaultName>/backupPolicies/<BackupPolicyName>",
           "effect": "auditIfNotExists"
         }

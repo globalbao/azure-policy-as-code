@@ -37,7 +37,7 @@ resource data_protection_initiative 'Microsoft.Authorization/policySetDefinition
         }
         defaultValue: ''
       }
-      inclusionTagValue: {
+      inclusionTagValues: {
         type: 'Array'
         metadata: {
           displayName: 'Inclusion Tag Values'
@@ -99,7 +99,7 @@ resource data_protection_initiative 'Microsoft.Authorization/policySetDefinition
             value: '[parameters(\'inclusionTagName\')]'
           }
           inclusionTagValue: {
-            value: '[parameters(\'inclusionTagValue\')]'
+            value: '[parameters(\'inclusionTagValues\')]'
           }
           backupPolicyId: {
             value: '[parameters(\'backupPolicyId\')]'

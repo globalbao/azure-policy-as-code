@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1008.15138",
-      "templateHash": "7061226618769398454"
+      "templateHash": "11064924860679601182"
     }
   },
   "parameters": {
@@ -492,7 +492,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1008.15138",
-              "templateHash": "3365208818394019522"
+              "templateHash": "16841622481610958838"
             }
           },
           "parameters": {
@@ -1646,7 +1646,7 @@
                     "_generator": {
                       "name": "bicep",
                       "version": "0.4.1008.15138",
-                      "templateHash": "12828685647059043002"
+                      "templateHash": "11872977824426001739"
                     }
                   },
                   "parameters": {
@@ -1695,7 +1695,7 @@
                             },
                             "defaultValue": ""
                           },
-                          "inclusionTagValue": {
+                          "inclusionTagValues": {
                             "type": "Array",
                             "metadata": {
                               "displayName": "Inclusion Tag Values",
@@ -1757,7 +1757,7 @@
                                 "value": "[[parameters('inclusionTagName')]"
                               },
                               "inclusionTagValue": {
-                                "value": "[[parameters('inclusionTagValue')]"
+                                "value": "[[parameters('inclusionTagValues')]"
                               },
                               "backupPolicyId": {
                                 "value": "[[parameters('backupPolicyId')]"
