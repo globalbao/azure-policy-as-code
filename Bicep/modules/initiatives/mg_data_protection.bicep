@@ -111,7 +111,7 @@ resource data_protection_initiative 'Microsoft.Authorization/policySetDefinition
       }
       {
         policyDefinitionId: builtinPolicies2.AuditVirtualMachinesWithoutDisasterRecoveryConfigured
-        policyDefinitionReferenceId: 'Compute_AuditVirtualMachinesWithoutDisasterRecoveryConfigured'
+        policyDefinitionReferenceId: 'AuditVirtualMachinesWithoutDisasterRecoveryConfigured'
       }
     ]
   }
