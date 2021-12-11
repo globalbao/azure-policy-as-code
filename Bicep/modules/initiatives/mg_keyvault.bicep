@@ -111,19 +111,6 @@ resource keyvault_initiative 'Microsoft.Authorization/policySetDefinitions@2020-
         ]
         defaultValue: 2048
       }
-      effect: {
-        type: 'String'
-        metadata: {
-          displayName: 'Effect'
-          description: 'Enable or disable the execution of the policy'
-        }
-        allowedValues: [
-          'Audit'
-          'Deny'
-          'Disabled'
-        ]
-        defaultValue: 'Audit'
-      }
     }
     policyDefinitions: [
       {
@@ -138,20 +125,10 @@ resource keyvault_initiative 'Microsoft.Authorization/policySetDefinitions@2020-
       {
         policyDefinitionId: builtinPolicies1.KeyVaultsShouldHavePurgeProtectionEnabled
         policyDefinitionReferenceId: 'KeyVaultsShouldHavePurgeProtectionEnabled'
-        parameters: {
-          effect: {
-            value: '[parameters(\'effect\')]'
-          }
-        }
       }
       {
         policyDefinitionId: builtinPolicies1.KeyVaultsShouldHaveSoftDeleteEnabled
         policyDefinitionReferenceId: 'KeyVaultsShouldHaveSoftDeleteEnabled'
-        parameters: {
-          effect: {
-            value: '[parameters(\'effect\')]'
-          }
-        }
       }
       {
         policyDefinitionId: builtinPolicies1.CertificatesShouldBeIssuedByTheSpecifiedIntegratedCertificateAuthority
@@ -159,9 +136,6 @@ resource keyvault_initiative 'Microsoft.Authorization/policySetDefinitions@2020-
         parameters: {
           allowedCAs: {
             value: '[parameters(\'allowedCAs\')]'
-          }
-          effect: {
-            value: '[parameters(\'effect\')]'
           }
         }
       }
@@ -172,9 +146,6 @@ resource keyvault_initiative 'Microsoft.Authorization/policySetDefinitions@2020-
           allowedKeyTypes: {
             value: '[parameters(\'allowedKeyTypesCertificates\')]'
           }
-          effect: {
-            value: '[parameters(\'effect\')]'
-          }
         }
       }
       {
@@ -183,9 +154,6 @@ resource keyvault_initiative 'Microsoft.Authorization/policySetDefinitions@2020-
         parameters: {
           minimumRSAKeySize: {
             value: '[parameters(\'minimumRSAKeySize\')]'
-          }
-          effect: {
-            value: '[parameters(\'effect\')]'
           }
         }
       }
@@ -196,19 +164,11 @@ resource keyvault_initiative 'Microsoft.Authorization/policySetDefinitions@2020-
           allowedKeyTypes: {
             value: '[parameters(\'allowedKeyTypes\')]'
           }
-          effect: {
-            value: '[parameters(\'effect\')]'
-          }
         }
       }
       {
         policyDefinitionId: builtinPolicies1.KeyVaultKeysShouldHaveAnExpirationDate
         policyDefinitionReferenceId: 'KeyVaultKeysShouldHaveAnExpirationDate'
-        parameters: {
-          effect: {
-            value: '[parameters(\'effect\')]'
-          }
-        }
       }
       {
         policyDefinitionId: builtinPolicies1.KeysShouldHaveMoreThanTheSpecifiedNumberOfDaysBeforeExpiration
@@ -216,9 +176,6 @@ resource keyvault_initiative 'Microsoft.Authorization/policySetDefinitions@2020-
         parameters: {
           minimumDaysBeforeExpiration: {
             value: '[parameters(\'minimumDaysBeforeExpiration\')]'
-          }
-          effect: {
-            value: '[parameters(\'effect\')]'
           }
         }
       }
@@ -229,9 +186,6 @@ resource keyvault_initiative 'Microsoft.Authorization/policySetDefinitions@2020-
           maximumValidityInDays: {
             value: '[parameters(\'maximumValidityInDays\')]'
           }
-          effect: {
-            value: '[parameters(\'effect\')]'
-          }
         }
       }
       {
@@ -240,9 +194,6 @@ resource keyvault_initiative 'Microsoft.Authorization/policySetDefinitions@2020-
         parameters: {
           maximumValidityInDays: {
             value: '[parameters(\'maximumValidityInDays\')]'
-          }
-          effect: {
-            value: '[parameters(\'effect\')]'
           }
         }
       }
@@ -253,28 +204,15 @@ resource keyvault_initiative 'Microsoft.Authorization/policySetDefinitions@2020-
           minimumRSAKeySize: {
             value: '[parameters(\'minimumRSAKeySize\')]'
           }
-          effect: {
-            value: '[parameters(\'effect\')]'
-          }
         }
       }
       {
         policyDefinitionId: builtinPolicies1.SecretsShouldHaveContentTypeSet
         policyDefinitionReferenceId: 'SecretsShouldHaveContentTypeSet'
-        parameters: {
-          effect: {
-            value: '[parameters(\'effect\')]'
-          }
-        }
       }
       {
         policyDefinitionId: builtinPolicies1.KeyVaultSecretsShouldHaveAnExpirationDate
         policyDefinitionReferenceId: 'KeyVaultSecretsShouldHaveAnExpirationDate'
-        parameters: {
-          effect: {
-            value: '[parameters(\'effect\')]'
-          }
-        }
       }
       {
         policyDefinitionId: builtinPolicies1.SecretsShouldHaveMoreThanTheSpecifiedNumberOfDaysBeforeExpiration
@@ -282,9 +220,6 @@ resource keyvault_initiative 'Microsoft.Authorization/policySetDefinitions@2020-
         parameters: {
           minimumDaysBeforeExpiration: {
             value: '[parameters(\'minimumDaysBeforeExpiration\')]'
-          }
-          effect: {
-            value: '[parameters(\'effect\')]'
           }
         }
       }
@@ -295,9 +230,6 @@ resource keyvault_initiative 'Microsoft.Authorization/policySetDefinitions@2020-
           maximumValidityInDays: {
             value: '[parameters(\'maximumValidityInDays\')]'
           }
-          effect: {
-            value: '[parameters(\'effect\')]'
-          }
         }
       }
       {
@@ -306,9 +238,6 @@ resource keyvault_initiative 'Microsoft.Authorization/policySetDefinitions@2020-
         parameters: {
           maximumValidityInDays: {
             value: '[parameters(\'maximumValidityInDays\')]'
-          }
-          effect: {
-            value: '[parameters(\'effect\')]'
           }
         }
       }

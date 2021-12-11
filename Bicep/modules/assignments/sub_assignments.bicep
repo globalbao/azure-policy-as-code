@@ -130,9 +130,6 @@ resource kv_assignment 'Microsoft.Authorization/policyAssignments@2020-09-01' = 
       logAnalytics: {
         value: logAnalytics
       }
-      effect: {
-        value: 'Audit'
-      }
     }
   }
 }
