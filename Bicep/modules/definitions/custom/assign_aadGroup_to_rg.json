@@ -1,0 +1,136 @@
+{
+	"properties": {
+		"displayName": "Assign AAD group with Contributor role to RG with Tag",
+		"policyType": "Custom",
+		"mode": "All",
+		"description": "Assigns an AAD group with contributor role to resource groups specified with a tag name/value. Existing resource groups can be remediated by triggering a remediation task.",
+		"metadata": {
+			"category": "Custom",
+			"source": "github.com/globalbao/azure-policy-as-code",
+			"author": "Jan-Tore Pedersen",
+			"version": "1.0.0"
+		},
+		"parameters": {
+			"tagName": {
+				"type": "String",
+				"metadata": {
+					"displayName": "Tag Name",
+					"description": "Name of the tag, such as 'environment'"
+				}
+			},
+			"tagValue": {
+				"type": "String",
+				"metadata": {
+					"displayName": "Tag Value",
+					"description": "Value of the tag, such as 'production'"
+				}
+			},
+			"adGroupId": {
+				"type": "String",
+				"metadata": {
+					"displayName": "Azure AD Group Object ID",
+					"description": "Azure AD Group Object ID, like b5002e0c-6a52-4d16-9ab0-684d467ab068"
+				}
+			},
+			"roleDefinitionId": {
+				"type": "String",
+				"metadata": {
+					"displayName": "Azure AD Role Definition ID",
+					"description": "Azure AD Role Definition ID, like 'b24988ac-6180-42a0-ab88-20f7382dd24c' which is for Contributor"
+				}
+			},
+			"effect": {
+				"type": "String",
+				"metadata": {
+					"displayName": "Effect",
+					"description": "Enable or disable the execution of the policy"
+				},
+				"allowedValues": [
+					"DeployIfNotExists",
+					"Disabled"
+				],
+				"defaultValue": "DeployIfNotExists"
+			}
+		},
+		"policyRule": {
+			"if": {
+				"allOf": [
+					{
+						"field": "type",
+						"equals": "Microsoft.Resources/subscriptions/resourceGroups"
+					},
+					{
+						"field": "[concat('tags[', parameters('tagName'), ']')]",
+						"Equals": "[parameters('tagValue')]"
+					}
+				]
+			},
+			"then": {
+				"effect": "[parameters('effect')]",
+				"details": {
+					"type": "Microsoft.Authorization/roleAssignments",
+					"roleDefinitionIds": [
+						"/providers/microsoft.authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
+					],
+					"existenceCondition": {
+						"allOf": [
+							{
+								"field": "Microsoft.Authorization/roleAssignments/roleDefinitionId",
+								"equals": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/microsoft.authorization/roleDefinitions/', parameters('roleDefinitionId'))]"
+							},
+							{
+								"field": "Microsoft.Authorization/roleAssignments/principalId",
+								"equals": "[parameters('adGroupId')]"
+							}
+						]
+					},
+					"deployment": {
+						"properties": {
+							"mode": "incremental",
+							"template": {
+								"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+								"contentVersion": "1.0.0.0",
+								"parameters": {
+									"adGroupId": {
+										"type": "string",
+										"metadata": {
+											"displayName": "Azure AD Group Object ID",
+											"description": "Azure AD Group Object ID, like b5002e0c-6a52-4d16-9ab0-684d467ab068"
+										}
+									},
+									"roleDefinitionId": {
+										"type": "string",
+										"metadata": {
+											"displayName": "Azure AD Role Definition ID",
+											"description": "Azure AD Role Definition ID, like 'b24988ac-6180-42a0-ab88-20f7382dd24c' which is for Contributor"
+										}
+									}
+								},
+								"resources": [
+									{
+										"type": "Microsoft.Authorization/roleAssignments",
+										"apiVersion": "2018-09-01-preview",
+										"name": "[guid(resourceGroup().id, deployment().name)]",
+										"properties": {
+											"roleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/microsoft.authorization/roleDefinitions/', parameters('roleDefinitionId'))]",
+											"principalId": "[parameters('adGroupId')]",
+											"principalType": "Group"
+										}
+									}
+								]
+							},
+							"parameters": {
+								"adGroupId": {
+									"value": "[parameters('adGroupId')]"
+								},
+								"roleDefinitionId": {
+									"value": "[parameters('roleDefinitionId')]"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

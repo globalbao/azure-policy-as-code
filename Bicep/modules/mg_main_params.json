@@ -12,19 +12,60 @@
       "value": "github.com/globalbao/azure-policy-as-code"
     },
     "tagNames": {
-      "value": ["CostCenter", "Application", "Environment"]
+      "value": [
+        "CostCenter",
+        "Application",
+        "Environment"
+      ]
     },
     "tagValue": {
       "value": "TBC"
     },
     "tagValuesToIgnore": {
-      "value": ["TBC", "tbc", "to be confirmed"]
+      "value": [
+        "TBC",
+        "tbc",
+        "to be confirmed"
+      ]
     },
     "subscriptionId": {
       "value": "42482d91-3f4f-4012-8e45-78bf7ad4d60c"
     },
     "effect": {
       "value": "Modify"
+    },
+    "appGatewayAlerts": {
+      "value": {
+        "clientRtt": {
+          "metricName": "clientRtt",
+          "operator": "GreaterThan",
+          "timeAggregation": "Average",
+          "dimensions": {
+            "name": "Listener",
+            "operator": "Include",
+            "values": [
+              "*"
+            ]
+          },
+          "description": "Average round trip time between clients and Application Gateway. This metric indicates how long it takes to establish connections and return acknowledgements",
+          "actionGroupName": "Operations",
+          "actionGroupRG": "ActionGroupRG"
+        }
+      }
+    },
+    "logAnalytics": {
+      "value": "value"
+    },
+    "vmBackup": {
+      "value": {
+        "ConfigureBackupOnVirtualMachinesWithAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation": {
+          "vaultLocation": "AustraliaEast",
+          "inclusionTagName": "Environment",
+          "inclusionTagValue": "Production",
+          "backupPolicyId": "/subscriptions/<SubscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.RecoveryServices/vaults/<VaultName>/backupPolicies/<BackupPolicyName>",
+          "effect": "AuditIfNotExists"
+        }
+      }
     }
   }
 }

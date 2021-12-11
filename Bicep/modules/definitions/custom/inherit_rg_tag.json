@@ -23,7 +23,11 @@
           "displayName": "Effect",
           "description": "Enable or disable the execution of the policy"
         },
-        "allowedValues": ["Audit", "Modify", "Disabled"],
+        "allowedValues": [
+          "Audit",
+          "Modify",
+          "Disabled"
+        ],
         "defaultValue": "Modify"
       }
     },

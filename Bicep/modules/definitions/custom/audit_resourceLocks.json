@@ -23,8 +23,14 @@
           "description": "Resource lock level to audit for",
           "displayName": "Lock level"
         },
-        "allowedValues": ["ReadOnly", "CanNotDelete"],
-        "defaultValue": ["ReadOnly", "CanNotDelete"]
+        "allowedValues": [
+          "ReadOnly",
+          "CanNotDelete"
+        ],
+        "defaultValue": [
+          "ReadOnly",
+          "CanNotDelete"
+        ]
       },
       "effect": {
         "type": "String",
@@ -32,7 +38,10 @@
           "displayName": "Effect",
           "description": "Enable or disable the execution of the policy"
         },
-        "allowedValues": ["AuditIfNotExists", "Disabled"],
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ],
         "defaultValue": "AuditIfNotExists"
       }
     },

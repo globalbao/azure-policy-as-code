@@ -1,14 +1,30 @@
 targetScope = 'subscription'
 
 // PARAMETERS
+@description('Name of new Resource Group created for supporting resources e.g. "Action Group".')
 param resourceGroupName string = 'ActionGroupRG'
+
+@description('Location of new Resource Group e.g. "australiaeast".')
 param resourceGrouplocation string = 'australiaeast'
+
+@description('Resource name of action group.')
 param actionGroupName string = 'Operations'
+
+@description('Indicates whether this action group is enabled. If an action group is not enabled, then none of its receivers will receive communications.')
 param actionGroupEnabled bool = true
+
+@description('The short name of the action group.')
 param actionGroupShortName string = 'ops'
+
+@description('The name of the email receiver.')
 param actionGroupEmailName string = 'jloudon'
+
+@description('The email address of this receiver.')
 param actionGroupEmail string = 'testemail@mail.com'
+
+@description('Indicates whether to use common alert schema.')
 param actionGroupAlertSchema bool = true
+
 param assignmentEnforcementMode string = 'Default'
 param assignmentIdentityLocation string = 'australiaeast'
 param policySource string = 'globalbao/azure-policy-as-code'
@@ -26,7 +42,10 @@ param exemptionCategory string = ''
 param exemptionDisplayName string = ''
 param exemptionDescription string = ''
 param exemptionExpiryDate string = ''
+param logAnalytics string = ''
 param effect string = 'Modify'
+param appGatewayAlerts object = {}
+param vmBackup object = {}
 
 // RESOURCE GROUPS MODULE
 module rg './other-resources/resourceGroups.bicep' = {
@@ -88,6 +107,9 @@ module sub_assignments './assignments/sub_assignments.bicep' = {
     tagValue: tagValue
     tagValuesToIgnore: tagValuesToIgnore
     effect: effect
+    appGatewayAlerts: appGatewayAlerts
+    logAnalytics: logAnalytics
+    vmBackup: vmBackup
   }
 }
 

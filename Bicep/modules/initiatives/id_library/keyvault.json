@@ -3,7 +3,6 @@
   "CertificatesShouldBeIssuedByTheSpecifiedIntegratedCertificateAuthority": "/providers/Microsoft.Authorization/policyDefinitions/8e826246-c976-48f6-b03e-619bb92b3d82",
   "CertificatesShouldBeIssuedByTheSpecifiedNonintegratedCertificateAuthority": "/providers/Microsoft.Authorization/policyDefinitions/a22f4a40-01d3-4c7d-8071-da157eeff341",
   "CertificatesShouldHaveTheSpecifiedLifetimeActionTriggers": "/providers/Microsoft.Authorization/policyDefinitions/12ef42cb-9903-4e39-9c26-422d29570417",
-  "CertificatesShouldNotExpireWithinTheSpecifiedNumberOfDays": "/providers/Microsoft.Authorization/policyDefinitions/f772fb64-8e40-40ad-87bc-7706e1949427",
   "CertificatesShouldUseAllowedKeyTypes": "/providers/Microsoft.Authorization/policyDefinitions/1151cede-290b-4ba0-8b38-0ad145ac888f",
   "CertificatesUsingEllipticCurveCryptographyShouldHaveAllowedCurveNames": "/providers/Microsoft.Authorization/policyDefinitions/bd78111f-4953-4367-9fd5-7e08808b54bf",
   "CertificatesUsingRSACryptographyShouldHaveTheSpecifiedMinimumKeySize": "/providers/Microsoft.Authorization/policyDefinitions/cee51871-e572-4576-855c-047c820360f0",
