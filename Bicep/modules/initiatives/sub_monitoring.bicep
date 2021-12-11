@@ -11,8 +11,8 @@ resource appGateway_monitoring_initiative 'Microsoft.Authorization/policySetDefi
   name: 'appGateway_monitoring_initiative'
   properties: {
     policyType: 'Custom'
-    displayName: 'Application Gateway Monitoring Governance Initiative - MG Scope'
-    description: 'Application Gateway Monitoring Governance Initiative - MG Scope via ${policySource}'
+    displayName: 'Application Gateway Monitoring Governance Initiative - Sub Scope'
+    description: 'Application Gateway Monitoring Governance Initiative - Sub Scope via ${policySource}'
     metadata: {
       category: policyCategory
       source: policySource

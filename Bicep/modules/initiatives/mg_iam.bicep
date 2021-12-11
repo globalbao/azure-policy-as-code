@@ -16,7 +16,7 @@ resource iam_initiative 'Microsoft.Authorization/policySetDefinitions@2020-09-01
   properties: {
     policyType: 'Custom'
     displayName: 'IAM Governance Initiative - MG Scope'
-    description: 'Identity & Access Management Governance Initiative MG Scope via ${policySource}'
+    description: 'Identity & Access Management Governance Initiative - MG Scope via ${policySource}'
     metadata: {
       category: policyCategory
       source: policySource

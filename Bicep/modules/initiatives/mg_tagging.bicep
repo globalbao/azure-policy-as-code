@@ -12,7 +12,7 @@ resource tagging_initiative 'Microsoft.Authorization/policySetDefinitions@2020-0
   properties: {
     policyType: 'Custom'
     displayName: 'Tagging Governance Initiative - MG Scope'
-    description: 'Tagging Governance Initiative MG Scope via ${policySource}'
+    description: 'Tagging Governance Initiative - MG Scope via ${policySource}'
     metadata: {
       category: policyCategory
       source: policySource
