@@ -63,7 +63,7 @@
           "inclusionTagName": "Environment",
           "inclusionTagValue": "Production",
           "backupPolicyId": "/subscriptions/<SubscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.RecoveryServices/vaults/<VaultName>/backupPolicies/<BackupPolicyName>",
-          "effect": "AuditIfNotExists"
+          "effect": "auditIfNotExists"
         }
       }
     }

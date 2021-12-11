@@ -71,11 +71,11 @@ resource data_protection_initiative 'Microsoft.Authorization/policySetDefinition
           description: 'Enable or disable the execution of the policy'
         }
         allowedValues: [
-          'DeployIfNotExists'
-          'AuditIfNotExists'
-          'Disabled'
+          'deployIfNotExists'
+          'auditIfNotExists'
+          'disabled'
         ]
-        defaultValue: 'DeployIfNotExists'
+        defaultValue: 'deployIfNotExists'
       }
     }
     policyDefinitions: [
