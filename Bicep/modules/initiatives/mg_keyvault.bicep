@@ -15,7 +15,7 @@ resource keyvault_initiative 'Microsoft.Authorization/policySetDefinitions@2020-
   properties: {
     policyType: 'Custom'
     displayName: 'KeyVault Governance Initiative - MG Scope'
-    description: 'KeyVault Governance Initiative MG Scope via ${policySource}'
+    description: 'KeyVault Governance Initiative - MG Scope via ${policySource}'
     metadata: {
       category: policyCategory
       source: policySource

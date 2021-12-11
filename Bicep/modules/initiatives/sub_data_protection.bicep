@@ -13,8 +13,8 @@ resource data_protection_initiative 'Microsoft.Authorization/policySetDefinition
   name: 'data_protection_initiative'
   properties: {
     policyType: 'Custom'
-    displayName: 'Data Protection Governance Initiative'
-    description: 'Data Protection Governance Initiative via ${policySource}'
+    displayName: 'Data Protection Governance Initiative - Sub Scope'
+    description: 'Data Protection Governance Initiative - Sub Scope via ${policySource}'
     metadata: {
       category: policyCategory
       source: policySource
