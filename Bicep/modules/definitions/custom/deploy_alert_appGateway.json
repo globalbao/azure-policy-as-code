@@ -38,7 +38,11 @@
           "description": "The extent of deviation required to trigger an alert. This will affect how tight the threshold is to the metric series pattern.",
           "displayName": "alertSensitivity"
         },
-        "allowedValues": ["High", "Medium", "Low"],
+        "allowedValues": [
+          "High",
+          "Medium",
+          "Low"
+        ],
         "defaultValue": "Medium"
       },
       "dimensions": {
@@ -92,7 +96,13 @@
           "description": "The criteria time aggregation types",
           "displayName": "timeAggregation"
         },
-        "allowedValues": ["Average", "Count", "Maximum", "Minimum", "Total"]
+        "allowedValues": [
+          "Average",
+          "Count",
+          "Maximum",
+          "Minimum",
+          "Total"
+        ]
       },
       "description": {
         "type": "String",
@@ -115,7 +125,13 @@
           "description": "Alert severity",
           "displayName": "severity"
         },
-        "allowedValues": [0, 1, 2, 3, 4],
+        "allowedValues": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
         "defaultValue": 3
       },
       "windowSize": {
@@ -132,7 +148,10 @@
           "displayName": "Effect",
           "description": "Enable or disable the execution of the policy"
         },
-        "allowedValues": ["DeployIfNotExists", "Disabled"],
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
         "defaultValue": "DeployIfNotExists"
       }
     },
@@ -345,11 +364,17 @@
                       "description": "[parameters('description')]",
                       "enabled": true,
                       "evaluationFrequency": "[parameters('evaluationFrequency')]",
-                      "scopes": ["[parameters('resourceId')]"],
-                      "severity": ["[parameters('severity')]"],
+                      "scopes": [
+                        "[parameters('resourceId')]"
+                      ],
+                      "severity": [
+                        "[parameters('severity')]"
+                      ],
                       "targetResourceRegion": "[parameters('resourceLocation')]",
                       "targetResourceType": "Microsoft.Network/applicationGateways",
-                      "windowSize": ["[parameters('windowSize')]"]
+                      "windowSize": [
+                        "[parameters('windowSize')]"
+                      ]
                     }
                   }
                 ],

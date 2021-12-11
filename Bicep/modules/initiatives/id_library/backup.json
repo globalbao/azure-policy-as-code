@@ -1,0 +1,8 @@
+{
+  "AzureBackupShouldBeEnabledForVirtualMachines": "/providers/Microsoft.Authorization/policyDefinitions/013e242c-8828-4970-87b3-ab247555486d",
+  "ConfigureBackupOnVirtualMachinesWithAGivenTagToANewRecoveryServicesVaultWithADefaultPolicy": "/providers/Microsoft.Authorization/policyDefinitions/83644c87-93dd-49fe-bf9f-6aff8fd0834e",
+  "ConfigureBackupOnVirtualMachinesWithAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation": "/providers/Microsoft.Authorization/policyDefinitions/345fa903-145c-4fe1-8bcd-93ec2adccde8",
+  "ConfigureBackupOnVirtualMachinesWithoutAGivenTagToANewRecoveryServicesVaultWithADefaultPolicy": "/providers/Microsoft.Authorization/policyDefinitions/98d0b9f8-fd90-49c9-88e2-d3baf3b0dd86",
+  "ConfigureBackupOnVirtualMachinesWithoutAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation": "/providers/Microsoft.Authorization/policyDefinitions/09ce66bc-1220-4153-8104-e3f51c936913",
+  "DeployDiagnosticSettingsForRecoveryServicesVaultToLogAnalyticsWorkspaceForResourceSpecificCategories": "/providers/Microsoft.Authorization/policyDefinitions/c717fb0c-d118-4c43-ab3d-ece30ac81fb3"
+}

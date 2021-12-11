@@ -33,7 +33,10 @@
           "displayName": "AuditEvent - Enabled",
           "description": "Whether to stream AuditEvent logs to the Log Analytics workspace - True or False"
         },
-        "allowedValues": ["True", "False"],
+        "allowedValues": [
+          "True",
+          "False"
+        ],
         "defaultValue": "True"
       },
       "AllMetricsEnabled": {
@@ -42,7 +45,10 @@
           "displayName": "AllMetrics - Enabled",
           "description": "Whether to stream AllMetrics logs to the Log Analytics workspace - True or False"
         },
-        "allowedValues": ["True", "False"],
+        "allowedValues": [
+          "True",
+          "False"
+        ],
         "defaultValue": "True"
       },
       "effect": {
@@ -51,7 +57,10 @@
           "displayName": "Effect",
           "description": "Enable or disable the execution of the policy"
         },
-        "allowedValues": ["DeployIfNotExists", "Disabled"],
+        "allowedValues": [
+          "DeployIfNotExists",
+          "Disabled"
+        ],
         "defaultValue": "DeployIfNotExists"
       }
     },

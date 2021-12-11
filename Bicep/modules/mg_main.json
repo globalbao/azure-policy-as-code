@@ -5,41 +5,65 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1008.15138",
-      "templateHash": "2538945138444408976"
+      "templateHash": "5362082578999936764"
     }
   },
   "parameters": {
     "resourceGroupName": {
       "type": "string",
-      "defaultValue": "ActionGroupRG"
+      "defaultValue": "ActionGroupRG",
+      "metadata": {
+        "description": "Name of new Resource Group created for supporting resources e.g. \"Action Group\"."
+      }
     },
     "resourceGrouplocation": {
       "type": "string",
-      "defaultValue": "australiaeast"
+      "defaultValue": "australiaeast",
+      "metadata": {
+        "description": "Location of new Resource Group e.g. \"australiaeast\"."
+      }
     },
     "actionGroupName": {
       "type": "string",
-      "defaultValue": "Operations"
+      "defaultValue": "Operations",
+      "metadata": {
+        "description": "Resource name of action group."
+      }
     },
     "actionGroupEnabled": {
       "type": "bool",
-      "defaultValue": true
+      "defaultValue": true,
+      "metadata": {
+        "description": "Indicates whether this action group is enabled. If an action group is not enabled, then none of its receivers will receive communications."
+      }
     },
     "actionGroupShortName": {
       "type": "string",
-      "defaultValue": "ops"
+      "defaultValue": "ops",
+      "metadata": {
+        "description": "The short name of the action group."
+      }
     },
     "actionGroupEmailName": {
       "type": "string",
-      "defaultValue": "jloudon"
+      "defaultValue": "jloudon",
+      "metadata": {
+        "description": "The name of the email receiver."
+      }
     },
     "actionGroupEmail": {
       "type": "string",
-      "defaultValue": "testemail@mail.com"
+      "defaultValue": "testemail@mail.com",
+      "metadata": {
+        "description": "The email address of this receiver."
+      }
     },
     "actionGroupAlertSchema": {
       "type": "bool",
-      "defaultValue": true
+      "defaultValue": true,
+      "metadata": {
+        "description": "Indicates whether to use common alert schema."
+      }
     },
     "assignmentEnforcementMode": {
       "type": "string",
@@ -113,9 +137,21 @@
       "type": "string",
       "defaultValue": ""
     },
+    "logAnalytics": {
+      "type": "string",
+      "defaultValue": ""
+    },
     "effect": {
       "type": "string",
       "defaultValue": "Modify"
+    },
+    "appGatewayAlerts": {
+      "type": "object",
+      "defaultValue": {}
+    },
+    "vmBackup": {
+      "type": "object",
+      "defaultValue": {}
     }
   },
   "functions": [],
@@ -218,27 +254,45 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1008.15138",
-              "templateHash": "12391878611796983843"
+              "templateHash": "1061323127141525784"
             }
           },
           "parameters": {
             "actionGroupName": {
-              "type": "string"
+              "type": "string",
+              "metadata": {
+                "description": "The resource name"
+              }
             },
             "actionGroupEnabled": {
-              "type": "bool"
+              "type": "bool",
+              "metadata": {
+                "description": "Indicates whether this action group is enabled. If an action group is not enabled, then none of its receivers will receive communications."
+              }
             },
             "actionGroupShortName": {
-              "type": "string"
+              "type": "string",
+              "metadata": {
+                "description": "The short name of the action group."
+              }
             },
             "actionGroupEmailName": {
-              "type": "string"
+              "type": "string",
+              "metadata": {
+                "description": "The name of the email receiver."
+              }
             },
             "actionGroupEmail": {
-              "type": "string"
+              "type": "string",
+              "metadata": {
+                "description": "The email address of this receiver."
+              }
             },
             "actionGroupAlertSchema": {
-              "type": "bool"
+              "type": "bool",
+              "metadata": {
+                "description": "Indicates whether to use common alert schema."
+              }
             }
           },
           "functions": [],
@@ -294,19 +348,21 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1008.15138",
-              "templateHash": "15408727882022270142"
+              "templateHash": "15466177018430535034"
             }
           },
           "functions": [],
           "variables": {
-            "deploy_diagSettings_keyVault": "[json('{\r\n  \"properties\": {\r\n    \"displayName\": \"Deploy diagnostic settings for Azure Key Vault to Log Analytics workspace\",\r\n    \"policyType\": \"Custom\",\r\n    \"mode\": \"All\",\r\n    \"description\": \"Deploys the diagnostic settings for Azure Key Vault to stream resource logs to a Log Analytics workspace when any Key Vault which is missing this diagnostic settings is created or updated.\",\r\n    \"metadata\": {\r\n      \"category\": \"Custom\",\r\n      \"source\": \"github.com/globalbao/azure-policy-as-code\",\r\n      \"version\": \"1.0.0\"\r\n    },\r\n    \"parameters\": {\r\n      \"diagnosticsSettingNameToUse\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Setting name\",\r\n          \"description\": \"Name of the diagnostic settings.\"\r\n        },\r\n        \"defaultValue\": \"AzureKeyVaultDiagnosticsLogsToWorkspace\"\r\n      },\r\n      \"logAnalytics\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Log Analytics workspace\",\r\n          \"description\": \"Specify the Log Analytics workspace the Key Vault should be connected to.\",\r\n          \"strongType\": \"omsWorkspace\",\r\n          \"assignPermissions\": true\r\n        }\r\n      },\r\n      \"AuditEventEnabled\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"AuditEvent - Enabled\",\r\n          \"description\": \"Whether to stream AuditEvent logs to the Log Analytics workspace - True or False\"\r\n        },\r\n        \"allowedValues\": [\"True\", \"False\"],\r\n        \"defaultValue\": \"True\"\r\n      },\r\n      \"AllMetricsEnabled\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"AllMetrics - Enabled\",\r\n          \"description\": \"Whether to stream AllMetrics logs to the Log Analytics workspace - True or False\"\r\n        },\r\n        \"allowedValues\": [\"True\", \"False\"],\r\n        \"defaultValue\": \"True\"\r\n      },\r\n      \"effect\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Effect\",\r\n          \"description\": \"Enable or disable the execution of the policy\"\r\n        },\r\n        \"allowedValues\": [\"DeployIfNotExists\", \"Disabled\"],\r\n        \"defaultValue\": \"DeployIfNotExists\"\r\n      }\r\n    },\r\n    \"policyRule\": {\r\n      \"if\": {\r\n        \"field\": \"type\",\r\n        \"equals\": \"Microsoft.KeyVault/vaults\"\r\n      },\r\n      \"then\": {\r\n        \"effect\": \"[parameters(''effect'')]\",\r\n        \"details\": {\r\n          \"type\": \"Microsoft.Insights/diagnosticSettings\",\r\n          \"evaluationDelay\": \"AfterProvisioningSuccess\",\r\n          \"roleDefinitionIds\": [\r\n            \"/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c\"\r\n          ],\r\n          \"existenceCondition\": {\r\n            \"allOf\": [\r\n              {\r\n                \"field\": \"Microsoft.Insights/diagnosticSettings/metrics.enabled\",\r\n                \"equals\": \"[parameters(''AllMetricsEnabled'')]\"\r\n              },\r\n              {\r\n                \"field\": \"Microsoft.Insights/diagnosticSettings/logs.enabled\",\r\n                \"equals\": \"[parameters(''AuditEventEnabled'')]\"\r\n              },\r\n              {\r\n                \"field\": \"Microsoft.Insights/diagnosticSettings/workspaceId\",\r\n                \"matchInsensitively\": \"[parameters(''logAnalytics'')]\"\r\n              }\r\n            ]\r\n          },\r\n          \"deployment\": {\r\n            \"properties\": {\r\n              \"mode\": \"incremental\",\r\n              \"template\": {\r\n                \"$schema\": \"http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#\",\r\n                \"contentVersion\": \"1.0.0.0\",\r\n                \"parameters\": {\r\n                  \"diagnosticsSettingNameToUse\": {\r\n                    \"type\": \"string\"\r\n                  },\r\n                  \"resourceName\": {\r\n                    \"type\": \"string\"\r\n                  },\r\n                  \"logAnalytics\": {\r\n                    \"type\": \"string\"\r\n                  },\r\n                  \"location\": {\r\n                    \"type\": \"string\"\r\n                  },\r\n                  \"AuditEventEnabled\": {\r\n                    \"type\": \"string\"\r\n                  },\r\n                  \"AllMetricsEnabled\": {\r\n                    \"type\": \"string\"\r\n                  }\r\n                },\r\n                \"variables\": {},\r\n                \"resources\": [\r\n                  {\r\n                    \"type\": \"Microsoft.KeyVault/vaults/providers/diagnosticSettings\",\r\n                    \"apiVersion\": \"2017-05-01-preview\",\r\n                    \"name\": \"[concat(parameters(''resourceName''), ''/'', ''Microsoft.Insights/'', parameters(''diagnosticsSettingNameToUse''))]\",\r\n                    \"location\": \"[parameters(''location'')]\",\r\n                    \"dependsOn\": [],\r\n                    \"properties\": {\r\n                      \"workspaceId\": \"[parameters(''logAnalytics'')]\",\r\n                      \"metrics\": [\r\n                        {\r\n                          \"category\": \"AllMetrics\",\r\n                          \"enabled\": \"[parameters(''AllMetricsEnabled'')]\",\r\n                          \"retentionPolicy\": {\r\n                            \"days\": 0,\r\n                            \"enabled\": false\r\n                          },\r\n                          \"timeGrain\": null\r\n                        }\r\n                      ],\r\n                      \"logs\": [\r\n                        {\r\n                          \"category\": \"AuditEvent\",\r\n                          \"enabled\": \"[parameters(''AuditEventEnabled'')]\"\r\n                        }\r\n                      ]\r\n                    }\r\n                  }\r\n                ],\r\n                \"outputs\": {}\r\n              },\r\n              \"parameters\": {\r\n                \"diagnosticsSettingNameToUse\": {\r\n                  \"value\": \"[parameters(''diagnosticsSettingNameToUse'')]\"\r\n                },\r\n                \"logAnalytics\": {\r\n                  \"value\": \"[parameters(''logAnalytics'')]\"\r\n                },\r\n                \"location\": {\r\n                  \"value\": \"[field(''location'')]\"\r\n                },\r\n                \"resourceName\": {\r\n                  \"value\": \"[field(''name'')]\"\r\n                },\r\n                \"AuditEventEnabled\": {\r\n                  \"value\": \"[parameters(''AuditEventEnabled'')]\"\r\n                },\r\n                \"AllMetricsEnabled\": {\r\n                  \"value\": \"[parameters(''AllMetricsEnabled'')]\"\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n')]",
-            "audit_resourceLocks": "[json('{\r\n  \"properties\": {\r\n    \"displayName\": \"Audit resource locks\",\r\n    \"policyType\": \"Custom\",\r\n    \"mode\": \"All\",\r\n    \"description\": \"This policy audits if a resource lock ''CanNotDelete'' or ''ReadOnly'' has been applied to the specified resource types.\",\r\n    \"metadata\": {\r\n      \"category\": \"Custom\",\r\n      \"source\": \"github.com/globalbao/azure-policy-as-code\",\r\n      \"version\": \"1.0.0\"\r\n    },\r\n    \"parameters\": {\r\n      \"resourceTypes\": {\r\n        \"type\": \"Array\",\r\n        \"metadata\": {\r\n          \"description\": \"Azure resource types to audit for locks e.g. ''microsoft.network/expressroutecircuits'' and ''microsoft.network/expressroutegateways''\",\r\n          \"displayName\": \"Resource types to audit for locks\"\r\n        }\r\n      },\r\n      \"lockLevel\": {\r\n        \"type\": \"Array\",\r\n        \"metadata\": {\r\n          \"description\": \"Resource lock level to audit for\",\r\n          \"displayName\": \"Lock level\"\r\n        },\r\n        \"allowedValues\": [\"ReadOnly\", \"CanNotDelete\"],\r\n        \"defaultValue\": [\"ReadOnly\", \"CanNotDelete\"]\r\n      },\r\n      \"effect\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Effect\",\r\n          \"description\": \"Enable or disable the execution of the policy\"\r\n        },\r\n        \"allowedValues\": [\"AuditIfNotExists\", \"Disabled\"],\r\n        \"defaultValue\": \"AuditIfNotExists\"\r\n      }\r\n    },\r\n    \"policyRule\": {\r\n      \"if\": {\r\n        \"field\": \"type\",\r\n        \"in\": \"[parameters(''resourceTypes'')]\"\r\n      },\r\n      \"then\": {\r\n        \"effect\": \"[parameters(''effect'')]\",\r\n        \"details\": {\r\n          \"type\": \"Microsoft.Authorization/locks\",\r\n          \"existenceCondition\": {\r\n            \"field\": \"Microsoft.Authorization/locks/level\",\r\n            \"in\": \"[parameters(''lockLevel'')]\"\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n')]",
-            "audit_roleAssignments": "[json('{\r\n  \"properties\": {\r\n    \"displayName\": \"Audit role assignments\",\r\n    \"policyType\": \"Custom\",\r\n    \"mode\": \"All\",\r\n    \"description\": \"This policy checks for any specified Role Assignments. Use to audit IAM assignments to resources/RGs which are out of compliance with your governance standards\",\r\n    \"metadata\": {\r\n      \"category\": \"Custom\",\r\n      \"source\": \"github.com/globalbao/azure-policy-as-code\",\r\n      \"version\": \"1.0.0\"\r\n    },\r\n    \"parameters\": {\r\n      \"principalType\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"description\": \"Which principalType to audit against e.g. ''User''\",\r\n          \"displayName\": \"principalType\"\r\n        },\r\n        \"allowedValues\": [\"User\", \"Group\", \"ServicePrincipal\"],\r\n        \"defaultValue\": \"User\"\r\n      },\r\n      \"effect\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Effect\",\r\n          \"description\": \"Enable or disable the execution of the policy\"\r\n        },\r\n        \"allowedValues\": [\"Audit\", \"Disabled\"],\r\n        \"defaultValue\": \"Audit\"\r\n      }\r\n    },\r\n    \"policyRule\": {\r\n      \"if\": {\r\n        \"allOf\": [\r\n          {\r\n            \"field\": \"type\",\r\n            \"equals\": \"Microsoft.Authorization/roleAssignments\"\r\n          },\r\n          {\r\n            \"field\": \"Microsoft.Authorization/roleAssignments/principalType\",\r\n            \"equals\": \"[parameters(''principalType'')]\"\r\n          }\r\n        ]\r\n      },\r\n      \"then\": {\r\n        \"effect\": \"[parameters(''effect'')]\"\r\n      }\r\n    }\r\n  }\r\n}\r\n')]",
-            "add_tag_to_rg": "[json('{\r\n  \"properties\": {\r\n    \"displayName\": \"Add mandatory tag to resource group\",\r\n    \"policyType\": \"Custom\",\r\n    \"mode\": \"All\",\r\n    \"description\": \"Adds the mandatory tag key when any resource group missing this tag is created or updated. If the tag exists with a different value it will not be changed.\",\r\n    \"metadata\": {\r\n      \"category\": \"Custom\",\r\n      \"source\": \"github.com/globalbao/azure-policy-as-code\",\r\n      \"version\": \"1.0.0\"\r\n    },\r\n    \"parameters\": {\r\n      \"tagName\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Tag name\",\r\n          \"description\": \"Name of the tag, such as ''CostCenter''\"\r\n        }\r\n      },\r\n      \"tagValue\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Tag value\",\r\n          \"description\": \"Value of the tag e.g. ''12345''\"\r\n        }\r\n      },\r\n      \"effect\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Effect\",\r\n          \"description\": \"Enable or disable the execution of the policy\"\r\n        },\r\n        \"allowedValues\": [\"Audit\", \"Modify\", \"Disabled\"],\r\n        \"defaultValue\": \"Modify\"\r\n      }\r\n    },\r\n    \"policyRule\": {\r\n      \"if\": {\r\n        \"allOf\": [\r\n          {\r\n            \"field\": \"type\",\r\n            \"equals\": \"Microsoft.Resources/subscriptions/resourceGroups\"\r\n          },\r\n          {\r\n            \"field\": \"[concat(''tags['', parameters(''tagName''), '']'')]\",\r\n            \"exists\": \"false\"\r\n          }\r\n        ]\r\n      },\r\n      \"then\": {\r\n        \"effect\": \"[parameters(''effect'')]\",\r\n        \"details\": {\r\n          \"roleDefinitionIds\": [\r\n            \"/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c\"\r\n          ],\r\n          \"operations\": [\r\n            {\r\n              \"operation\": \"add\",\r\n              \"field\": \"[concat(''tags['', parameters(''tagName''), '']'')]\",\r\n              \"value\": \"[parameters(''tagValue'')]\"\r\n            }\r\n          ]\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n')]",
-            "inherit_all_rg_tags": "[json('{\r\n  \"properties\": {\r\n    \"displayName\": \"Inherit all tags from the resource group\",\r\n    \"policyType\": \"Custom\",\r\n    \"mode\": \"Indexed\",\r\n    \"description\": \"Adds all tags with its value from the parent resource group when any resource missing these tags is created or updated. If the tag exists with a different value it will not be changed.\",\r\n    \"metadata\": {\r\n      \"category\": \"Custom\",\r\n      \"source\": \"github.com/globalbao/azure-policy-as-code\",\r\n      \"version\": \"1.0.0\"\r\n    },\r\n    \"parameters\": {\r\n      \"effect\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Effect\",\r\n          \"description\": \"Enable or disable the execution of the policy\"\r\n        },\r\n        \"allowedValues\": [\"Audit\", \"Modify\", \"Disabled\"],\r\n        \"defaultValue\": \"Modify\"\r\n      }\r\n    },\r\n    \"policyRule\": {\r\n      \"if\": {\r\n        \"allOf\": [\r\n          {\r\n            \"field\": \"tags\",\r\n            \"exists\": \"false\"\r\n          },\r\n          {\r\n            \"value\": \"[resourceGroup().tags]\",\r\n            \"notEquals\": \"\"\r\n          }\r\n        ]\r\n      },\r\n      \"then\": {\r\n        \"effect\": \"[parameters(''effect'')]\",\r\n        \"details\": {\r\n          \"roleDefinitionIds\": [\r\n            \"/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c\"\r\n          ],\r\n          \"operations\": [\r\n            {\r\n              \"operation\": \"add\",\r\n              \"field\": \"tags\",\r\n              \"value\": \"[resourceGroup().tags]\"\r\n            }\r\n          ]\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n')]",
-            "inherit_rg_tag": "[json('{\r\n  \"properties\": {\r\n    \"displayName\": \"Inherit mandatory tag from the resource group\",\r\n    \"policyType\": \"Custom\",\r\n    \"mode\": \"Indexed\",\r\n    \"description\": \"Adds the specified mandatory tag with its value from the parent resource group when any resource missing this tag is created or updated. If the tag exists with a different value it will not be changed.\",\r\n    \"metadata\": {\r\n      \"category\": \"Custom\",\r\n      \"source\": \"github.com/globalbao/azure-policy-as-code\",\r\n      \"version\": \"1.0.0\"\r\n    },\r\n    \"parameters\": {\r\n      \"tagName\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Tag name\",\r\n          \"description\": \"Name of the tag, such as ''CostCenter''\"\r\n        }\r\n      },\r\n      \"effect\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Effect\",\r\n          \"description\": \"Enable or disable the execution of the policy\"\r\n        },\r\n        \"allowedValues\": [\"Audit\", \"Modify\", \"Disabled\"],\r\n        \"defaultValue\": \"Modify\"\r\n      }\r\n    },\r\n    \"policyRule\": {\r\n      \"if\": {\r\n        \"allOf\": [\r\n          {\r\n            \"field\": \"[concat(''tags['', parameters(''tagName''), '']'')]\",\r\n            \"exists\": \"false\"\r\n          },\r\n          {\r\n            \"value\": \"[resourceGroup().tags[parameters(''tagName'')]]\",\r\n            \"notEquals\": \"\"\r\n          }\r\n        ]\r\n      },\r\n      \"then\": {\r\n        \"effect\": \"[parameters(''effect'')]\",\r\n        \"details\": {\r\n          \"roleDefinitionIds\": [\r\n            \"/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c\"\r\n          ],\r\n          \"operations\": [\r\n            {\r\n              \"operation\": \"add\",\r\n              \"field\": \"[concat(''tags['', parameters(''tagName''), '']'')]\",\r\n              \"value\": \"[resourceGroup().tags[parameters(''tagName'')]]\"\r\n            }\r\n          ]\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n')]",
-            "inherit_rg_tag_overwrite_existing": "[json('{\r\n  \"properties\": {\r\n    \"displayName\": \"Inherit mandatory tag from the resource group and overwrite existing\",\r\n    \"policyType\": \"Custom\",\r\n    \"mode\": \"Indexed\",\r\n    \"description\": \"Overwrites the specified mandatory tag and existing value using the RG''s tag value. Applicable when any Resource containing the mandatory tag is created or updated. Ignores scenarios where tag values are the same for both Resource and RG, or when the RG''s tag value is one of the parameters(''tagValuesToIgnore'').\",\r\n    \"metadata\": {\r\n      \"category\": \"Custom\",\r\n      \"source\": \"github.com/globalbao/azure-policy-as-code\",\r\n      \"version\": \"1.0.0\"\r\n    },\r\n    \"parameters\": {\r\n      \"tagName\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Tag name\",\r\n          \"description\": \"Name of the tag, such as ''CostCenter''\"\r\n        }\r\n      },\r\n      \"tagValuesToIgnore\": {\r\n        \"type\": \"Array\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Tag values to ignore for inheritance\",\r\n          \"description\": \"A list of tag values to ignore when evaluating tag inheritance from the RG\"\r\n        }\r\n      },\r\n      \"effect\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Effect\",\r\n          \"description\": \"Enable or disable the execution of the policy\"\r\n        },\r\n        \"allowedValues\": [\"Audit\", \"Modify\", \"Disabled\"],\r\n        \"defaultValue\": \"Modify\"\r\n      }\r\n    },\r\n    \"policyRule\": {\r\n      \"if\": {\r\n        \"allOf\": [\r\n          {\r\n            \"field\": \"[concat(''tags['', parameters(''tagName''), '']'')]\",\r\n            \"exists\": \"true\"\r\n          },\r\n          {\r\n            \"value\": \"[resourceGroup().tags[parameters(''tagName'')]]\",\r\n            \"notEquals\": \"\"\r\n          },\r\n          {\r\n            \"field\": \"[concat(''tags['', parameters(''tagName''), '']'')]\",\r\n            \"notEquals\": \"[resourceGroup().tags[parameters(''tagName'')]]\"\r\n          },\r\n          {\r\n            \"value\": \"[resourceGroup().tags[parameters(''tagName'')]]\",\r\n            \"notIn\": \"[parameters(''tagValuesToIgnore'')]\"\r\n          }\r\n        ]\r\n      },\r\n      \"then\": {\r\n        \"effect\": \"[parameters(''effect'')]\",\r\n        \"details\": {\r\n          \"operations\": [\r\n            {\r\n              \"field\": \"[concat(''tags['', parameters(''tagName''), '']'')]\",\r\n              \"operation\": \"addOrReplace\",\r\n              \"value\": \"[resourceGroup().tags[parameters(''tagName'')]]\"\r\n            }\r\n          ],\r\n          \"roleDefinitionIds\": [\r\n            \"/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c\"\r\n          ]\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n')]",
-            "deploy_alert_appGateway": "[json('{\r\n  \"properties\": {\r\n    \"displayName\": \"Deploy alert for Application Gateway\",\r\n    \"policyType\": \"Custom\",\r\n    \"mode\": \"All\",\r\n    \"description\": \"Deploys a v2 metric alert for Application Gateway if an alert for the specified metric name does not exist on the target resource\",\r\n    \"metadata\": {\r\n      \"category\": \"Custom\",\r\n      \"source\": \"github.com/globalbao/azure-policy-as-code\",\r\n      \"version\": \"1.0.0\"\r\n    },\r\n    \"parameters\": {\r\n      \"actionGroupName\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"description\": \"Name of the Action Group\",\r\n          \"displayName\": \"actionGroupName\"\r\n        }\r\n      },\r\n      \"actionGroupRG\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"description\": \"Resource Group containing the Action Group\",\r\n          \"displayName\": \"actionGroupRG\"\r\n        }\r\n      },\r\n      \"autoMitigate\": {\r\n        \"type\": \"Boolean\",\r\n        \"metadata\": {\r\n          \"description\": \"Indicates whether the alert should be auto resolved or not\",\r\n          \"displayName\": \"autoMitigate\"\r\n        },\r\n        \"defaultValue\": true\r\n      },\r\n      \"alertSensitivity\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"description\": \"The extent of deviation required to trigger an alert. This will affect how tight the threshold is to the metric series pattern.\",\r\n          \"displayName\": \"alertSensitivity\"\r\n        },\r\n        \"allowedValues\": [\"High\", \"Medium\", \"Low\"],\r\n        \"defaultValue\": \"Medium\"\r\n      },\r\n      \"dimensions\": {\r\n        \"type\": \"Object\",\r\n        \"metadata\": {\r\n          \"description\": \"List of dimension conditions. See https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-supported\",\r\n          \"displayName\": \"dimensions\"\r\n        }\r\n      },\r\n      \"minFailingPeriodsToAlert\": {\r\n        \"type\": \"Integer\",\r\n        \"metadata\": {\r\n          \"description\": \"The number of violations to trigger an alert. Should be smaller or equal to numberOfEvaluationPeriods.\",\r\n          \"displayName\": \"minFailingPeriodsToAlert\"\r\n        },\r\n        \"defaultValue\": 1\r\n      },\r\n      \"numberOfEvaluationPeriods\": {\r\n        \"type\": \"Integer\",\r\n        \"metadata\": {\r\n          \"description\": \"The number of aggregated lookback points. The lookback time window is calculated based on the aggregation granularity (windowSize) and the selected number of aggregated points.\",\r\n          \"displayName\": \"numberOfEvaluationPeriods\"\r\n        },\r\n        \"defaultValue\": 2\r\n      },\r\n      \"metricName\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"description\": \"Name of the metric\",\r\n          \"displayName\": \"metricName\"\r\n        }\r\n      },\r\n      \"operator\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"description\": \"The criteria operator\",\r\n          \"displayName\": \"operator\"\r\n        },\r\n        \"allowedValues\": [\r\n          \"Equals\",\r\n          \"GreaterThan\",\r\n          \"GreaterThanOrEqual\",\r\n          \"LessThan\",\r\n          \"LessThanOrEqual\",\r\n          \"NotEquals\"\r\n        ]\r\n      },\r\n      \"timeAggregation\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"description\": \"The criteria time aggregation types\",\r\n          \"displayName\": \"timeAggregation\"\r\n        },\r\n        \"allowedValues\": [\"Average\", \"Count\", \"Maximum\", \"Minimum\", \"Total\"]\r\n      },\r\n      \"description\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"description\": \"The description of the metric alert that will be included in the alert email\",\r\n          \"displayName\": \"description\"\r\n        }\r\n      },\r\n      \"evaluationFrequency\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"description\": \"How often the metric alert is evaluated represented in ISO 8601 duration format e.g. PT15M\",\r\n          \"displayName\": \"evaluationFrequency\"\r\n        },\r\n        \"defaultValue\": \"PT15M\"\r\n      },\r\n      \"severity\": {\r\n        \"type\": \"Integer\",\r\n        \"metadata\": {\r\n          \"description\": \"Alert severity\",\r\n          \"displayName\": \"severity\"\r\n        },\r\n        \"allowedValues\": [0, 1, 2, 3, 4],\r\n        \"defaultValue\": 3\r\n      },\r\n      \"windowSize\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"description\": \"The period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold e.g. PT1H\",\r\n          \"displayName\": \"windowSize\"\r\n        },\r\n        \"defaultValue\": \"PT1H\"\r\n      },\r\n      \"effect\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Effect\",\r\n          \"description\": \"Enable or disable the execution of the policy\"\r\n        },\r\n        \"allowedValues\": [\"DeployIfNotExists\", \"Disabled\"],\r\n        \"defaultValue\": \"DeployIfNotExists\"\r\n      }\r\n    },\r\n    \"policyRule\": {\r\n      \"if\": {\r\n        \"allOf\": [\r\n          {\r\n            \"field\": \"type\",\r\n            \"equals\": \"Microsoft.Network/applicationGateways\"\r\n          },\r\n          {\r\n            \"field\": \"Microsoft.Network/applicationGateways/sku.tier\",\r\n            \"equals\": \"Standard_v2\"\r\n          }\r\n        ]\r\n      },\r\n      \"then\": {\r\n        \"effect\": \"[parameters(''effect'')]\",\r\n        \"details\": {\r\n          \"type\": \"Microsoft.Insights/metricAlerts\",\r\n          \"evaluationDelay\": \"AfterProvisioningSuccess\",\r\n          \"roleDefinitionIds\": [\r\n            \"/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c\"\r\n          ],\r\n          \"existenceCondition\": {\r\n            \"allOf\": [\r\n              {\r\n                \"field\": \"Microsoft.Insights/metricAlerts/criteria.Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria.allOf[*].metricNamespace\",\r\n                \"equals\": \"Microsoft.Network/applicationGateways\"\r\n              },\r\n              {\r\n                \"field\": \"Microsoft.Insights/metricAlerts/criteria.Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria.allOf[*].metricName\",\r\n                \"equals\": \"[parameters(''metricName'')]\"\r\n              },\r\n              {\r\n                \"field\": \"Microsoft.Insights/metricalerts/scopes[*]\",\r\n                \"equals\": \"[concat(subscription().id, ''/resourceGroups/'', resourceGroup().name, ''/providers/Microsoft.Network/applicationGateways/'', field(''fullName''))]\"\r\n              }\r\n            ]\r\n          },\r\n          \"deployment\": {\r\n            \"properties\": {\r\n              \"mode\": \"incremental\",\r\n              \"template\": {\r\n                \"$schema\": \"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#\",\r\n                \"contentVersion\": \"1.0.0.0\",\r\n                \"parameters\": {\r\n                  \"actionGroupId\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"The ID of the action group that is triggered when the alert is activated or deactivated\",\r\n                      \"displayName\": \"actionGroupId\"\r\n                    },\r\n                    \"defaultValue\": \"[resourceId(parameters(''actionGroupRG''), ''Microsoft.Insights/ActionGroups'', parameters(''actionGroupName''))]\"\r\n                  },\r\n                  \"actionGroupName\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"Name of the Action Group\",\r\n                      \"displayName\": \"actionGroupName\"\r\n                    }\r\n                  },\r\n                  \"actionGroupRG\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"Resource Group containing the Action Group\",\r\n                      \"displayName\": \"actionGroupRG\"\r\n                    }\r\n                  },\r\n                  \"resourceId\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"Resource ID of the resource emitting the metric that will be used for the comparison\",\r\n                      \"displayName\": \"resourceId\"\r\n                    },\r\n                    \"defaultValue\": \"[resourceId(''Microsoft.Network/applicationGateways'', parameters(''resourceName''))]\"\r\n                  },\r\n                  \"resourceLocation\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"Location of the resource\",\r\n                      \"displayName\": \"resourceLocation\"\r\n                    }\r\n                  },\r\n                  \"resourceName\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"Name of the resource\",\r\n                      \"displayName\": \"resourceName\"\r\n                    }\r\n                  },\r\n                  \"autoMitigate\": {\r\n                    \"type\": \"bool\",\r\n                    \"metadata\": {\r\n                      \"description\": \"Indicates whether the alert should be auto resolved or not\",\r\n                      \"displayName\": \"autoMitigate\"\r\n                    }\r\n                  },\r\n                  \"alertSensitivity\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"The extent of deviation required to trigger an alert. This will affect how tight the threshold is to the metric series pattern\",\r\n                      \"displayName\": \"alertSensitivity\"\r\n                    }\r\n                  },\r\n                  \"dimensions\": {\r\n                    \"type\": \"object\",\r\n                    \"metadata\": {\r\n                      \"description\": \"List of dimension conditions\",\r\n                      \"displayName\": \"dimensions\"\r\n                    }\r\n                  },\r\n                  \"minFailingPeriodsToAlert\": {\r\n                    \"type\": \"int\",\r\n                    \"metadata\": {\r\n                      \"description\": \"The number of violations to trigger an alert. Should be smaller or equal to numberOfEvaluationPeriods\",\r\n                      \"displayName\": \"minFailingPeriodsToAlert\"\r\n                    }\r\n                  },\r\n                  \"numberOfEvaluationPeriods\": {\r\n                    \"type\": \"int\",\r\n                    \"metadata\": {\r\n                      \"description\": \"The number of aggregated lookback points. The lookback time window is calculated based on the aggregation granularity (windowSize) and the selected number of aggregated points\",\r\n                      \"displayName\": \"numberOfEvaluationPeriods\"\r\n                    }\r\n                  },\r\n                  \"metricName\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"Name of the metric\",\r\n                      \"displayName\": \"metricName\"\r\n                    }\r\n                  },\r\n                  \"operator\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"The criteria operator\",\r\n                      \"displayName\": \"operator\"\r\n                    }\r\n                  },\r\n                  \"timeAggregation\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"The criteria time aggregation types\",\r\n                      \"displayName\": \"timeAggregation\"\r\n                    }\r\n                  },\r\n                  \"description\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"The description of the metric alert that will be included in the alert email\",\r\n                      \"displayName\": \"description\"\r\n                    }\r\n                  },\r\n                  \"evaluationFrequency\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"How often the metric alert is evaluated represented in ISO 8601 duration format e.g. PT15M\",\r\n                      \"displayName\": \"evaluationFrequency\"\r\n                    }\r\n                  },\r\n                  \"severity\": {\r\n                    \"type\": \"int\",\r\n                    \"metadata\": {\r\n                      \"description\": \"Alert severity\",\r\n                      \"displayName\": \"severity\"\r\n                    }\r\n                  },\r\n                  \"windowSize\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"The period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold e.g. PT1H\",\r\n                      \"displayName\": \"windowSize\"\r\n                    }\r\n                  }\r\n                },\r\n                \"resources\": [\r\n                  {\r\n                    \"apiVersion\": \"2018-03-01\",\r\n                    \"type\": \"Microsoft.Insights/metricAlerts\",\r\n                    \"location\": \"global\",\r\n                    \"name\": \"[concat(parameters(''resourceName''), ''-appGateway_'', parameters(''metricName''))]\",\r\n                    \"properties\": {\r\n                      \"actions\": [\r\n                        {\r\n                          \"actionGroupId\": \"[parameters(''actionGroupId'')]\",\r\n                          \"webHookProperties\": {}\r\n                        }\r\n                      ],\r\n                      \"autoMitigate\": \"[parameters(''autoMitigate'')]\",\r\n                      \"criteria\": {\r\n                        \"allOf\": [\r\n                          {\r\n                            \"alertSensitivity\": \"[parameters(''alertSensitivity'')]\",\r\n                            \"criterionType\": \"DynamicThresholdCriterion\",\r\n                            \"dimensions\": \"[parameters(''dimensions'')]\",\r\n                            \"failingPeriods\": {\r\n                              \"minFailingPeriodsToAlert\": \"[parameters(''minFailingPeriodsToAlert'')]\",\r\n                              \"numberOfEvaluationPeriods\": \"[parameters(''numberOfEvaluationPeriods'')]\"\r\n                            },\r\n                            \"metricName\": \"[parameters(''metricName'')]\",\r\n                            \"metricNamespace\": \"Microsoft.Network/applicationGateways\",\r\n                            \"name\": \"Metric1\",\r\n                            \"operator\": \"[parameters(''operator'')]\",\r\n                            \"timeAggregation\": \"[parameters(''timeAggregation'')]\"\r\n                          }\r\n                        ],\r\n                        \"odata.type\": \"Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria\"\r\n                      },\r\n                      \"description\": \"[parameters(''description'')]\",\r\n                      \"enabled\": true,\r\n                      \"evaluationFrequency\": \"[parameters(''evaluationFrequency'')]\",\r\n                      \"scopes\": [\"[parameters(''resourceId'')]\"],\r\n                      \"severity\": [\"[parameters(''severity'')]\"],\r\n                      \"targetResourceRegion\": \"[parameters(''resourceLocation'')]\",\r\n                      \"targetResourceType\": \"Microsoft.Network/applicationGateways\",\r\n                      \"windowSize\": [\"[parameters(''windowSize'')]\"]\r\n                    }\r\n                  }\r\n                ],\r\n                \"variables\": {}\r\n              },\r\n              \"parameters\": {\r\n                \"actionGroupName\": {\r\n                  \"value\": \"[parameters(''actionGroupName'')]\"\r\n                },\r\n                \"actionGroupRG\": {\r\n                  \"value\": \"[parameters(''actionGroupRG'')]\"\r\n                },\r\n                \"resourceLocation\": {\r\n                  \"value\": \"[field(''location'')]\"\r\n                },\r\n                \"resourceName\": {\r\n                  \"value\": \"[field(''fullName'')]\"\r\n                },\r\n                \"autoMitigate\": {\r\n                  \"value\": \"[parameters(''autoMitigate'')]\"\r\n                },\r\n                \"alertSensitivity\": {\r\n                  \"value\": \"[parameters(''alertSensitivity'')]\"\r\n                },\r\n                \"dimensions\": {\r\n                  \"value\": \"[parameters(''dimensions'')]\"\r\n                },\r\n                \"minFailingPeriodsToAlert\": {\r\n                  \"value\": \"[parameters(''minFailingPeriodsToAlert'')]\"\r\n                },\r\n                \"numberOfEvaluationPeriods\": {\r\n                  \"value\": \"[parameters(''numberOfEvaluationPeriods'')]\"\r\n                },\r\n                \"metricName\": {\r\n                  \"value\": \"[parameters(''metricName'')]\"\r\n                },\r\n                \"operator\": {\r\n                  \"value\": \"[parameters(''operator'')]\"\r\n                },\r\n                \"timeAggregation\": {\r\n                  \"value\": \"[parameters(''timeAggregation'')]\"\r\n                },\r\n                \"description\": {\r\n                  \"value\": \"[parameters(''description'')]\"\r\n                },\r\n                \"evaluationFrequency\": {\r\n                  \"value\": \"[parameters(''evaluationFrequency'')]\"\r\n                },\r\n                \"severity\": {\r\n                  \"value\": \"[parameters(''severity'')]\"\r\n                },\r\n                \"windowSize\": {\r\n                  \"value\": \"[parameters(''windowSize'')]\"\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n')]"
+            "deploy_diagSettings_keyVault": "[json('{\r\n  \"properties\": {\r\n    \"displayName\": \"Deploy diagnostic settings for Azure Key Vault to Log Analytics workspace\",\r\n    \"policyType\": \"Custom\",\r\n    \"mode\": \"All\",\r\n    \"description\": \"Deploys the diagnostic settings for Azure Key Vault to stream resource logs to a Log Analytics workspace when any Key Vault which is missing this diagnostic settings is created or updated.\",\r\n    \"metadata\": {\r\n      \"category\": \"Custom\",\r\n      \"source\": \"github.com/globalbao/azure-policy-as-code\",\r\n      \"version\": \"1.0.0\"\r\n    },\r\n    \"parameters\": {\r\n      \"diagnosticsSettingNameToUse\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Setting name\",\r\n          \"description\": \"Name of the diagnostic settings.\"\r\n        },\r\n        \"defaultValue\": \"AzureKeyVaultDiagnosticsLogsToWorkspace\"\r\n      },\r\n      \"logAnalytics\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Log Analytics workspace\",\r\n          \"description\": \"Specify the Log Analytics workspace the Key Vault should be connected to.\",\r\n          \"strongType\": \"omsWorkspace\",\r\n          \"assignPermissions\": true\r\n        }\r\n      },\r\n      \"AuditEventEnabled\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"AuditEvent - Enabled\",\r\n          \"description\": \"Whether to stream AuditEvent logs to the Log Analytics workspace - True or False\"\r\n        },\r\n        \"allowedValues\": [\r\n          \"True\",\r\n          \"False\"\r\n        ],\r\n        \"defaultValue\": \"True\"\r\n      },\r\n      \"AllMetricsEnabled\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"AllMetrics - Enabled\",\r\n          \"description\": \"Whether to stream AllMetrics logs to the Log Analytics workspace - True or False\"\r\n        },\r\n        \"allowedValues\": [\r\n          \"True\",\r\n          \"False\"\r\n        ],\r\n        \"defaultValue\": \"True\"\r\n      },\r\n      \"effect\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Effect\",\r\n          \"description\": \"Enable or disable the execution of the policy\"\r\n        },\r\n        \"allowedValues\": [\r\n          \"DeployIfNotExists\",\r\n          \"Disabled\"\r\n        ],\r\n        \"defaultValue\": \"DeployIfNotExists\"\r\n      }\r\n    },\r\n    \"policyRule\": {\r\n      \"if\": {\r\n        \"field\": \"type\",\r\n        \"equals\": \"Microsoft.KeyVault/vaults\"\r\n      },\r\n      \"then\": {\r\n        \"effect\": \"[parameters(''effect'')]\",\r\n        \"details\": {\r\n          \"type\": \"Microsoft.Insights/diagnosticSettings\",\r\n          \"evaluationDelay\": \"AfterProvisioningSuccess\",\r\n          \"roleDefinitionIds\": [\r\n            \"/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c\"\r\n          ],\r\n          \"existenceCondition\": {\r\n            \"allOf\": [\r\n              {\r\n                \"field\": \"Microsoft.Insights/diagnosticSettings/metrics.enabled\",\r\n                \"equals\": \"[parameters(''AllMetricsEnabled'')]\"\r\n              },\r\n              {\r\n                \"field\": \"Microsoft.Insights/diagnosticSettings/logs.enabled\",\r\n                \"equals\": \"[parameters(''AuditEventEnabled'')]\"\r\n              },\r\n              {\r\n                \"field\": \"Microsoft.Insights/diagnosticSettings/workspaceId\",\r\n                \"matchInsensitively\": \"[parameters(''logAnalytics'')]\"\r\n              }\r\n            ]\r\n          },\r\n          \"deployment\": {\r\n            \"properties\": {\r\n              \"mode\": \"incremental\",\r\n              \"template\": {\r\n                \"$schema\": \"http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#\",\r\n                \"contentVersion\": \"1.0.0.0\",\r\n                \"parameters\": {\r\n                  \"diagnosticsSettingNameToUse\": {\r\n                    \"type\": \"string\"\r\n                  },\r\n                  \"resourceName\": {\r\n                    \"type\": \"string\"\r\n                  },\r\n                  \"logAnalytics\": {\r\n                    \"type\": \"string\"\r\n                  },\r\n                  \"location\": {\r\n                    \"type\": \"string\"\r\n                  },\r\n                  \"AuditEventEnabled\": {\r\n                    \"type\": \"string\"\r\n                  },\r\n                  \"AllMetricsEnabled\": {\r\n                    \"type\": \"string\"\r\n                  }\r\n                },\r\n                \"variables\": {},\r\n                \"resources\": [\r\n                  {\r\n                    \"type\": \"Microsoft.KeyVault/vaults/providers/diagnosticSettings\",\r\n                    \"apiVersion\": \"2017-05-01-preview\",\r\n                    \"name\": \"[concat(parameters(''resourceName''), ''/'', ''Microsoft.Insights/'', parameters(''diagnosticsSettingNameToUse''))]\",\r\n                    \"location\": \"[parameters(''location'')]\",\r\n                    \"dependsOn\": [],\r\n                    \"properties\": {\r\n                      \"workspaceId\": \"[parameters(''logAnalytics'')]\",\r\n                      \"metrics\": [\r\n                        {\r\n                          \"category\": \"AllMetrics\",\r\n                          \"enabled\": \"[parameters(''AllMetricsEnabled'')]\",\r\n                          \"retentionPolicy\": {\r\n                            \"days\": 0,\r\n                            \"enabled\": false\r\n                          },\r\n                          \"timeGrain\": null\r\n                        }\r\n                      ],\r\n                      \"logs\": [\r\n                        {\r\n                          \"category\": \"AuditEvent\",\r\n                          \"enabled\": \"[parameters(''AuditEventEnabled'')]\"\r\n                        }\r\n                      ]\r\n                    }\r\n                  }\r\n                ],\r\n                \"outputs\": {}\r\n              },\r\n              \"parameters\": {\r\n                \"diagnosticsSettingNameToUse\": {\r\n                  \"value\": \"[parameters(''diagnosticsSettingNameToUse'')]\"\r\n                },\r\n                \"logAnalytics\": {\r\n                  \"value\": \"[parameters(''logAnalytics'')]\"\r\n                },\r\n                \"location\": {\r\n                  \"value\": \"[field(''location'')]\"\r\n                },\r\n                \"resourceName\": {\r\n                  \"value\": \"[field(''name'')]\"\r\n                },\r\n                \"AuditEventEnabled\": {\r\n                  \"value\": \"[parameters(''AuditEventEnabled'')]\"\r\n                },\r\n                \"AllMetricsEnabled\": {\r\n                  \"value\": \"[parameters(''AllMetricsEnabled'')]\"\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}')]",
+            "audit_resourceLocks": "[json('{\r\n  \"properties\": {\r\n    \"displayName\": \"Audit resource locks\",\r\n    \"policyType\": \"Custom\",\r\n    \"mode\": \"All\",\r\n    \"description\": \"This policy audits if a resource lock ''CanNotDelete'' or ''ReadOnly'' has been applied to the specified resource types.\",\r\n    \"metadata\": {\r\n      \"category\": \"Custom\",\r\n      \"source\": \"github.com/globalbao/azure-policy-as-code\",\r\n      \"version\": \"1.0.0\"\r\n    },\r\n    \"parameters\": {\r\n      \"resourceTypes\": {\r\n        \"type\": \"Array\",\r\n        \"metadata\": {\r\n          \"description\": \"Azure resource types to audit for locks e.g. ''microsoft.network/expressroutecircuits'' and ''microsoft.network/expressroutegateways''\",\r\n          \"displayName\": \"Resource types to audit for locks\"\r\n        }\r\n      },\r\n      \"lockLevel\": {\r\n        \"type\": \"Array\",\r\n        \"metadata\": {\r\n          \"description\": \"Resource lock level to audit for\",\r\n          \"displayName\": \"Lock level\"\r\n        },\r\n        \"allowedValues\": [\r\n          \"ReadOnly\",\r\n          \"CanNotDelete\"\r\n        ],\r\n        \"defaultValue\": [\r\n          \"ReadOnly\",\r\n          \"CanNotDelete\"\r\n        ]\r\n      },\r\n      \"effect\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Effect\",\r\n          \"description\": \"Enable or disable the execution of the policy\"\r\n        },\r\n        \"allowedValues\": [\r\n          \"AuditIfNotExists\",\r\n          \"Disabled\"\r\n        ],\r\n        \"defaultValue\": \"AuditIfNotExists\"\r\n      }\r\n    },\r\n    \"policyRule\": {\r\n      \"if\": {\r\n        \"field\": \"type\",\r\n        \"in\": \"[parameters(''resourceTypes'')]\"\r\n      },\r\n      \"then\": {\r\n        \"effect\": \"[parameters(''effect'')]\",\r\n        \"details\": {\r\n          \"type\": \"Microsoft.Authorization/locks\",\r\n          \"existenceCondition\": {\r\n            \"field\": \"Microsoft.Authorization/locks/level\",\r\n            \"in\": \"[parameters(''lockLevel'')]\"\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}')]",
+            "audit_roleAssignments": "[json('{\r\n  \"properties\": {\r\n    \"displayName\": \"Audit role assignments\",\r\n    \"policyType\": \"Custom\",\r\n    \"mode\": \"All\",\r\n    \"description\": \"Checks for any specified Role Assignments. Use to audit IAM assignments to resources/RGs which are out of compliance with your governance standards\",\r\n    \"metadata\": {\r\n      \"category\": \"Custom\",\r\n      \"source\": \"github.com/globalbao/azure-policy-as-code\",\r\n      \"version\": \"1.0.0\"\r\n    },\r\n    \"parameters\": {\r\n      \"principalType\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"description\": \"Which principalType to audit against e.g. ''User''\",\r\n          \"displayName\": \"principalType\"\r\n        },\r\n        \"allowedValues\": [\r\n          \"User\",\r\n          \"Group\",\r\n          \"ServicePrincipal\"\r\n        ],\r\n        \"defaultValue\": \"User\"\r\n      },\r\n      \"effect\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Effect\",\r\n          \"description\": \"Enable or disable the execution of the policy\"\r\n        },\r\n        \"allowedValues\": [\r\n          \"Audit\",\r\n          \"Disabled\"\r\n        ],\r\n        \"defaultValue\": \"Audit\"\r\n      }\r\n    },\r\n    \"policyRule\": {\r\n      \"if\": {\r\n        \"allOf\": [\r\n          {\r\n            \"field\": \"type\",\r\n            \"equals\": \"Microsoft.Authorization/roleAssignments\"\r\n          },\r\n          {\r\n            \"field\": \"Microsoft.Authorization/roleAssignments/principalType\",\r\n            \"equals\": \"[parameters(''principalType'')]\"\r\n          }\r\n        ]\r\n      },\r\n      \"then\": {\r\n        \"effect\": \"[parameters(''effect'')]\"\r\n      }\r\n    }\r\n  }\r\n}')]",
+            "add_tag_to_rg": "[json('{\r\n  \"properties\": {\r\n    \"displayName\": \"Add mandatory tag to resource group\",\r\n    \"policyType\": \"Custom\",\r\n    \"mode\": \"All\",\r\n    \"description\": \"Adds the mandatory tag key when any resource group missing this tag is created or updated. If the tag exists with a different value it will not be changed.\",\r\n    \"metadata\": {\r\n      \"category\": \"Custom\",\r\n      \"source\": \"github.com/globalbao/azure-policy-as-code\",\r\n      \"version\": \"1.0.0\"\r\n    },\r\n    \"parameters\": {\r\n      \"tagName\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Tag name\",\r\n          \"description\": \"Name of the tag, such as ''CostCenter''\"\r\n        }\r\n      },\r\n      \"tagValue\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Tag value\",\r\n          \"description\": \"Value of the tag e.g. ''12345''\"\r\n        }\r\n      },\r\n      \"effect\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Effect\",\r\n          \"description\": \"Enable or disable the execution of the policy\"\r\n        },\r\n        \"allowedValues\": [\r\n          \"Audit\",\r\n          \"Modify\",\r\n          \"Disabled\"\r\n        ],\r\n        \"defaultValue\": \"Modify\"\r\n      }\r\n    },\r\n    \"policyRule\": {\r\n      \"if\": {\r\n        \"allOf\": [\r\n          {\r\n            \"field\": \"type\",\r\n            \"equals\": \"Microsoft.Resources/subscriptions/resourceGroups\"\r\n          },\r\n          {\r\n            \"field\": \"[concat(''tags['', parameters(''tagName''), '']'')]\",\r\n            \"exists\": \"false\"\r\n          }\r\n        ]\r\n      },\r\n      \"then\": {\r\n        \"effect\": \"[parameters(''effect'')]\",\r\n        \"details\": {\r\n          \"roleDefinitionIds\": [\r\n            \"/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c\"\r\n          ],\r\n          \"operations\": [\r\n            {\r\n              \"operation\": \"add\",\r\n              \"field\": \"[concat(''tags['', parameters(''tagName''), '']'')]\",\r\n              \"value\": \"[parameters(''tagValue'')]\"\r\n            }\r\n          ]\r\n        }\r\n      }\r\n    }\r\n  }\r\n}')]",
+            "inherit_all_rg_tags": "[json('{\r\n  \"properties\": {\r\n    \"displayName\": \"Inherit all tags from the resource group\",\r\n    \"policyType\": \"Custom\",\r\n    \"mode\": \"Indexed\",\r\n    \"description\": \"Adds all tags with its value from the parent resource group when any resource missing these tags is created or updated. If the tag exists with a different value it will not be changed.\",\r\n    \"metadata\": {\r\n      \"category\": \"Custom\",\r\n      \"source\": \"github.com/globalbao/azure-policy-as-code\",\r\n      \"version\": \"1.0.0\"\r\n    },\r\n    \"parameters\": {\r\n      \"effect\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Effect\",\r\n          \"description\": \"Enable or disable the execution of the policy\"\r\n        },\r\n        \"allowedValues\": [\r\n          \"Audit\",\r\n          \"Modify\",\r\n          \"Disabled\"\r\n        ],\r\n        \"defaultValue\": \"Modify\"\r\n      }\r\n    },\r\n    \"policyRule\": {\r\n      \"if\": {\r\n        \"allOf\": [\r\n          {\r\n            \"field\": \"tags\",\r\n            \"exists\": \"false\"\r\n          },\r\n          {\r\n            \"value\": \"[resourceGroup().tags]\",\r\n            \"notEquals\": \"\"\r\n          }\r\n        ]\r\n      },\r\n      \"then\": {\r\n        \"effect\": \"[parameters(''effect'')]\",\r\n        \"details\": {\r\n          \"roleDefinitionIds\": [\r\n            \"/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c\"\r\n          ],\r\n          \"operations\": [\r\n            {\r\n              \"operation\": \"add\",\r\n              \"field\": \"tags\",\r\n              \"value\": \"[resourceGroup().tags]\"\r\n            }\r\n          ]\r\n        }\r\n      }\r\n    }\r\n  }\r\n}')]",
+            "inherit_rg_tag": "[json('{\r\n  \"properties\": {\r\n    \"displayName\": \"Inherit mandatory tag from the resource group\",\r\n    \"policyType\": \"Custom\",\r\n    \"mode\": \"Indexed\",\r\n    \"description\": \"Adds the specified mandatory tag with its value from the parent resource group when any resource missing this tag is created or updated. If the tag exists with a different value it will not be changed.\",\r\n    \"metadata\": {\r\n      \"category\": \"Custom\",\r\n      \"source\": \"github.com/globalbao/azure-policy-as-code\",\r\n      \"version\": \"1.0.0\"\r\n    },\r\n    \"parameters\": {\r\n      \"tagName\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Tag name\",\r\n          \"description\": \"Name of the tag, such as ''CostCenter''\"\r\n        }\r\n      },\r\n      \"effect\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Effect\",\r\n          \"description\": \"Enable or disable the execution of the policy\"\r\n        },\r\n        \"allowedValues\": [\r\n          \"Audit\",\r\n          \"Modify\",\r\n          \"Disabled\"\r\n        ],\r\n        \"defaultValue\": \"Modify\"\r\n      }\r\n    },\r\n    \"policyRule\": {\r\n      \"if\": {\r\n        \"allOf\": [\r\n          {\r\n            \"field\": \"[concat(''tags['', parameters(''tagName''), '']'')]\",\r\n            \"exists\": \"false\"\r\n          },\r\n          {\r\n            \"value\": \"[resourceGroup().tags[parameters(''tagName'')]]\",\r\n            \"notEquals\": \"\"\r\n          }\r\n        ]\r\n      },\r\n      \"then\": {\r\n        \"effect\": \"[parameters(''effect'')]\",\r\n        \"details\": {\r\n          \"roleDefinitionIds\": [\r\n            \"/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c\"\r\n          ],\r\n          \"operations\": [\r\n            {\r\n              \"operation\": \"add\",\r\n              \"field\": \"[concat(''tags['', parameters(''tagName''), '']'')]\",\r\n              \"value\": \"[resourceGroup().tags[parameters(''tagName'')]]\"\r\n            }\r\n          ]\r\n        }\r\n      }\r\n    }\r\n  }\r\n}')]",
+            "inherit_rg_tag_overwrite_existing": "[json('{\r\n  \"properties\": {\r\n    \"displayName\": \"Inherit mandatory tag from the resource group and overwrite existing\",\r\n    \"policyType\": \"Custom\",\r\n    \"mode\": \"Indexed\",\r\n    \"description\": \"Overwrites the specified mandatory tag and existing value using the RG''s tag value. Applicable when any Resource containing the mandatory tag is created or updated. Ignores scenarios where tag values are the same for both Resource and RG, or when the RG''s tag value is one of the parameters(''tagValuesToIgnore'').\",\r\n    \"metadata\": {\r\n      \"category\": \"Custom\",\r\n      \"source\": \"github.com/globalbao/azure-policy-as-code\",\r\n      \"version\": \"1.0.0\"\r\n    },\r\n    \"parameters\": {\r\n      \"tagName\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Tag name\",\r\n          \"description\": \"Name of the tag, such as ''CostCenter''\"\r\n        }\r\n      },\r\n      \"tagValuesToIgnore\": {\r\n        \"type\": \"Array\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Tag values to ignore for inheritance\",\r\n          \"description\": \"A list of tag values to ignore when evaluating tag inheritance from the RG\"\r\n        }\r\n      },\r\n      \"effect\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Effect\",\r\n          \"description\": \"Enable or disable the execution of the policy\"\r\n        },\r\n        \"allowedValues\": [\r\n          \"Audit\",\r\n          \"Modify\",\r\n          \"Disabled\"\r\n        ],\r\n        \"defaultValue\": \"Modify\"\r\n      }\r\n    },\r\n    \"policyRule\": {\r\n      \"if\": {\r\n        \"allOf\": [\r\n          {\r\n            \"field\": \"[concat(''tags['', parameters(''tagName''), '']'')]\",\r\n            \"exists\": \"true\"\r\n          },\r\n          {\r\n            \"value\": \"[resourceGroup().tags[parameters(''tagName'')]]\",\r\n            \"notEquals\": \"\"\r\n          },\r\n          {\r\n            \"field\": \"[concat(''tags['', parameters(''tagName''), '']'')]\",\r\n            \"notEquals\": \"[resourceGroup().tags[parameters(''tagName'')]]\"\r\n          },\r\n          {\r\n            \"value\": \"[resourceGroup().tags[parameters(''tagName'')]]\",\r\n            \"notIn\": \"[parameters(''tagValuesToIgnore'')]\"\r\n          }\r\n        ]\r\n      },\r\n      \"then\": {\r\n        \"effect\": \"[parameters(''effect'')]\",\r\n        \"details\": {\r\n          \"operations\": [\r\n            {\r\n              \"field\": \"[concat(''tags['', parameters(''tagName''), '']'')]\",\r\n              \"operation\": \"addOrReplace\",\r\n              \"value\": \"[resourceGroup().tags[parameters(''tagName'')]]\"\r\n            }\r\n          ],\r\n          \"roleDefinitionIds\": [\r\n            \"/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c\"\r\n          ]\r\n        }\r\n      }\r\n    }\r\n  }\r\n}')]",
+            "deploy_alert_appGateway": "[json('{\r\n  \"properties\": {\r\n    \"displayName\": \"Deploy alert for Application Gateway\",\r\n    \"policyType\": \"Custom\",\r\n    \"mode\": \"All\",\r\n    \"description\": \"Deploys a v2 metric alert for Application Gateway if an alert for the specified metric name does not exist on the target resource\",\r\n    \"metadata\": {\r\n      \"category\": \"Custom\",\r\n      \"source\": \"github.com/globalbao/azure-policy-as-code\",\r\n      \"version\": \"1.0.0\"\r\n    },\r\n    \"parameters\": {\r\n      \"actionGroupName\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"description\": \"Name of the Action Group\",\r\n          \"displayName\": \"actionGroupName\"\r\n        }\r\n      },\r\n      \"actionGroupRG\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"description\": \"Resource Group containing the Action Group\",\r\n          \"displayName\": \"actionGroupRG\"\r\n        }\r\n      },\r\n      \"autoMitigate\": {\r\n        \"type\": \"Boolean\",\r\n        \"metadata\": {\r\n          \"description\": \"Indicates whether the alert should be auto resolved or not\",\r\n          \"displayName\": \"autoMitigate\"\r\n        },\r\n        \"defaultValue\": true\r\n      },\r\n      \"alertSensitivity\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"description\": \"The extent of deviation required to trigger an alert. This will affect how tight the threshold is to the metric series pattern.\",\r\n          \"displayName\": \"alertSensitivity\"\r\n        },\r\n        \"allowedValues\": [\r\n          \"High\",\r\n          \"Medium\",\r\n          \"Low\"\r\n        ],\r\n        \"defaultValue\": \"Medium\"\r\n      },\r\n      \"dimensions\": {\r\n        \"type\": \"Object\",\r\n        \"metadata\": {\r\n          \"description\": \"List of dimension conditions. See https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-supported\",\r\n          \"displayName\": \"dimensions\"\r\n        }\r\n      },\r\n      \"minFailingPeriodsToAlert\": {\r\n        \"type\": \"Integer\",\r\n        \"metadata\": {\r\n          \"description\": \"The number of violations to trigger an alert. Should be smaller or equal to numberOfEvaluationPeriods.\",\r\n          \"displayName\": \"minFailingPeriodsToAlert\"\r\n        },\r\n        \"defaultValue\": 1\r\n      },\r\n      \"numberOfEvaluationPeriods\": {\r\n        \"type\": \"Integer\",\r\n        \"metadata\": {\r\n          \"description\": \"The number of aggregated lookback points. The lookback time window is calculated based on the aggregation granularity (windowSize) and the selected number of aggregated points.\",\r\n          \"displayName\": \"numberOfEvaluationPeriods\"\r\n        },\r\n        \"defaultValue\": 2\r\n      },\r\n      \"metricName\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"description\": \"Name of the metric\",\r\n          \"displayName\": \"metricName\"\r\n        }\r\n      },\r\n      \"operator\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"description\": \"The criteria operator\",\r\n          \"displayName\": \"operator\"\r\n        },\r\n        \"allowedValues\": [\r\n          \"Equals\",\r\n          \"GreaterThan\",\r\n          \"GreaterThanOrEqual\",\r\n          \"LessThan\",\r\n          \"LessThanOrEqual\",\r\n          \"NotEquals\"\r\n        ]\r\n      },\r\n      \"timeAggregation\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"description\": \"The criteria time aggregation types\",\r\n          \"displayName\": \"timeAggregation\"\r\n        },\r\n        \"allowedValues\": [\r\n          \"Average\",\r\n          \"Count\",\r\n          \"Maximum\",\r\n          \"Minimum\",\r\n          \"Total\"\r\n        ]\r\n      },\r\n      \"description\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"description\": \"The description of the metric alert that will be included in the alert email\",\r\n          \"displayName\": \"description\"\r\n        }\r\n      },\r\n      \"evaluationFrequency\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"description\": \"How often the metric alert is evaluated represented in ISO 8601 duration format e.g. PT15M\",\r\n          \"displayName\": \"evaluationFrequency\"\r\n        },\r\n        \"defaultValue\": \"PT15M\"\r\n      },\r\n      \"severity\": {\r\n        \"type\": \"Integer\",\r\n        \"metadata\": {\r\n          \"description\": \"Alert severity\",\r\n          \"displayName\": \"severity\"\r\n        },\r\n        \"allowedValues\": [\r\n          0,\r\n          1,\r\n          2,\r\n          3,\r\n          4\r\n        ],\r\n        \"defaultValue\": 3\r\n      },\r\n      \"windowSize\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"description\": \"The period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold e.g. PT1H\",\r\n          \"displayName\": \"windowSize\"\r\n        },\r\n        \"defaultValue\": \"PT1H\"\r\n      },\r\n      \"effect\": {\r\n        \"type\": \"String\",\r\n        \"metadata\": {\r\n          \"displayName\": \"Effect\",\r\n          \"description\": \"Enable or disable the execution of the policy\"\r\n        },\r\n        \"allowedValues\": [\r\n          \"DeployIfNotExists\",\r\n          \"Disabled\"\r\n        ],\r\n        \"defaultValue\": \"DeployIfNotExists\"\r\n      }\r\n    },\r\n    \"policyRule\": {\r\n      \"if\": {\r\n        \"allOf\": [\r\n          {\r\n            \"field\": \"type\",\r\n            \"equals\": \"Microsoft.Network/applicationGateways\"\r\n          },\r\n          {\r\n            \"field\": \"Microsoft.Network/applicationGateways/sku.tier\",\r\n            \"equals\": \"Standard_v2\"\r\n          }\r\n        ]\r\n      },\r\n      \"then\": {\r\n        \"effect\": \"[parameters(''effect'')]\",\r\n        \"details\": {\r\n          \"type\": \"Microsoft.Insights/metricAlerts\",\r\n          \"evaluationDelay\": \"AfterProvisioningSuccess\",\r\n          \"roleDefinitionIds\": [\r\n            \"/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c\"\r\n          ],\r\n          \"existenceCondition\": {\r\n            \"allOf\": [\r\n              {\r\n                \"field\": \"Microsoft.Insights/metricAlerts/criteria.Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria.allOf[*].metricNamespace\",\r\n                \"equals\": \"Microsoft.Network/applicationGateways\"\r\n              },\r\n              {\r\n                \"field\": \"Microsoft.Insights/metricAlerts/criteria.Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria.allOf[*].metricName\",\r\n                \"equals\": \"[parameters(''metricName'')]\"\r\n              },\r\n              {\r\n                \"field\": \"Microsoft.Insights/metricalerts/scopes[*]\",\r\n                \"equals\": \"[concat(subscription().id, ''/resourceGroups/'', resourceGroup().name, ''/providers/Microsoft.Network/applicationGateways/'', field(''fullName''))]\"\r\n              }\r\n            ]\r\n          },\r\n          \"deployment\": {\r\n            \"properties\": {\r\n              \"mode\": \"incremental\",\r\n              \"template\": {\r\n                \"$schema\": \"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#\",\r\n                \"contentVersion\": \"1.0.0.0\",\r\n                \"parameters\": {\r\n                  \"actionGroupId\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"The ID of the action group that is triggered when the alert is activated or deactivated\",\r\n                      \"displayName\": \"actionGroupId\"\r\n                    },\r\n                    \"defaultValue\": \"[resourceId(parameters(''actionGroupRG''), ''Microsoft.Insights/ActionGroups'', parameters(''actionGroupName''))]\"\r\n                  },\r\n                  \"actionGroupName\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"Name of the Action Group\",\r\n                      \"displayName\": \"actionGroupName\"\r\n                    }\r\n                  },\r\n                  \"actionGroupRG\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"Resource Group containing the Action Group\",\r\n                      \"displayName\": \"actionGroupRG\"\r\n                    }\r\n                  },\r\n                  \"resourceId\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"Resource ID of the resource emitting the metric that will be used for the comparison\",\r\n                      \"displayName\": \"resourceId\"\r\n                    },\r\n                    \"defaultValue\": \"[resourceId(''Microsoft.Network/applicationGateways'', parameters(''resourceName''))]\"\r\n                  },\r\n                  \"resourceLocation\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"Location of the resource\",\r\n                      \"displayName\": \"resourceLocation\"\r\n                    }\r\n                  },\r\n                  \"resourceName\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"Name of the resource\",\r\n                      \"displayName\": \"resourceName\"\r\n                    }\r\n                  },\r\n                  \"autoMitigate\": {\r\n                    \"type\": \"bool\",\r\n                    \"metadata\": {\r\n                      \"description\": \"Indicates whether the alert should be auto resolved or not\",\r\n                      \"displayName\": \"autoMitigate\"\r\n                    }\r\n                  },\r\n                  \"alertSensitivity\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"The extent of deviation required to trigger an alert. This will affect how tight the threshold is to the metric series pattern\",\r\n                      \"displayName\": \"alertSensitivity\"\r\n                    }\r\n                  },\r\n                  \"dimensions\": {\r\n                    \"type\": \"object\",\r\n                    \"metadata\": {\r\n                      \"description\": \"List of dimension conditions\",\r\n                      \"displayName\": \"dimensions\"\r\n                    }\r\n                  },\r\n                  \"minFailingPeriodsToAlert\": {\r\n                    \"type\": \"int\",\r\n                    \"metadata\": {\r\n                      \"description\": \"The number of violations to trigger an alert. Should be smaller or equal to numberOfEvaluationPeriods\",\r\n                      \"displayName\": \"minFailingPeriodsToAlert\"\r\n                    }\r\n                  },\r\n                  \"numberOfEvaluationPeriods\": {\r\n                    \"type\": \"int\",\r\n                    \"metadata\": {\r\n                      \"description\": \"The number of aggregated lookback points. The lookback time window is calculated based on the aggregation granularity (windowSize) and the selected number of aggregated points\",\r\n                      \"displayName\": \"numberOfEvaluationPeriods\"\r\n                    }\r\n                  },\r\n                  \"metricName\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"Name of the metric\",\r\n                      \"displayName\": \"metricName\"\r\n                    }\r\n                  },\r\n                  \"operator\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"The criteria operator\",\r\n                      \"displayName\": \"operator\"\r\n                    }\r\n                  },\r\n                  \"timeAggregation\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"The criteria time aggregation types\",\r\n                      \"displayName\": \"timeAggregation\"\r\n                    }\r\n                  },\r\n                  \"description\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"The description of the metric alert that will be included in the alert email\",\r\n                      \"displayName\": \"description\"\r\n                    }\r\n                  },\r\n                  \"evaluationFrequency\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"How often the metric alert is evaluated represented in ISO 8601 duration format e.g. PT15M\",\r\n                      \"displayName\": \"evaluationFrequency\"\r\n                    }\r\n                  },\r\n                  \"severity\": {\r\n                    \"type\": \"int\",\r\n                    \"metadata\": {\r\n                      \"description\": \"Alert severity\",\r\n                      \"displayName\": \"severity\"\r\n                    }\r\n                  },\r\n                  \"windowSize\": {\r\n                    \"type\": \"string\",\r\n                    \"metadata\": {\r\n                      \"description\": \"The period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold e.g. PT1H\",\r\n                      \"displayName\": \"windowSize\"\r\n                    }\r\n                  }\r\n                },\r\n                \"resources\": [\r\n                  {\r\n                    \"apiVersion\": \"2018-03-01\",\r\n                    \"type\": \"Microsoft.Insights/metricAlerts\",\r\n                    \"location\": \"global\",\r\n                    \"name\": \"[concat(parameters(''resourceName''), ''-appGateway_'', parameters(''metricName''))]\",\r\n                    \"properties\": {\r\n                      \"actions\": [\r\n                        {\r\n                          \"actionGroupId\": \"[parameters(''actionGroupId'')]\",\r\n                          \"webHookProperties\": {}\r\n                        }\r\n                      ],\r\n                      \"autoMitigate\": \"[parameters(''autoMitigate'')]\",\r\n                      \"criteria\": {\r\n                        \"allOf\": [\r\n                          {\r\n                            \"alertSensitivity\": \"[parameters(''alertSensitivity'')]\",\r\n                            \"criterionType\": \"DynamicThresholdCriterion\",\r\n                            \"dimensions\": \"[parameters(''dimensions'')]\",\r\n                            \"failingPeriods\": {\r\n                              \"minFailingPeriodsToAlert\": \"[parameters(''minFailingPeriodsToAlert'')]\",\r\n                              \"numberOfEvaluationPeriods\": \"[parameters(''numberOfEvaluationPeriods'')]\"\r\n                            },\r\n                            \"metricName\": \"[parameters(''metricName'')]\",\r\n                            \"metricNamespace\": \"Microsoft.Network/applicationGateways\",\r\n                            \"name\": \"Metric1\",\r\n                            \"operator\": \"[parameters(''operator'')]\",\r\n                            \"timeAggregation\": \"[parameters(''timeAggregation'')]\"\r\n                          }\r\n                        ],\r\n                        \"odata.type\": \"Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria\"\r\n                      },\r\n                      \"description\": \"[parameters(''description'')]\",\r\n                      \"enabled\": true,\r\n                      \"evaluationFrequency\": \"[parameters(''evaluationFrequency'')]\",\r\n                      \"scopes\": [\r\n                        \"[parameters(''resourceId'')]\"\r\n                      ],\r\n                      \"severity\": [\r\n                        \"[parameters(''severity'')]\"\r\n                      ],\r\n                      \"targetResourceRegion\": \"[parameters(''resourceLocation'')]\",\r\n                      \"targetResourceType\": \"Microsoft.Network/applicationGateways\",\r\n                      \"windowSize\": [\r\n                        \"[parameters(''windowSize'')]\"\r\n                      ]\r\n                    }\r\n                  }\r\n                ],\r\n                \"variables\": {}\r\n              },\r\n              \"parameters\": {\r\n                \"actionGroupName\": {\r\n                  \"value\": \"[parameters(''actionGroupName'')]\"\r\n                },\r\n                \"actionGroupRG\": {\r\n                  \"value\": \"[parameters(''actionGroupRG'')]\"\r\n                },\r\n                \"resourceLocation\": {\r\n                  \"value\": \"[field(''location'')]\"\r\n                },\r\n                \"resourceName\": {\r\n                  \"value\": \"[field(''fullName'')]\"\r\n                },\r\n                \"autoMitigate\": {\r\n                  \"value\": \"[parameters(''autoMitigate'')]\"\r\n                },\r\n                \"alertSensitivity\": {\r\n                  \"value\": \"[parameters(''alertSensitivity'')]\"\r\n                },\r\n                \"dimensions\": {\r\n                  \"value\": \"[parameters(''dimensions'')]\"\r\n                },\r\n                \"minFailingPeriodsToAlert\": {\r\n                  \"value\": \"[parameters(''minFailingPeriodsToAlert'')]\"\r\n                },\r\n                \"numberOfEvaluationPeriods\": {\r\n                  \"value\": \"[parameters(''numberOfEvaluationPeriods'')]\"\r\n                },\r\n                \"metricName\": {\r\n                  \"value\": \"[parameters(''metricName'')]\"\r\n                },\r\n                \"operator\": {\r\n                  \"value\": \"[parameters(''operator'')]\"\r\n                },\r\n                \"timeAggregation\": {\r\n                  \"value\": \"[parameters(''timeAggregation'')]\"\r\n                },\r\n                \"description\": {\r\n                  \"value\": \"[parameters(''description'')]\"\r\n                },\r\n                \"evaluationFrequency\": {\r\n                  \"value\": \"[parameters(''evaluationFrequency'')]\"\r\n                },\r\n                \"severity\": {\r\n                  \"value\": \"[parameters(''severity'')]\"\r\n                },\r\n                \"windowSize\": {\r\n                  \"value\": \"[parameters(''windowSize'')]\"\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}')]",
+            "assign_aadGroup_to_rg": "[json('{\r\n\t\"properties\": {\r\n\t\t\"displayName\": \"Assign AAD group with Contributor role to RG with Tag\",\r\n\t\t\"policyType\": \"Custom\",\r\n\t\t\"mode\": \"All\",\r\n\t\t\"description\": \"Assigns an AAD group with contributor role to resource groups specified with a tag name/value. Existing resource groups can be remediated by triggering a remediation task.\",\r\n\t\t\"metadata\": {\r\n\t\t\t\"category\": \"Custom\",\r\n\t\t\t\"source\": \"github.com/globalbao/azure-policy-as-code\",\r\n\t\t\t\"author\": \"Jan-Tore Pedersen\",\r\n\t\t\t\"version\": \"1.0.0\"\r\n\t\t},\r\n\t\t\"parameters\": {\r\n\t\t\t\"tagName\": {\r\n\t\t\t\t\"type\": \"String\",\r\n\t\t\t\t\"metadata\": {\r\n\t\t\t\t\t\"displayName\": \"Tag Name\",\r\n\t\t\t\t\t\"description\": \"Name of the tag, such as ''environment''\"\r\n\t\t\t\t}\r\n\t\t\t},\r\n\t\t\t\"tagValue\": {\r\n\t\t\t\t\"type\": \"String\",\r\n\t\t\t\t\"metadata\": {\r\n\t\t\t\t\t\"displayName\": \"Tag Value\",\r\n\t\t\t\t\t\"description\": \"Value of the tag, such as ''production''\"\r\n\t\t\t\t}\r\n\t\t\t},\r\n\t\t\t\"adGroupId\": {\r\n\t\t\t\t\"type\": \"String\",\r\n\t\t\t\t\"metadata\": {\r\n\t\t\t\t\t\"displayName\": \"Azure AD Group Object ID\",\r\n\t\t\t\t\t\"description\": \"Azure AD Group Object ID, like b5002e0c-6a52-4d16-9ab0-684d467ab068\"\r\n\t\t\t\t}\r\n\t\t\t},\r\n\t\t\t\"roleDefinitionId\": {\r\n\t\t\t\t\"type\": \"String\",\r\n\t\t\t\t\"metadata\": {\r\n\t\t\t\t\t\"displayName\": \"Azure AD Role Definition ID\",\r\n\t\t\t\t\t\"description\": \"Azure AD Role Definition ID, like ''b24988ac-6180-42a0-ab88-20f7382dd24c'' which is for Contributor\"\r\n\t\t\t\t}\r\n\t\t\t},\r\n\t\t\t\"effect\": {\r\n\t\t\t\t\"type\": \"String\",\r\n\t\t\t\t\"metadata\": {\r\n\t\t\t\t\t\"displayName\": \"Effect\",\r\n\t\t\t\t\t\"description\": \"Enable or disable the execution of the policy\"\r\n\t\t\t\t},\r\n\t\t\t\t\"allowedValues\": [\r\n\t\t\t\t\t\"DeployIfNotExists\",\r\n\t\t\t\t\t\"Disabled\"\r\n\t\t\t\t],\r\n\t\t\t\t\"defaultValue\": \"DeployIfNotExists\"\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"policyRule\": {\r\n\t\t\t\"if\": {\r\n\t\t\t\t\"allOf\": [\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"field\": \"type\",\r\n\t\t\t\t\t\t\"equals\": \"Microsoft.Resources/subscriptions/resourceGroups\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"field\": \"[concat(''tags['', parameters(''tagName''), '']'')]\",\r\n\t\t\t\t\t\t\"Equals\": \"[parameters(''tagValue'')]\"\r\n\t\t\t\t\t}\r\n\t\t\t\t]\r\n\t\t\t},\r\n\t\t\t\"then\": {\r\n\t\t\t\t\"effect\": \"[parameters(''effect'')]\",\r\n\t\t\t\t\"details\": {\r\n\t\t\t\t\t\"type\": \"Microsoft.Authorization/roleAssignments\",\r\n\t\t\t\t\t\"roleDefinitionIds\": [\r\n\t\t\t\t\t\t\"/providers/microsoft.authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635\"\r\n\t\t\t\t\t],\r\n\t\t\t\t\t\"existenceCondition\": {\r\n\t\t\t\t\t\t\"allOf\": [\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"field\": \"Microsoft.Authorization/roleAssignments/roleDefinitionId\",\r\n\t\t\t\t\t\t\t\t\"equals\": \"[concat(''/subscriptions/'', subscription().subscriptionId, ''/providers/microsoft.authorization/roleDefinitions/'', parameters(''roleDefinitionId''))]\"\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\"field\": \"Microsoft.Authorization/roleAssignments/principalId\",\r\n\t\t\t\t\t\t\t\t\"equals\": \"[parameters(''adGroupId'')]\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"deployment\": {\r\n\t\t\t\t\t\t\"properties\": {\r\n\t\t\t\t\t\t\t\"mode\": \"incremental\",\r\n\t\t\t\t\t\t\t\"template\": {\r\n\t\t\t\t\t\t\t\t\"$schema\": \"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#\",\r\n\t\t\t\t\t\t\t\t\"contentVersion\": \"1.0.0.0\",\r\n\t\t\t\t\t\t\t\t\"parameters\": {\r\n\t\t\t\t\t\t\t\t\t\"adGroupId\": {\r\n\t\t\t\t\t\t\t\t\t\t\"type\": \"string\",\r\n\t\t\t\t\t\t\t\t\t\t\"metadata\": {\r\n\t\t\t\t\t\t\t\t\t\t\t\"displayName\": \"Azure AD Group Object ID\",\r\n\t\t\t\t\t\t\t\t\t\t\t\"description\": \"Azure AD Group Object ID, like b5002e0c-6a52-4d16-9ab0-684d467ab068\"\r\n\t\t\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t\t\t\"roleDefinitionId\": {\r\n\t\t\t\t\t\t\t\t\t\t\"type\": \"string\",\r\n\t\t\t\t\t\t\t\t\t\t\"metadata\": {\r\n\t\t\t\t\t\t\t\t\t\t\t\"displayName\": \"Azure AD Role Definition ID\",\r\n\t\t\t\t\t\t\t\t\t\t\t\"description\": \"Azure AD Role Definition ID, like ''b24988ac-6180-42a0-ab88-20f7382dd24c'' which is for Contributor\"\r\n\t\t\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t\t\"resources\": [\r\n\t\t\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\t\t\"type\": \"Microsoft.Authorization/roleAssignments\",\r\n\t\t\t\t\t\t\t\t\t\t\"apiVersion\": \"2018-09-01-preview\",\r\n\t\t\t\t\t\t\t\t\t\t\"name\": \"[guid(resourceGroup().id, deployment().name)]\",\r\n\t\t\t\t\t\t\t\t\t\t\"properties\": {\r\n\t\t\t\t\t\t\t\t\t\t\t\"roleDefinitionId\": \"[concat(''/subscriptions/'', subscription().subscriptionId, ''/providers/microsoft.authorization/roleDefinitions/'', parameters(''roleDefinitionId''))]\",\r\n\t\t\t\t\t\t\t\t\t\t\t\"principalId\": \"[parameters(''adGroupId'')]\",\r\n\t\t\t\t\t\t\t\t\t\t\t\"principalType\": \"Group\"\r\n\t\t\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t\t]\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t\"parameters\": {\r\n\t\t\t\t\t\t\t\t\"adGroupId\": {\r\n\t\t\t\t\t\t\t\t\t\"value\": \"[parameters(''adGroupId'')]\"\r\n\t\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t\t\"roleDefinitionId\": {\r\n\t\t\t\t\t\t\t\t\t\"value\": \"[parameters(''roleDefinitionId'')]\"\r\n\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}')]",
+            "modify_storageAccount_vnet_integration": "[json('{\r\n\t\"properties\": {\r\n\t\t\"displayName\": \"Audit or modify storage account vnet integration\",\r\n\t\t\"policyType\": \"Custom\",\r\n\t\t\"mode\": \"All\",\r\n\t\t\"metadata\": {\r\n\t\t\t\"category\": \"Custom\",\r\n\t\t\t\"source\": \"github.com/globalbao/azure-policy-as-code\",\r\n\t\t\t\"author\": \"Roger Chen\",\r\n\t\t\t\"version\": \"1.0.0\"\r\n\t\t},\r\n\t\t\"parameters\": {\r\n\t\t\t\"allowedIPs\": {\r\n\t\t\t\t\"type\": \"Array\",\r\n\t\t\t\t\"metadata\": {\r\n\t\t\t\t\t\"displayName\": \"Allowed IPs\",\r\n\t\t\t\t\t\"description\": \"Only storage accounts that have this IP entered will be evaluated by policy\"\r\n\t\t\t\t},\r\n\t\t\t\t\"defaultValue\": [\r\n\t\t\t\t\t\"input IP here\"\r\n\t\t\t\t]\r\n\t\t\t},\r\n\t\t\t\"allowedNetworks\": {\r\n\t\t\t\t\"type\": \"Array\",\r\n\t\t\t\t\"metadata\": {\r\n\t\t\t\t\t\"displayName\": \"Allowed Networks\",\r\n\t\t\t\t\t\"description\": \"The list of allowed virtual networks\"\r\n\t\t\t\t},\r\n\t\t\t\t\"defaultValue\": [\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"id\": \"input subnet id here\",\r\n\t\t\t\t\t\t\"action\": \"Allow\",\r\n\t\t\t\t\t\t\"state\": \"Succeeded\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"id\": \"input subnet id here\",\r\n\t\t\t\t\t\t\"action\": \"Allow\",\r\n\t\t\t\t\t\t\"state\": \"Succeeded\"\r\n\t\t\t\t\t}\r\n\t\t\t\t]\r\n\t\t\t},\r\n\t\t\t\"effect\": {\r\n\t\t\t\t\"type\": \"String\",\r\n\t\t\t\t\"metadata\": {\r\n\t\t\t\t\t\"displayName\": \"Effect\",\r\n\t\t\t\t\t\"description\": \"Enable or disable the execution of the policy\"\r\n\t\t\t\t},\r\n\t\t\t\t\"allowedValues\": [\r\n\t\t\t\t\t\"Audit\",\r\n\t\t\t\t\t\"Modify\",\r\n\t\t\t\t\t\"Disabled\"\r\n\t\t\t\t],\r\n\t\t\t\t\"defaultValue\": \"Audit\"\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"policyRule\": {\r\n\t\t\t\"if\": {\r\n\t\t\t\t\"allOf\": [\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"field\": \"type\",\r\n\t\t\t\t\t\t\"equals\": \"Microsoft.Storage/storageAccounts\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"count\": {\r\n\t\t\t\t\t\t\t\"field\": \"Microsoft.Storage/storageAccounts/networkAcls.ipRules[*]\",\r\n\t\t\t\t\t\t\t\"where\": {\r\n\t\t\t\t\t\t\t\t\"count\": {\r\n\t\t\t\t\t\t\t\t\t\"value\": \"[parameters(''allowedIPs'')]\",\r\n\t\t\t\t\t\t\t\t\t\"name\": \"approvedPrefix\",\r\n\t\t\t\t\t\t\t\t\t\"where\": {\r\n\t\t\t\t\t\t\t\t\t\t\"value\": \"[ipRangeContains(current(''approvedPrefix''), current(''Microsoft.Storage/storageAccounts/networkAcls.ipRules[*].value''))]\",\r\n\t\t\t\t\t\t\t\t\t\t\"equals\": true\r\n\t\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t\t\"greater\": 0\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\"greater\": 0\r\n\t\t\t\t\t},\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"count\": {\r\n\t\t\t\t\t\t\t\"value\": \"[parameters(''allowednetworks'')]\",\r\n\t\t\t\t\t\t\t\"name\": \"allowedNetworks\",\r\n\t\t\t\t\t\t\t\"where\": {\r\n\t\t\t\t\t\t\t\t\"count\": {\r\n\t\t\t\t\t\t\t\t\t\"field\": \"Microsoft.Storage/storageAccounts/networkAcls.virtualNetworkRules[*]\",\r\n\t\t\t\t\t\t\t\t\t\"where\": {\r\n\t\t\t\t\t\t\t\t\t\t\"allOf\": [\r\n\t\t\t\t\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\t\t\t\t\"field\": \"Microsoft.Storage/storageAccounts/networkAcls.virtualNetworkRules[*].id\",\r\n\t\t\t\t\t\t\t\t\t\t\t\t\"equals\": \"[current(''allowedNetworks'').id]\"\r\n\t\t\t\t\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\t\t\t\t\"field\": \"Microsoft.Storage/storageAccounts/networkAcls.virtualNetworkRules[*].action\",\r\n\t\t\t\t\t\t\t\t\t\t\t\t\"equals\": \"[current(''allowedNetworks'').action]\"\r\n\t\t\t\t\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\t\t\t\t\"field\": \"Microsoft.Storage/storageAccounts/networkAcls.virtualNetworkRules[*].state\",\r\n\t\t\t\t\t\t\t\t\t\t\t\t\"equals\": \"[current(''allowedNetworks'').state]\"\r\n\t\t\t\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t\t\t\t]\r\n\t\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t\t\"equals\": 1\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\"notEquals\": \"[length(parameters(''allowednetworks''))]\"\r\n\t\t\t\t\t}\r\n\t\t\t\t]\r\n\t\t\t},\r\n\t\t\t\"then\": {\r\n\t\t\t\t\"effect\": \"[parameters(''effect'')]\",\r\n\t\t\t\t\"details\": {\r\n\t\t\t\t\t\"roleDefinitionIds\": [\r\n\t\t\t\t\t\t\"/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c\"\r\n\t\t\t\t\t],\r\n\t\t\t\t\t\"conflictEffect\": \"audit\",\r\n\t\t\t\t\t\"operations\": [\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"operation\": \"add\",\r\n\t\t\t\t\t\t\t\"field\": \"Microsoft.Storage/storageAccounts/networkAcls.virtualNetworkRules[*]\",\r\n\t\t\t\t\t\t\t\"value\": {\r\n\t\t\t\t\t\t\t\t\"id\": \"[parameters(''allowednetworks'')[0].id]\",\r\n\t\t\t\t\t\t\t\t\"action\": \"Allow\",\r\n\t\t\t\t\t\t\t\t\"state\": \"Succeeded\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\"operation\": \"add\",\r\n\t\t\t\t\t\t\t\"field\": \"Microsoft.Storage/storageAccounts/networkAcls.virtualNetworkRules[*]\",\r\n\t\t\t\t\t\t\t\"value\": {\r\n\t\t\t\t\t\t\t\t\"id\": \"[parameters(''allowednetworks'')[1].id]\",\r\n\t\t\t\t\t\t\t\t\"action\": \"Allow\",\r\n\t\t\t\t\t\t\t\t\"state\": \"Succeeded\"\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t]\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}')]"
           },
           "resources": [
             {
@@ -356,6 +412,18 @@
               "apiVersion": "2020-09-01",
               "name": "deploy_alert_appGateway",
               "properties": "[variables('deploy_alert_appGateway').properties]"
+            },
+            {
+              "type": "Microsoft.Authorization/policyDefinitions",
+              "apiVersion": "2020-09-01",
+              "name": "assign_aadGroup_to_rg",
+              "properties": "[variables('assign_aadGroup_to_rg').properties]"
+            },
+            {
+              "type": "Microsoft.Authorization/policyDefinitions",
+              "apiVersion": "2020-09-01",
+              "name": "modify_storageAccount_vnet_integration",
+              "properties": "[variables('modify_storageAccount_vnet_integration').properties]"
             }
           ],
           "outputs": {
@@ -369,7 +437,9 @@
                 "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyDefinitions', 'inherit_all_rg_tag')]",
                 "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyDefinitions', 'inherit_rg_tag')]",
                 "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyDefinitions', 'inherit_rg_tag_overwrite_existing')]",
-                "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyDefinitions', 'deploy_alert_appGateway')]"
+                "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyDefinitions', 'deploy_alert_appGateway')]",
+                "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyDefinitions', 'assign_aadGroup_to_rg')]",
+                "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyDefinitions', 'modify_storageAccount_vnet_integration')]"
               ]
             },
             "customPolicyNames": {
@@ -382,7 +452,9 @@
                 "[reference(extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyDefinitions', 'inherit_all_rg_tag')).displayName]",
                 "[reference(extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyDefinitions', 'inherit_rg_tag')).displayName]",
                 "[reference(extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyDefinitions', 'inherit_rg_tag_overwrite_existing')).displayName]",
-                "[reference(extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyDefinitions', 'deploy_alert_appGateway')).displayName]"
+                "[reference(extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyDefinitions', 'deploy_alert_appGateway')).displayName]",
+                "[reference(extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyDefinitions', 'assign_aadGroup_to_rg')).displayName]",
+                "[reference(extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyDefinitions', 'modify_storageAccount_vnet_integration')).displayName]"
               ]
             }
           }
@@ -420,7 +492,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1008.15138",
-              "templateHash": "16748936152100209044"
+              "templateHash": "11703135732979206801"
             }
           },
           "parameters": {
@@ -971,6 +1043,817 @@
                   }
                 }
               }
+            },
+            {
+              "type": "Microsoft.Resources/deployments",
+              "apiVersion": "2020-06-01",
+              "name": "monitoring_initiative",
+              "location": "[deployment().location]",
+              "properties": {
+                "expressionEvaluationOptions": {
+                  "scope": "inner"
+                },
+                "mode": "Incremental",
+                "parameters": {
+                  "policySource": {
+                    "value": "[parameters('policySource')]"
+                  },
+                  "policyCategory": {
+                    "value": "[parameters('policyCategory')]"
+                  },
+                  "customPolicyIds": {
+                    "value": "[parameters('customPolicyIds')]"
+                  },
+                  "customPolicyNames": {
+                    "value": "[parameters('customPolicyNames')]"
+                  }
+                },
+                "template": {
+                  "$schema": "https://schema.management.azure.com/schemas/2019-08-01/managementGroupDeploymentTemplate.json#",
+                  "contentVersion": "1.0.0.0",
+                  "metadata": {
+                    "_generator": {
+                      "name": "bicep",
+                      "version": "0.4.1008.15138",
+                      "templateHash": "9770934925570793559"
+                    }
+                  },
+                  "parameters": {
+                    "policySource": {
+                      "type": "string",
+                      "defaultValue": "Bicep"
+                    },
+                    "policyCategory": {
+                      "type": "string",
+                      "defaultValue": "Custom"
+                    },
+                    "customPolicyIds": {
+                      "type": "array"
+                    },
+                    "customPolicyNames": {
+                      "type": "array"
+                    }
+                  },
+                  "functions": [],
+                  "resources": [
+                    {
+                      "type": "Microsoft.Authorization/policySetDefinitions",
+                      "apiVersion": "2020-09-01",
+                      "name": "appGateway_monitoring_initiative",
+                      "properties": {
+                        "policyType": "Custom",
+                        "displayName": "Application Gateway Monitoring Governance Initiative - MG Scope",
+                        "description": "[format('Application Gateway Monitoring Governance Initiative - MG Scope via {0}', parameters('policySource'))]",
+                        "metadata": {
+                          "category": "[parameters('policyCategory')]",
+                          "source": "[parameters('policySource')]",
+                          "version": "1.0.0"
+                        },
+                        "parameters": {
+                          "actionGroupName": {
+                            "type": "String",
+                            "metadata": {
+                              "description": "Name of the Action Group",
+                              "displayName": "actionGroupName"
+                            }
+                          },
+                          "actionGroupRG": {
+                            "type": "String",
+                            "metadata": {
+                              "description": "Resource Group containing the Action Group",
+                              "displayName": "actionGroupRG"
+                            }
+                          },
+                          "autoMitigate": {
+                            "type": "Boolean",
+                            "metadata": {
+                              "description": "Indicates whether the alert should be auto resolved or not",
+                              "displayName": "autoMitigate"
+                            },
+                            "defaultValue": true
+                          },
+                          "alertSensitivity": {
+                            "type": "String",
+                            "metadata": {
+                              "description": "The extent of deviation required to trigger an alert. This will affect how tight the threshold is to the metric series pattern.",
+                              "displayName": "alertSensitivity"
+                            },
+                            "allowedValues": [
+                              "High",
+                              "Medium",
+                              "Low"
+                            ],
+                            "defaultValue": "Medium"
+                          },
+                          "dimensions": {
+                            "type": "Object",
+                            "metadata": {
+                              "description": "List of dimension conditions. See https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-supported",
+                              "displayName": "dimensions"
+                            }
+                          },
+                          "minFailingPeriodsToAlert": {
+                            "type": "Integer",
+                            "metadata": {
+                              "description": "The number of violations to trigger an alert. Should be smaller or equal to numberOfEvaluationPeriods.",
+                              "displayName": "minFailingPeriodsToAlert"
+                            },
+                            "defaultValue": 1
+                          },
+                          "numberOfEvaluationPeriods": {
+                            "type": "Integer",
+                            "metadata": {
+                              "description": "The number of aggregated lookback points. The lookback time window is calculated based on the aggregation granularity (windowSize) and the selected number of aggregated points.",
+                              "displayName": "numberOfEvaluationPeriods"
+                            },
+                            "defaultValue": 2
+                          },
+                          "metricName": {
+                            "type": "String",
+                            "metadata": {
+                              "description": "Name of the metric",
+                              "displayName": "metricName"
+                            }
+                          },
+                          "operator": {
+                            "type": "String",
+                            "metadata": {
+                              "description": "The criteria operator",
+                              "displayName": "operator"
+                            },
+                            "allowedValues": [
+                              "Equals",
+                              "GreaterThan",
+                              "GreaterThanOrEqual",
+                              "LessThan",
+                              "LessThanOrEqual",
+                              "NotEquals"
+                            ]
+                          },
+                          "timeAggregation": {
+                            "type": "String",
+                            "metadata": {
+                              "description": "The criteria time aggregation types",
+                              "displayName": "timeAggregation"
+                            },
+                            "allowedValues": [
+                              "Average",
+                              "Count",
+                              "Maximum",
+                              "Minimum",
+                              "Total"
+                            ]
+                          },
+                          "description": {
+                            "type": "String",
+                            "metadata": {
+                              "description": "The description of the metric alert that will be included in the alert email",
+                              "displayName": "description"
+                            }
+                          },
+                          "evaluationFrequency": {
+                            "type": "String",
+                            "metadata": {
+                              "description": "How often the metric alert is evaluated represented in ISO 8601 duration format e.g. PT15M",
+                              "displayName": "evaluationFrequency"
+                            },
+                            "defaultValue": "PT15M"
+                          },
+                          "severity": {
+                            "type": "Integer",
+                            "metadata": {
+                              "description": "Alert severity",
+                              "displayName": "severity"
+                            },
+                            "allowedValues": [
+                              0,
+                              1,
+                              2,
+                              3,
+                              4
+                            ],
+                            "defaultValue": 3
+                          },
+                          "windowSize": {
+                            "type": "String",
+                            "metadata": {
+                              "description": "The period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold e.g. PT1H",
+                              "displayName": "windowSize"
+                            },
+                            "defaultValue": "PT1H"
+                          },
+                          "effect": {
+                            "type": "String",
+                            "metadata": {
+                              "displayName": "Effect",
+                              "description": "Enable or disable the execution of the policy"
+                            },
+                            "allowedValues": [
+                              "DeployIfNotExists",
+                              "Disabled"
+                            ],
+                            "defaultValue": "DeployIfNotExists"
+                          }
+                        },
+                        "policyDefinitions": [
+                          {
+                            "policyDefinitionId": "[parameters('customPolicyIds')[7]]",
+                            "policyDefinitionReferenceId": "[format('clientRtt-{0}', parameters('customPolicyNames')[7])]",
+                            "parameters": {
+                              "metricName": {
+                                "value": "[[parameters('metricName')]"
+                              },
+                              "operator": {
+                                "value": "[[parameters('operator')]"
+                              },
+                              "timeAggregation": {
+                                "value": "[[parameters('timeAggregation')]"
+                              },
+                              "dimensions": {
+                                "value": "[[parameters('dimensions')]"
+                              },
+                              "description": {
+                                "value": "[[parameters('description')]"
+                              },
+                              "actionGroupName": {
+                                "value": "[[parameters('actionGroupName')]"
+                              },
+                              "actionGroupRG": {
+                                "value": "[[parameters('actionGroupRG')]"
+                              },
+                              "autoMitigate": {
+                                "value": "[[parameters('autoMitigate')]"
+                              },
+                              "alertSensitivity": {
+                                "value": "[[parameters('alertSensitivity')]"
+                              },
+                              "minFailingPeriodsToAlert": {
+                                "value": "[[parameters('minFailingPeriodsToAlert')]"
+                              },
+                              "numberOfEvaluationPeriods": {
+                                "value": "[[parameters('numberOfEvaluationPeriods')]"
+                              },
+                              "evaluationFrequency": {
+                                "value": "[[parameters('evaluationFrequency')]"
+                              },
+                              "severity": {
+                                "value": "[[parameters('severity')]"
+                              },
+                              "windowSize": {
+                                "value": "[[parameters('windowSize')]"
+                              },
+                              "effect": {
+                                "value": "[[parameters('effect')]"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "outputs": {
+                    "customInitiativeId": {
+                      "type": "string",
+                      "value": "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policySetDefinitions', 'appGateway_monitoring_initiative')]"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "Microsoft.Resources/deployments",
+              "apiVersion": "2020-06-01",
+              "name": "kv_initiative",
+              "location": "[deployment().location]",
+              "properties": {
+                "expressionEvaluationOptions": {
+                  "scope": "inner"
+                },
+                "mode": "Incremental",
+                "parameters": {
+                  "policySource": {
+                    "value": "[parameters('policySource')]"
+                  },
+                  "policyCategory": {
+                    "value": "[parameters('policyCategory')]"
+                  },
+                  "customPolicyIds": {
+                    "value": "[parameters('customPolicyIds')]"
+                  },
+                  "customPolicyNames": {
+                    "value": "[parameters('customPolicyNames')]"
+                  }
+                },
+                "template": {
+                  "$schema": "https://schema.management.azure.com/schemas/2019-08-01/managementGroupDeploymentTemplate.json#",
+                  "contentVersion": "1.0.0.0",
+                  "metadata": {
+                    "_generator": {
+                      "name": "bicep",
+                      "version": "0.4.1008.15138",
+                      "templateHash": "4025402885616590425"
+                    }
+                  },
+                  "parameters": {
+                    "policySource": {
+                      "type": "string",
+                      "defaultValue": "Bicep"
+                    },
+                    "policyCategory": {
+                      "type": "string",
+                      "defaultValue": "Custom"
+                    },
+                    "customPolicyIds": {
+                      "type": "array"
+                    },
+                    "customPolicyNames": {
+                      "type": "array"
+                    }
+                  },
+                  "functions": [],
+                  "variables": {
+                    "builtinPolicies1": "[json('{\r\n  \"AzureKeyVaultManagedHSMShouldHavePurgeProtectionEnabled\": \"/providers/Microsoft.Authorization/policyDefinitions/c39ba22d-4428-4149-b981-70acb31fc383\",\r\n  \"CertificatesShouldBeIssuedByTheSpecifiedIntegratedCertificateAuthority\": \"/providers/Microsoft.Authorization/policyDefinitions/8e826246-c976-48f6-b03e-619bb92b3d82\",\r\n  \"CertificatesShouldBeIssuedByTheSpecifiedNonintegratedCertificateAuthority\": \"/providers/Microsoft.Authorization/policyDefinitions/a22f4a40-01d3-4c7d-8071-da157eeff341\",\r\n  \"CertificatesShouldHaveTheSpecifiedLifetimeActionTriggers\": \"/providers/Microsoft.Authorization/policyDefinitions/12ef42cb-9903-4e39-9c26-422d29570417\",\r\n  \"CertificatesShouldUseAllowedKeyTypes\": \"/providers/Microsoft.Authorization/policyDefinitions/1151cede-290b-4ba0-8b38-0ad145ac888f\",\r\n  \"CertificatesUsingEllipticCurveCryptographyShouldHaveAllowedCurveNames\": \"/providers/Microsoft.Authorization/policyDefinitions/bd78111f-4953-4367-9fd5-7e08808b54bf\",\r\n  \"CertificatesUsingRSACryptographyShouldHaveTheSpecifiedMinimumKeySize\": \"/providers/Microsoft.Authorization/policyDefinitions/cee51871-e572-4576-855c-047c820360f0\",\r\n  \"DeployConfigureDiagnosticSettingsForAzureKeyVaultToLogAnalyticsWorkspace\": \"/providers/Microsoft.Authorization/policyDefinitions/951af2fa-529b-416e-ab6e-066fd85ac459\",\r\n  \"DeployConfigureDiagnosticSettingsToAnEventHubToBeEnabledOnAzureKeyVaultManagedHSM\": \"/providers/Microsoft.Authorization/policyDefinitions/a6d2c800-5230-4a40-bff3-8268b4987d42\",\r\n  \"DeployDiagnosticSettingsForKeyVaultToEventHub\": \"/providers/Microsoft.Authorization/policyDefinitions/ed7c8c13-51e7-49d1-8a43-8490431a0da2\",\r\n  \"KeysShouldBeBackedByAHardwareSecurityModuleHSM\": \"/providers/Microsoft.Authorization/policyDefinitions/587c79fe-dd04-4a5e-9d0b-f89598c7261b\",\r\n  \"KeysShouldBeTheSpecifiedCryptographicTypeRSAOrEC\": \"/providers/Microsoft.Authorization/policyDefinitions/75c4f823-d65c-4f29-a733-01d0077fdbcb\",\r\n  \"KeysShouldHaveMoreThanTheSpecifiedNumberOfDaysBeforeExpiration\": \"/providers/Microsoft.Authorization/policyDefinitions/5ff38825-c5d8-47c5-b70e-069a21955146\",\r\n  \"KeysShouldHaveTheSpecifiedMaximumValidityPeriod\": \"/providers/Microsoft.Authorization/policyDefinitions/49a22571-d204-4c91-a7b6-09b1a586fbc9\",\r\n  \"KeysShouldNotBeActiveForLongerThanTheSpecifiedNumberOfDays\": \"/providers/Microsoft.Authorization/policyDefinitions/c26e4b24-cf98-4c67-b48b-5a25c4c69eb9\",\r\n  \"KeysUsingEllipticCurveCryptographyShouldHaveTheSpecifiedCurveNames\": \"/providers/Microsoft.Authorization/policyDefinitions/ff25f3c8-b739-4538-9d07-3d6d25cfb255\",\r\n  \"KeysUsingRSACryptographyShouldHaveASpecifiedMinimumKeySize\": \"/providers/Microsoft.Authorization/policyDefinitions/82067dbb-e53b-4e06-b631-546d197452d9\",\r\n  \"KeyVaultKeysShouldHaveAnExpirationDate\": \"/providers/Microsoft.Authorization/policyDefinitions/152b15f7-8e1f-4c1f-ab71-8c010ba5dbc0\",\r\n  \"KeyVaultSecretsShouldHaveAnExpirationDate\": \"/providers/Microsoft.Authorization/policyDefinitions/98728c90-32c7-4049-8429-847dc0f4fe37\",\r\n  \"KeyVaultsShouldHavePurgeProtectionEnabled\": \"/providers/Microsoft.Authorization/policyDefinitions/0b60c0b2-2dc2-4e1c-b5c9-abbed971de53\",\r\n  \"KeyVaultsShouldHaveSoftDeleteEnabled\": \"/providers/Microsoft.Authorization/policyDefinitions/1e66c121-a66a-4b1f-9b83-0fd99bf0fc2d\",\r\n  \"ResourceLogsInAzureKeyVaultManagedHSMShouldBeEnabled\": \"/providers/Microsoft.Authorization/policyDefinitions/a2a5b911-5617-447e-a49e-59dbe0e0434b\",\r\n  \"ResourceLogsInKeyVaultShouldBeEnabled\": \"/providers/Microsoft.Authorization/policyDefinitions/cf820ca0-f99e-4f3e-84fb-66e913812d21\",\r\n  \"SecretsShouldHaveContentTypeSet\": \"/providers/Microsoft.Authorization/policyDefinitions/75262d3e-ba4a-4f43-85f8-9f72c090e5e3\",\r\n  \"SecretsShouldHaveMoreThanTheSpecifiedNumberOfDaysBeforeExpiration\": \"/providers/Microsoft.Authorization/policyDefinitions/b0eb591a-5e70-4534-a8bf-04b9c489584a\",\r\n  \"SecretsShouldHaveTheSpecifiedMaximumValidityPeriod\": \"/providers/Microsoft.Authorization/policyDefinitions/342e8053-e12e-4c44-be01-c3c2f318400f\",\r\n  \"SecretsShouldNotBeActiveForLongerThanTheSpecifiedNumberOfDays\": \"/providers/Microsoft.Authorization/policyDefinitions/e8d99835-8a06-45ae-a8e0-87a91941ccfe\"\r\n}')]"
+                  },
+                  "resources": [
+                    {
+                      "type": "Microsoft.Authorization/policySetDefinitions",
+                      "apiVersion": "2020-09-01",
+                      "name": "keyvault_initiative",
+                      "properties": {
+                        "policyType": "Custom",
+                        "displayName": "KeyVault Governance Initiative - MG Scope",
+                        "description": "[format('KeyVault Governance Initiative MG Scope via {0}', parameters('policySource'))]",
+                        "metadata": {
+                          "category": "[parameters('policyCategory')]",
+                          "source": "[parameters('policySource')]",
+                          "version": "1.0.0"
+                        },
+                        "parameters": {
+                          "logAnalytics": {
+                            "type": "String",
+                            "metadata": {
+                              "displayName": "Log Analytics workspace",
+                              "description": "Specify the Log Analytics workspace the Key Vault should be connected to.",
+                              "strongType": "omsWorkspace",
+                              "assignPermissions": true
+                            }
+                          },
+                          "allowedCAs": {
+                            "type": "Array",
+                            "metadata": {
+                              "displayName": "Allowed Azure Key Vault Supported CAs",
+                              "description": "The list of allowed certificate authorities supported by Azure Key Vault."
+                            },
+                            "allowedValues": [
+                              "DigiCert",
+                              "GlobalSign"
+                            ],
+                            "defaultValue": [
+                              "DigiCert",
+                              "GlobalSign"
+                            ]
+                          },
+                          "allowedKeyTypesCertificates": {
+                            "type": "Array",
+                            "metadata": {
+                              "displayName": "Allowed key types",
+                              "description": "The list of allowed certificate key types."
+                            },
+                            "allowedValues": [
+                              "RSA",
+                              "RSA-HSM",
+                              "EC",
+                              "EC-HSM"
+                            ],
+                            "defaultValue": [
+                              "RSA",
+                              "RSA-HSM"
+                            ]
+                          },
+                          "allowedKeyTypes": {
+                            "type": "Array",
+                            "metadata": {
+                              "displayName": "Allowed key types",
+                              "description": "The list of allowed key types."
+                            },
+                            "allowedValues": [
+                              "RSA",
+                              "RSA-HSM",
+                              "EC",
+                              "EC-HSM"
+                            ],
+                            "defaultValue": [
+                              "RSA",
+                              "RSA-HSM",
+                              "EC",
+                              "EC-HSM"
+                            ]
+                          },
+                          "minimumDaysBeforeExpiration": {
+                            "type": "Integer",
+                            "metadata": {
+                              "displayName": "The minimum days before expiration",
+                              "description": "Specify the minimum number of days that a key or secret should remain usable prior to expiration."
+                            },
+                            "defaultValue": 30
+                          },
+                          "maximumValidityInDays": {
+                            "type": "Integer",
+                            "metadata": {
+                              "displayName": "The maximum validity period in days",
+                              "description": "Specify the maximum number of days a key or secret can be valid for. Using a key or secret with a long validity period is not recommended."
+                            },
+                            "defaultValue": 200
+                          },
+                          "minimumRSAKeySize": {
+                            "type": "Integer",
+                            "metadata": {
+                              "displayName": "Minimum RSA key size",
+                              "description": "The minimum key size for RSA keys."
+                            },
+                            "allowedValues": [
+                              2048,
+                              3072,
+                              4096
+                            ],
+                            "defaultValue": 2048
+                          },
+                          "effect": {
+                            "type": "String",
+                            "metadata": {
+                              "displayName": "Effect",
+                              "description": "Enable or disable the execution of the policy"
+                            },
+                            "allowedValues": [
+                              "Audit",
+                              "Deny",
+                              "Disabled"
+                            ],
+                            "defaultValue": "Audit"
+                          }
+                        },
+                        "policyDefinitions": [
+                          {
+                            "policyDefinitionId": "[parameters('customPolicyIds')[0]]",
+                            "policyDefinitionReferenceId": "[parameters('customPolicyNames')[0]]",
+                            "parameters": {
+                              "logAnalytics": {
+                                "value": "[[parameters('logAnalytics')]"
+                              }
+                            }
+                          },
+                          {
+                            "policyDefinitionId": "[variables('builtinPolicies1').KeyVaultsShouldHavePurgeProtectionEnabled]",
+                            "policyDefinitionReferenceId": "KeyVaultsShouldHavePurgeProtectionEnabled",
+                            "parameters": {
+                              "effect": {
+                                "value": "[[parameters('effect')]"
+                              }
+                            }
+                          },
+                          {
+                            "policyDefinitionId": "[variables('builtinPolicies1').KeyVaultsShouldHaveSoftDeleteEnabled]",
+                            "policyDefinitionReferenceId": "KeyVaultsShouldHaveSoftDeleteEnabled",
+                            "parameters": {
+                              "effect": {
+                                "value": "[[parameters('effect')]"
+                              }
+                            }
+                          },
+                          {
+                            "policyDefinitionId": "[variables('builtinPolicies1').CertificatesShouldBeIssuedByTheSpecifiedIntegratedCertificateAuthority]",
+                            "policyDefinitionReferenceId": "CertificatesShouldBeIssuedByTheSpecifiedIntegratedCertificateAuthority",
+                            "parameters": {
+                              "allowedCAs": {
+                                "value": "[[parameters('allowedCAs')]"
+                              },
+                              "effect": {
+                                "value": "[[parameters('effect')]"
+                              }
+                            }
+                          },
+                          {
+                            "policyDefinitionId": "[variables('builtinPolicies1').CertificatesShouldUseAllowedKeyTypes]",
+                            "policyDefinitionReferenceId": "CertificatesShouldUseAllowedKeyTypes",
+                            "parameters": {
+                              "allowedKeyTypes": {
+                                "value": "[[parameters('allowedKeyTypesCertificates')]"
+                              },
+                              "effect": {
+                                "value": "[[parameters('effect')]"
+                              }
+                            }
+                          },
+                          {
+                            "policyDefinitionId": "[variables('builtinPolicies1').CertificatesUsingRSACryptographyShouldHaveTheSpecifiedMinimumKeySize]",
+                            "policyDefinitionReferenceId": "CertificatesUsingRSACryptographyShouldHaveTheSpecifiedMinimumKeySize",
+                            "parameters": {
+                              "minimumRSAKeySize": {
+                                "value": "[[parameters('minimumRSAKeySize')]"
+                              },
+                              "effect": {
+                                "value": "[[parameters('effect')]"
+                              }
+                            }
+                          },
+                          {
+                            "policyDefinitionId": "[variables('builtinPolicies1').KeysShouldBeTheSpecifiedCryptographicTypeRSAOrEC]",
+                            "policyDefinitionReferenceId": "KeysShouldBeTheSpecifiedCryptographicTypeRSAOrEC",
+                            "parameters": {
+                              "allowedKeyTypes": {
+                                "value": "[[parameters('allowedKeyTypes')]"
+                              },
+                              "effect": {
+                                "value": "[[parameters('effect')]"
+                              }
+                            }
+                          },
+                          {
+                            "policyDefinitionId": "[variables('builtinPolicies1').KeyVaultKeysShouldHaveAnExpirationDate]",
+                            "policyDefinitionReferenceId": "KeyVaultKeysShouldHaveAnExpirationDate",
+                            "parameters": {
+                              "effect": {
+                                "value": "[[parameters('effect')]"
+                              }
+                            }
+                          },
+                          {
+                            "policyDefinitionId": "[variables('builtinPolicies1').KeysShouldHaveMoreThanTheSpecifiedNumberOfDaysBeforeExpiration]",
+                            "policyDefinitionReferenceId": "KeysShouldHaveMoreThanTheSpecifiedNumberOfDaysBeforeExpiration",
+                            "parameters": {
+                              "minimumDaysBeforeExpiration": {
+                                "value": "[[parameters('minimumDaysBeforeExpiration')]"
+                              },
+                              "effect": {
+                                "value": "[[parameters('effect')]"
+                              }
+                            }
+                          },
+                          {
+                            "policyDefinitionId": "[variables('builtinPolicies1').KeysShouldHaveTheSpecifiedMaximumValidityPeriod]",
+                            "policyDefinitionReferenceId": "KeysShouldHaveTheSpecifiedMaximumValidityPeriod",
+                            "parameters": {
+                              "maximumValidityInDays": {
+                                "value": "[[parameters('maximumValidityInDays')]"
+                              },
+                              "effect": {
+                                "value": "[[parameters('effect')]"
+                              }
+                            }
+                          },
+                          {
+                            "policyDefinitionId": "[variables('builtinPolicies1').KeysShouldNotBeActiveForLongerThanTheSpecifiedNumberOfDays]",
+                            "policyDefinitionReferenceId": "KeysShouldNotBeActiveForLongerThanTheSpecifiedNumberOfDays",
+                            "parameters": {
+                              "maximumValidityInDays": {
+                                "value": "[[parameters('maximumValidityInDays')]"
+                              },
+                              "effect": {
+                                "value": "[[parameters('effect')]"
+                              }
+                            }
+                          },
+                          {
+                            "policyDefinitionId": "[variables('builtinPolicies1').KeysUsingRSACryptographyShouldHaveASpecifiedMinimumKeySize]",
+                            "policyDefinitionReferenceId": "KeysUsingRSACryptographyShouldHaveASpecifiedMinimumKeySize",
+                            "parameters": {
+                              "minimumRSAKeySize": {
+                                "value": "[[parameters('minimumRSAKeySize')]"
+                              },
+                              "effect": {
+                                "value": "[[parameters('effect')]"
+                              }
+                            }
+                          },
+                          {
+                            "policyDefinitionId": "[variables('builtinPolicies1').SecretsShouldHaveContentTypeSet]",
+                            "policyDefinitionReferenceId": "SecretsShouldHaveContentTypeSet",
+                            "parameters": {
+                              "effect": {
+                                "value": "[[parameters('effect')]"
+                              }
+                            }
+                          },
+                          {
+                            "policyDefinitionId": "[variables('builtinPolicies1').KeyVaultSecretsShouldHaveAnExpirationDate]",
+                            "policyDefinitionReferenceId": "KeyVaultSecretsShouldHaveAnExpirationDate",
+                            "parameters": {
+                              "effect": {
+                                "value": "[[parameters('effect')]"
+                              }
+                            }
+                          },
+                          {
+                            "policyDefinitionId": "[variables('builtinPolicies1').SecretsShouldHaveMoreThanTheSpecifiedNumberOfDaysBeforeExpiration]",
+                            "policyDefinitionReferenceId": "SecretsShouldHaveMoreThanTheSpecifiedNumberOfDaysBeforeExpiration",
+                            "parameters": {
+                              "minimumDaysBeforeExpiration": {
+                                "value": "[[parameters('minimumDaysBeforeExpiration')]"
+                              },
+                              "effect": {
+                                "value": "[[parameters('effect')]"
+                              }
+                            }
+                          },
+                          {
+                            "policyDefinitionId": "[variables('builtinPolicies1').SecretsShouldHaveTheSpecifiedMaximumValidityPeriod]",
+                            "policyDefinitionReferenceId": "SecretsShouldHaveTheSpecifiedMaximumValidityPeriod",
+                            "parameters": {
+                              "maximumValidityInDays": {
+                                "value": "[[parameters('maximumValidityInDays')]"
+                              },
+                              "effect": {
+                                "value": "[[parameters('effect')]"
+                              }
+                            }
+                          },
+                          {
+                            "policyDefinitionId": "[variables('builtinPolicies1').SecretsShouldNotBeActiveForLongerThanTheSpecifiedNumberOfDays]",
+                            "policyDefinitionReferenceId": "SecretsShouldNotBeActiveForLongerThanTheSpecifiedNumberOfDays",
+                            "parameters": {
+                              "maximumValidityInDays": {
+                                "value": "[[parameters('maximumValidityInDays')]"
+                              },
+                              "effect": {
+                                "value": "[[parameters('effect')]"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "outputs": {
+                    "customInitiativeId": {
+                      "type": "string",
+                      "value": "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policySetDefinitions', 'keyvault_initiative')]"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "Microsoft.Resources/deployments",
+              "apiVersion": "2020-06-01",
+              "name": "dp_initiative",
+              "location": "[deployment().location]",
+              "properties": {
+                "expressionEvaluationOptions": {
+                  "scope": "inner"
+                },
+                "mode": "Incremental",
+                "parameters": {
+                  "policySource": {
+                    "value": "[parameters('policySource')]"
+                  },
+                  "policyCategory": {
+                    "value": "[parameters('policyCategory')]"
+                  }
+                },
+                "template": {
+                  "$schema": "https://schema.management.azure.com/schemas/2019-08-01/managementGroupDeploymentTemplate.json#",
+                  "contentVersion": "1.0.0.0",
+                  "metadata": {
+                    "_generator": {
+                      "name": "bicep",
+                      "version": "0.4.1008.15138",
+                      "templateHash": "7680065884635525777"
+                    }
+                  },
+                  "parameters": {
+                    "policySource": {
+                      "type": "string",
+                      "defaultValue": "Bicep"
+                    },
+                    "policyCategory": {
+                      "type": "string",
+                      "defaultValue": "Custom"
+                    }
+                  },
+                  "functions": [],
+                  "variables": {
+                    "builtinPolicies1": "[json('{\r\n  \"AzureBackupShouldBeEnabledForVirtualMachines\": \"/providers/Microsoft.Authorization/policyDefinitions/013e242c-8828-4970-87b3-ab247555486d\",\r\n  \"ConfigureBackupOnVirtualMachinesWithAGivenTagToANewRecoveryServicesVaultWithADefaultPolicy\": \"/providers/Microsoft.Authorization/policyDefinitions/83644c87-93dd-49fe-bf9f-6aff8fd0834e\",\r\n  \"ConfigureBackupOnVirtualMachinesWithAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation\": \"/providers/Microsoft.Authorization/policyDefinitions/345fa903-145c-4fe1-8bcd-93ec2adccde8\",\r\n  \"ConfigureBackupOnVirtualMachinesWithoutAGivenTagToANewRecoveryServicesVaultWithADefaultPolicy\": \"/providers/Microsoft.Authorization/policyDefinitions/98d0b9f8-fd90-49c9-88e2-d3baf3b0dd86\",\r\n  \"ConfigureBackupOnVirtualMachinesWithoutAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation\": \"/providers/Microsoft.Authorization/policyDefinitions/09ce66bc-1220-4153-8104-e3f51c936913\",\r\n  \"DeployDiagnosticSettingsForRecoveryServicesVaultToLogAnalyticsWorkspaceForResourceSpecificCategories\": \"/providers/Microsoft.Authorization/policyDefinitions/c717fb0c-d118-4c43-ab3d-ece30ac81fb3\"\r\n}')]",
+                    "builtinPolicies2": "[json('{\r\n  \"AllowedVirtualMachineSizeSkus\": \"/providers/Microsoft.Authorization/policyDefinitions/cccc23c7-8427-4f53-ad12-b6a63eb452b3\",\r\n  \"AuditVirtualMachinesWithoutDisasterRecoveryConfigured\": \"/providers/Microsoft.Authorization/policyDefinitions/0015ea4d-51ff-4ce3-8d8c-f3f8f0179a56\",\r\n  \"AuditVmsThatDoNotUseManagedDisks\": \"/providers/Microsoft.Authorization/policyDefinitions/06a78e20-9358-41c9-923c-fb736d382a4d\",\r\n  \"ConfigureDisasterRecoveryOnVirtualMachinesByEnablingReplication\": \"/providers/Microsoft.Authorization/policyDefinitions/ac34a73f-9fa5-4067-9247-a3ecae514468\",\r\n  \"ConfigureDiskAccessResourcesToUsePrivateDNSZones\": \"/providers/Microsoft.Authorization/policyDefinitions/bc05b96c-0b36-4ca9-82f0-5c53f96ce05a\",\r\n  \"ConfigureDiskAccessResourcesWithPrivateEndpoints\": \"/providers/Microsoft.Authorization/policyDefinitions/582bd7a6-a5f6-4dc6-b9dc-9cb81fe0d4c5\",\r\n  \"ConfigureManagedDisksToDisablePublicNetworkAccess\": \"/providers/Microsoft.Authorization/policyDefinitions/8426280e-b5be-43d9-979e-653d12a08638\",\r\n  \"DeployDefaultMicrosoftIaasantimalwareExtensionForWindowsServer\": \"/providers/Microsoft.Authorization/policyDefinitions/2835b622-407b-4114-9198-6f7064cbe0dc\",\r\n  \"DiskAccessResourcesShouldUsePrivateLink\": \"/providers/Microsoft.Authorization/policyDefinitions/f39f5f49-4abf-44de-8c70-0756997bfb51\",\r\n  \"ManagedDisksShouldBeDoubleEncryptedWithBothPlatformmanagedAndCustomermanagedKeys\": \"/providers/Microsoft.Authorization/policyDefinitions/ca91455f-eace-4f96-be59-e6e2c35b4816\",\r\n  \"ManagedDisksShouldDisablePublicNetworkAccess\": \"/providers/Microsoft.Authorization/policyDefinitions/8405fdab-1faf-48aa-b702-999c9c172094\",\r\n  \"ManagedDisksShouldUseASpecificSetOfDiskEncryptionSetsForTheCustomermanagedKeyEncryption\": \"/providers/Microsoft.Authorization/policyDefinitions/d461a302-a187-421a-89ac-84acdb4edc04\",\r\n  \"MicrosoftAntimalwareForAzureShouldBeConfiguredToAutomaticallyUpdateProtectionSignatures\": \"/providers/Microsoft.Authorization/policyDefinitions/c43e4a30-77cb-48ab-a4dd-93f175c63b57\",\r\n  \"MicrosoftIaasantimalwareExtensionShouldBeDeployedOnWindowsServers\": \"/providers/Microsoft.Authorization/policyDefinitions/9b597639-28e4-48eb-b506-56b05d366257\",\r\n  \"OnlyApprovedVMExtensionsShouldBeInstalled\": \"/providers/Microsoft.Authorization/policyDefinitions/c0e996f8-39cf-4af9-9f45-83fbde810432\",\r\n  \"OSAndDataDisksShouldBeEncryptedWithACustomermanagedKey\": \"/providers/Microsoft.Authorization/policyDefinitions/702dd420-7fcc-42c5-afe8-4026edd20fe0\",\r\n  \"RequireAutomaticOSImagePatchingOnVirtualMachineScaleSets\": \"/providers/Microsoft.Authorization/policyDefinitions/465f0161-0087-490a-9ad9-ad6217f4f43a\",\r\n  \"ResourceLogsInVirtualMachineScaleSetsShouldBeEnabled\": \"/providers/Microsoft.Authorization/policyDefinitions/7c1b1214-f927-48bf-8882-84f0af6588b1\",\r\n  \"UnattachedDisksShouldBeEncrypted\": \"/providers/Microsoft.Authorization/policyDefinitions/2c89a2e5-7285-40fe-afe0-ae8654b92fb2\",\r\n  \"VirtualMachinesAndVirtualMachineScaleSetsShouldHaveEncryptionAtHostEnabled\": \"/providers/Microsoft.Authorization/policyDefinitions/fc4d8e41-e223-45ea-9bf5-eada37891d87\",\r\n  \"VirtualMachinesShouldBeMigratedToNewAzureResourceManagerResources\": \"/providers/Microsoft.Authorization/policyDefinitions/1d84d5fb-01f6-4d12-ba4f-4a26081d403d\"\r\n}\r\n')]"
+                  },
+                  "resources": [
+                    {
+                      "type": "Microsoft.Authorization/policySetDefinitions",
+                      "apiVersion": "2020-09-01",
+                      "name": "data_protection_initiative",
+                      "properties": {
+                        "policyType": "Custom",
+                        "displayName": "Data Protection Governance Initiative",
+                        "description": "[format('Data Protection Governance Initiative via {0}', parameters('policySource'))]",
+                        "metadata": {
+                          "category": "[parameters('policyCategory')]",
+                          "source": "[parameters('policySource')]",
+                          "version": "1.0.0"
+                        },
+                        "parameters": {
+                          "vaultLocation": {
+                            "type": "String",
+                            "metadata": {
+                              "displayName": "Location (Specify the location of the VMs that you want to protect)",
+                              "description": "Specify the location of the VMs that you want to protect. VMs should be backed up to a vault in the same location. For example - CanadaCentral",
+                              "strongType": "location"
+                            }
+                          },
+                          "inclusionTagName": {
+                            "type": "String",
+                            "metadata": {
+                              "displayName": "Inclusion Tag Name",
+                              "description": "Name of the tag to use for including VMs in the scope of this policy. This should be used along with the Inclusion Tag Value parameter. Learn more at https://aka.ms/AppCentricVMBackupPolicy"
+                            },
+                            "defaultValue": ""
+                          },
+                          "inclusionTagValue": {
+                            "type": "Array",
+                            "metadata": {
+                              "displayName": "Inclusion Tag Values",
+                              "description": "Value of the tag to use for including VMs in the scope of this policy (in case of multiple values use a comma-separated list). This should be used along with the Inclusion Tag Name parameter. Learn more at https://aka.ms/AppCentricVMBackupPolicy."
+                            }
+                          },
+                          "backupPolicyId": {
+                            "type": "String",
+                            "metadata": {
+                              "displayName": "Backup Policy (of type Azure VM from a vault in the location chosen above)",
+                              "description": "Specify the ID of the Azure Backup policy to configure backup of the virtual machines. The selected Azure Backup policy should be of type Azure Virtual Machine. This policy needs to be in a vault that is present in the location chosen above. For example - /subscriptions/<SubscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.RecoveryServices/vaults/<VaultName>/backupPolicies/<BackupPolicyName>",
+                              "strongType": "Microsoft.RecoveryServices/vaults/backupPolicies"
+                            }
+                          },
+                          "effect": {
+                            "type": "String",
+                            "metadata": {
+                              "displayName": "Effect",
+                              "description": "Enable or disable the execution of the policy"
+                            },
+                            "allowedValues": [
+                              "AuditIfNotExists",
+                              "Disabled"
+                            ],
+                            "defaultValue": "AuditIfNotExists"
+                          },
+                          "effect2": {
+                            "type": "String",
+                            "metadata": {
+                              "displayName": "Effect",
+                              "description": "Enable or disable the execution of the policy"
+                            },
+                            "allowedValues": [
+                              "DeployIfNotExists",
+                              "AuditIfNotExists",
+                              "Disabled"
+                            ],
+                            "defaultValue": "DeployIfNotExists"
+                          }
+                        },
+                        "policyDefinitions": [
+                          {
+                            "policyDefinitionId": "[variables('builtinPolicies1').AzureBackupShouldBeEnabledForVirtualMachines]",
+                            "policyDefinitionReferenceId": "AzureBackupShouldBeEnabledForVirtualMachines",
+                            "parameters": {
+                              "effect": {
+                                "value": "[[parameters('effect')]"
+                              }
+                            }
+                          },
+                          {
+                            "policyDefinitionId": "[variables('builtinPolicies1').ConfigureBackupOnVirtualMachinesWithAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation]",
+                            "policyDefinitionReferenceId": "ConfigureBackupOnVirtualMachinesWithAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation",
+                            "parameters": {
+                              "vaultLocation": {
+                                "value": "[[parameters('vaultLocation')]"
+                              },
+                              "inclusionTagName": {
+                                "value": "[[parameters('inclusionTagName')]"
+                              },
+                              "inclusionTagValue": {
+                                "value": "[[parameters('inclusionTagValue')]"
+                              },
+                              "backupPolicyId": {
+                                "value": "[[parameters('backupPolicyId')]"
+                              },
+                              "effect": {
+                                "value": "[[parameters('effect2')]"
+                              }
+                            }
+                          },
+                          {
+                            "policyDefinitionId": "[variables('builtinPolicies2').AuditVirtualMachinesWithoutDisasterRecoveryConfigured]",
+                            "policyDefinitionReferenceId": "Compute_AuditVirtualMachinesWithoutDisasterRecoveryConfigured"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "outputs": {
+                    "customInitiativeId": {
+                      "type": "string",
+                      "value": "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policySetDefinitions', 'data_protection_initiative')]"
+                    }
+                  }
+                }
+              }
             }
           ],
           "outputs": {
@@ -978,7 +1861,10 @@
               "type": "array",
               "value": [
                 "[reference(extensionResourceId(managementGroup().id, 'Microsoft.Resources/deployments', 'iam_initiative'), '2020-06-01').outputs.customInitiativeId.value]",
-                "[reference(extensionResourceId(managementGroup().id, 'Microsoft.Resources/deployments', 'tagging_initiative'), '2020-06-01').outputs.customInitiativeId.value]"
+                "[reference(extensionResourceId(managementGroup().id, 'Microsoft.Resources/deployments', 'tagging_initiative'), '2020-06-01').outputs.customInitiativeId.value]",
+                "[reference(extensionResourceId(managementGroup().id, 'Microsoft.Resources/deployments', 'monitoring_initiative'), '2020-06-01').outputs.customInitiativeId.value]",
+                "[reference(extensionResourceId(managementGroup().id, 'Microsoft.Resources/deployments', 'kv_initiative'), '2020-06-01').outputs.customInitiativeId.value]",
+                "[reference(extensionResourceId(managementGroup().id, 'Microsoft.Resources/deployments', 'dp_initiative'), '2020-06-01').outputs.customInitiativeId.value]"
               ]
             }
           }
@@ -1022,6 +1908,15 @@
           },
           "effect": {
             "value": "[parameters('effect')]"
+          },
+          "appGatewayAlerts": {
+            "value": "[parameters('appGatewayAlerts')]"
+          },
+          "logAnalytics": {
+            "value": "[parameters('logAnalytics')]"
+          },
+          "vmBackup": {
+            "value": "[parameters('vmBackup')]"
           }
         },
         "template": {
@@ -1031,7 +1926,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1008.15138",
-              "templateHash": "4898497104311218936"
+              "templateHash": "18122507162919410059"
             }
           },
           "parameters": {
@@ -1059,10 +1954,38 @@
             },
             "effect": {
               "type": "string"
+            },
+            "appGatewayAlerts": {
+              "type": "object"
+            },
+            "logAnalytics": {
+              "type": "string"
+            },
+            "vmBackup": {
+              "type": "object"
             }
           },
           "functions": [],
           "resources": [
+            {
+              "type": "Microsoft.Authorization/policyAssignments",
+              "apiVersion": "2020-09-01",
+              "name": "iam_assignment",
+              "location": "[parameters('assignmentIdentityLocation')]",
+              "identity": {
+                "type": "SystemAssigned"
+              },
+              "properties": {
+                "displayName": "IAM Governance Assignment - MG Scope",
+                "description": "[format('Identity & Access Management Governance Assignment MG Scope via {0}', parameters('policySource'))]",
+                "enforcementMode": "[parameters('assignmentEnforcementMode')]",
+                "metadata": {
+                  "source": "[parameters('policySource')]",
+                  "version": "1.0.0"
+                },
+                "policyDefinitionId": "[parameters('customInitiativeIds')[0]]"
+              }
+            },
             {
               "type": "Microsoft.Authorization/policyAssignments",
               "apiVersion": "2020-09-01",
@@ -1105,20 +2028,106 @@
             {
               "type": "Microsoft.Authorization/policyAssignments",
               "apiVersion": "2020-09-01",
-              "name": "iam_assignment",
+              "name": "monitoring_assignment",
               "location": "[parameters('assignmentIdentityLocation')]",
               "identity": {
                 "type": "SystemAssigned"
               },
               "properties": {
-                "displayName": "IAM Governance Assignment - MG Scope",
-                "description": "[format('Identity & Access Management Governance Assignment MG Scope via {0}', parameters('policySource'))]",
+                "displayName": "Application Gateway Monitoring Governance Assignment - MG Scope",
+                "description": "[format('Application Gateway Monitoring Governance Assignment MG Scope via {0}', parameters('policySource'))]",
                 "enforcementMode": "[parameters('assignmentEnforcementMode')]",
                 "metadata": {
                   "source": "[parameters('policySource')]",
                   "version": "1.0.0"
                 },
-                "policyDefinitionId": "[parameters('customInitiativeIds')[0]]"
+                "policyDefinitionId": "[parameters('customInitiativeIds')[2]]",
+                "parameters": {
+                  "metricName": {
+                    "value": "[parameters('appGatewayAlerts').clientRtt.metricName]"
+                  },
+                  "operator": {
+                    "value": "[parameters('appGatewayAlerts').clientRtt.operator]"
+                  },
+                  "timeAggregation": {
+                    "value": "[parameters('appGatewayAlerts').clientRtt.timeAggregation]"
+                  },
+                  "dimensions": {
+                    "value": "[parameters('appGatewayAlerts').clientRtt.dimensions]"
+                  },
+                  "description": {
+                    "value": "[parameters('appGatewayAlerts').clientRtt.description]"
+                  },
+                  "actionGroupName": {
+                    "value": "[parameters('appGatewayAlerts').clientRtt.actionGroupName]"
+                  },
+                  "actionGroupRG": {
+                    "value": "[parameters('appGatewayAlerts').clientRtt.actionGroupRG]"
+                  }
+                }
+              }
+            },
+            {
+              "type": "Microsoft.Authorization/policyAssignments",
+              "apiVersion": "2020-09-01",
+              "name": "kv_assignment",
+              "location": "[parameters('assignmentIdentityLocation')]",
+              "identity": {
+                "type": "SystemAssigned"
+              },
+              "properties": {
+                "displayName": "KeyVault Governance Assignment - MG Scope",
+                "description": "[format('KeyVault Governance Assignment MG Scope via {0}', parameters('policySource'))]",
+                "enforcementMode": "[parameters('assignmentEnforcementMode')]",
+                "metadata": {
+                  "source": "[parameters('policySource')]",
+                  "version": "1.0.0"
+                },
+                "policyDefinitionId": "[parameters('customInitiativeIds')[3]]",
+                "parameters": {
+                  "logAnalytics": {
+                    "value": "[parameters('logAnalytics')]"
+                  },
+                  "effect": {
+                    "value": "Audit"
+                  }
+                }
+              }
+            },
+            {
+              "type": "Microsoft.Authorization/policyAssignments",
+              "apiVersion": "2020-09-01",
+              "name": "dp_assignment",
+              "location": "[parameters('assignmentIdentityLocation')]",
+              "identity": {
+                "type": "SystemAssigned"
+              },
+              "properties": {
+                "displayName": "Data Protection Governance Assignment - MG Scope",
+                "description": "[format('Data Protection Governance Assignment MG Scope via {0}', parameters('policySource'))]",
+                "enforcementMode": "[parameters('assignmentEnforcementMode')]",
+                "metadata": {
+                  "source": "[parameters('policySource')]",
+                  "version": "1.0.0"
+                },
+                "policyDefinitionId": "[parameters('customInitiativeIds')[4]]",
+                "parameters": {
+                  "vaultLocation": {
+                    "value": "[parameters('vmBackup').ConfigureBackupOnVirtualMachinesWithAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation.vaultLocation]"
+                  },
+                  "inclusionTagName": {
+                    "value": "[parameters('vmBackup').ConfigureBackupOnVirtualMachinesWithAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation.inclusionTagName]"
+                  },
+                  "inclusionTagValue": {
+                    "value": "[parameters('vmBackup').ConfigureBackupOnVirtualMachinesWithAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation.inclusionTagValue]"
+                  },
+                  "backupPolicyId": {
+                    "value": "[parameters('vmBackup').ConfigureBackupOnVirtualMachinesWithAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation.backupPolicyId]"
+                  },
+                  "effect2": {
+                    "value": "[parameters('vmBackup').ConfigureBackupOnVirtualMachinesWithAGivenTagToAnExistingRecoveryServicesVaultInTheSameLocation.effect]"
+                  }
+                }
               }
             },
             {
@@ -1133,20 +2142,51 @@
               "dependsOn": [
                 "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyAssignments', 'tagging_assignment')]"
               ]
+            },
+            {
+              "type": "Microsoft.Authorization/roleAssignments",
+              "apiVersion": "2020-04-01-preview",
+              "name": "[guid('monitoring_assignment', 'Microsoft.Authorization/policyAssignments')]",
+              "properties": {
+                "principalId": "[reference(extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyAssignments', 'monitoring_assignment'), '2020-09-01', 'full').identity.principalId]",
+                "principalType": "ServicePrincipal",
+                "roleDefinitionId": "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+              },
+              "dependsOn": [
+                "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyAssignments', 'monitoring_assignment')]"
+              ]
+            },
+            {
+              "type": "Microsoft.Authorization/roleAssignments",
+              "apiVersion": "2020-04-01-preview",
+              "name": "[guid('dp_assignment', 'Microsoft.Authorization/policyAssignments')]",
+              "properties": {
+                "principalId": "[reference(extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyAssignments', 'dp_assignment'), '2020-09-01', 'full').identity.principalId]",
+                "principalType": "ServicePrincipal",
+                "roleDefinitionId": "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+              },
+              "dependsOn": [
+                "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyAssignments', 'dp_assignment')]"
+              ]
             }
           ],
           "outputs": {
             "policyAssignmentIds": {
               "type": "array",
               "value": [
+                "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyAssignments', 'iam_assignment')]",
                 "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyAssignments', 'tagging_assignment')]",
-                "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyAssignments', 'iam_assignment')]"
+                "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyAssignments', 'monitoring_assignment')]",
+                "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyAssignments', 'kv_assignment')]",
+                "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/policyAssignments', 'dp_assignment')]"
               ]
             },
             "roleAssignmentIds": {
               "type": "array",
               "value": [
-                "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/roleAssignments', guid('tagging_assignment', 'Microsoft.Authorization/policyAssignments'))]"
+                "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/roleAssignments', guid('tagging_assignment', 'Microsoft.Authorization/policyAssignments'))]",
+                "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/roleAssignments', guid('monitoring_assignment', 'Microsoft.Authorization/policyAssignments'))]",
+                "[extensionResourceId(managementGroup().id, 'Microsoft.Authorization/roleAssignments', guid('dp_assignment', 'Microsoft.Authorization/policyAssignments'))]"
               ]
             }
           }
