@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1008.15138",
-      "templateHash": "3020899382841877720"
+      "templateHash": "11738881725704378974"
     }
   },
   "parameters": {
@@ -486,7 +486,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1008.15138",
-              "templateHash": "17266656600190455608"
+              "templateHash": "14869385204466193812"
             }
           },
           "parameters": {
@@ -1640,7 +1640,7 @@
                     "_generator": {
                       "name": "bicep",
                       "version": "0.4.1008.15138",
-                      "templateHash": "9027110806558525976"
+                      "templateHash": "6592265429853062109"
                     }
                   },
                   "parameters": {
@@ -1711,11 +1711,10 @@
                               "description": "Enable or disable the execution of the policy"
                             },
                             "allowedValues": [
-                              "Audit",
-                              "Modify",
+                              "AuditIfNotExists",
                               "Disabled"
                             ],
-                            "defaultValue": "Modify"
+                            "defaultValue": "AuditIfNotExists"
                           },
                           "effect2": {
                             "type": "String",

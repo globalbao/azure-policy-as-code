@@ -59,11 +59,10 @@ resource data_protection_initiative 'Microsoft.Authorization/policySetDefinition
           description: 'Enable or disable the execution of the policy'
         }
         allowedValues: [
-          'Audit'
-          'Modify'
+          'AuditIfNotExists'
           'Disabled'
         ]
-        defaultValue: 'Modify'
+        defaultValue: 'AuditIfNotExists'
       }
       effect2: {
         type: 'String'
