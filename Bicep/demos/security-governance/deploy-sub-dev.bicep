@@ -1,5 +1,7 @@
+// Set Bicep deployment scope
 targetScope = 'subscription'
 
+// Create a policy assignment for Azure Security Benchmark initiative
 resource AzSecBenchmarkAssign 'Microsoft.Authorization/policyAssignments@2021-06-01' = {
   name: 'AzSecBenchmark'
   location: 'AustraliaEast'
@@ -16,6 +18,7 @@ resource AzSecBenchmarkAssign 'Microsoft.Authorization/policyAssignments@2021-06
   }
 }
 
+// Create a policy assignment for Security Governance Demo initiative
 resource SecGovDemoAssign 'Microsoft.Authorization/policyAssignments@2021-06-01' = {
   name: 'SecGovDemoAssign'
   location: 'AustraliaEast'
@@ -35,6 +38,7 @@ resource SecGovDemoAssign 'Microsoft.Authorization/policyAssignments@2021-06-01'
   }
 }
 
+// Create a policy initiative for Security Governance Demo containing built-in policies
 resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01' = {
   name: 'SecGovDemoDef'
   properties: {
@@ -75,10 +79,10 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
             value: 'australiaeast'
           }
           storageId: {
-            value: '/subscriptions/5bf747d8-aeef-42a9-9263-07379c144d5a/resourceGroups/SecurityGovernanceDemo-AUE/providers/Microsoft.Storage/storageAccounts/secgovdemoauedev'
+            value: '/subscriptions/5bf747d8-aeef-42a9-9263-07379c144d5a/resourceGroups/secgovdemoaue/providers/Microsoft.Storage/storageAccounts/secgovdemoauedev'
           }
           workspaceResourceId: {
-            value: '/subscriptions/5bf747d8-aeef-42a9-9263-07379c144d5a/resourceGroups/SecurityGovernanceDemo-AUE/providers/Microsoft.OperationalInsights/workspaces/SecurityGovernanceDemo-AUE'
+            value: '/subscriptions/5bf747d8-aeef-42a9-9263-07379c144d5a/resourceGroups/secgovdemoaue/providers/Microsoft.OperationalInsights/workspaces/secgovdemoaue'
           }
           workspaceRegion: {
             value: 'australiaeast'
@@ -102,10 +106,10 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
             value: 'australiasoutheast'
           }
           storageId: {
-            value: '/subscriptions/5bf747d8-aeef-42a9-9263-07379c144d5a/resourceGroups/SecurityGovernanceDemo-AUS/providers/Microsoft.Storage/storageAccounts/secgovdemoausdev'
+            value: '/subscriptions/5bf747d8-aeef-42a9-9263-07379c144d5a/resourceGroups/secgovdemoaus/providers/Microsoft.Storage/storageAccounts/secgovdemoausdev'
           }
           workspaceResourceId: {
-            value: '/subscriptions/5bf747d8-aeef-42a9-9263-07379c144d5a/resourceGroups/SecurityGovernanceDemo-AUS/providers/Microsoft.OperationalInsights/workspaces/SecurityGovernanceDemo-AUS'
+            value: '/subscriptions/5bf747d8-aeef-42a9-9263-07379c144d5a/resourceGroups/secgovdemoaus/providers/Microsoft.OperationalInsights/workspaces/secgovdemoaus'
           }
           workspaceRegion: {
             value: 'australiasoutheast'
@@ -170,7 +174,7 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionReferenceId: 'Public IP addresses should have resource logs enabled for Azure DDoS Protection Standard'
         parameters: {
           profileName: {
-            value: 'SecurityGovernanceDemo-AUE'
+            value: 'secgovdemo'
           }
           logAnalytics: {
             value: 'dbdc3853-90df-4cb4-8e5d-274cf783a0d6'
@@ -207,7 +211,7 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionReferenceId: 'Configure App Service slots to disable local authentication for SCM sites'
         parameters: {
           effect: {
-            value: 'Disabled'
+            value: 'DeployIfNotExists'
           }
         }
       }
@@ -216,7 +220,7 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionReferenceId: 'Configure App Service to disable local authentication for SCM sites'
         parameters: {
           effect: {
-            value: 'Disabled'
+            value: 'DeployIfNotExists'
           }
         }
       }
@@ -225,7 +229,7 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionReferenceId: 'Configure App Service slots to disable local authentication for FTP deployments'
         parameters: {
           effect: {
-            value: 'Disabled'
+            value: 'DeployIfNotExists'
           }
         }
       }
@@ -234,7 +238,7 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionReferenceId: 'Configure App Service to disable local authentication on FTP deployments'
         parameters: {
           effect: {
-            value: 'Disabled'
+            value: 'DeployIfNotExists'
           }
         }
       }
@@ -243,7 +247,7 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionReferenceId: 'Configure App Configuration stores to disable local authentication methods'
         parameters: {
           effect: {
-            value: 'Disabled'
+            value: 'Modify'
           }
         }
       }
@@ -252,7 +256,7 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionReferenceId: 'Configure Azure Automation account to disable local authentication'
         parameters: {
           effect: {
-            value: 'Disabled'
+            value: 'Modify'
           }
         }
       }
@@ -261,7 +265,7 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionReferenceId: 'Configure Batch accounts to disable local authentication'
         parameters: {
           effect: {
-            value: 'Disabled'
+            value: 'Modify'
           }
         }
       }
@@ -270,7 +274,7 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionReferenceId: 'Configure Cognitive Services accounts to disable local authentication methods'
         parameters: {
           effect: {
-            value: 'Disabled'
+            value: 'Modify'
           }
         }
       }
@@ -279,7 +283,7 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionReferenceId: 'Configure container registries to disable local authentication'
         parameters: {
           effect: {
-            value: 'Disabled'
+            value: 'Modify'
           }
         }
       }
@@ -288,7 +292,7 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionReferenceId: 'Configure Cosmos DB database accounts to disable local authentication'
         parameters: {
           effect: {
-            value: 'Disabled'
+            value: 'Modify'
           }
         }
       }
@@ -297,7 +301,7 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionReferenceId: 'Configure Azure Event Grid domains to disable local authentication'
         parameters: {
           effect: {
-            value: 'Disabled'
+            value: 'Modify'
           }
         }
       }
@@ -306,7 +310,7 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionReferenceId: 'Configure Azure Event Grid partner namespaces to disable local authentication'
         parameters: {
           effect: {
-            value: 'Disabled'
+            value: 'Modify'
           }
         }
       }
@@ -315,7 +319,7 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionReferenceId: 'Configure Azure Event Grid topics to disable local authentication'
         parameters: {
           effect: {
-            value: 'Disabled'
+            value: 'Modify'
           }
         }
       }
@@ -324,7 +328,7 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionReferenceId: 'Configure Azure Event Hub namespaces to disable local authentication'
         parameters: {
           effect: {
-            value: 'Disabled'
+            value: 'Modify'
           }
         }
       }
@@ -333,7 +337,7 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionReferenceId: 'Configure Azure IoT Hub to disable local authentication'
         parameters: {
           effect: {
-            value: 'Disabled'
+            value: 'Modify'
           }
         }
       }
@@ -342,7 +346,7 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionReferenceId: 'Configure Machine Learning computes to disable local authentication methods'
         parameters: {
           effect: {
-            value: 'Disabled'
+            value: 'Modify'
           }
         }
       }
@@ -351,7 +355,7 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionReferenceId: 'Configure Azure Cognitive Search services to disable local authentication'
         parameters: {
           effect: {
-            value: 'Disabled'
+            value: 'Modify'
           }
         }
       }
@@ -360,7 +364,7 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionReferenceId: 'Configure Azure Service Bus namespaces to disable local authentication'
         parameters: {
           effect: {
-            value: 'Disabled'
+            value: 'Modify'
           }
         }
       }
@@ -369,7 +373,7 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionReferenceId: 'Configure Azure SignalR Service to disable local authentication'
         parameters: {
           effect: {
-            value: 'Disabled'
+            value: 'Modify'
           }
         }
       }

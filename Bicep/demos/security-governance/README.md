@@ -1,8 +1,7 @@
 # Microsoft Reactor 2022 Event: Flexing Your Security Governance with Azure Policy As Code
 
 As seen on [YouTube: Flexing Your Security Governance with Azure Policy As Code](https://youtu.be/SuH_TBBsvLI)
-
-And related blog post: [jloudon.com/Flexing-your-Security-Governance-with-Azure-Policy-as-Code](https://jloudon.com/cloud/Flexing-your-Security-Governance-with-Azure-Policy-as-Code/)
+Related blog post: [jloudon.com/Flexing-your-Security-Governance-with-Azure-Policy-as-Code](https://jloudon.com/cloud/Flexing-your-Security-Governance-with-Azure-Policy-as-Code/)
 
 # Runsheet
 
@@ -101,6 +100,7 @@ az deployment group create --resource-group secgovdemoaue --name FA-AUE -f .\dep
 cd 'C:\Users\JesseLoudon\OneDrive\4_GitHub\GlobalBao\azure-policy-as-code\Bicep\demos\security-governance'
 az account set -s 5bf747d8-aeef-42a9-9263-07379c144d5a
 az deployment sub create -f ./deploy-sub-dev.bicep -l australiaeast
+az policy state trigger-scan --no-wait
 ```
 
 ## Deploy - azure policies - test management group
@@ -108,4 +108,5 @@ az deployment sub create -f ./deploy-sub-dev.bicep -l australiaeast
 cd 'C:\Users\JesseLoudon\OneDrive\4_GitHub\GlobalBao\azure-policy-as-code\Bicep\demos\security-governance'
 az account set -s 781d91ce-e381-4a27-ad7f-e0cbc0a86e39
 az deployment mg create -f ./deploy-mg-test.bicep -l australiaeast -m TEST
+az policy state trigger-scan --no-wait
 ```
