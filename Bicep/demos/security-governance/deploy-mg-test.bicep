@@ -181,8 +181,11 @@ resource SecGovDemoDef 'Microsoft.Authorization/policySetDefinitions@2020-09-01'
         policyDefinitionId: '/providers/Microsoft.Authorization/policyDefinitions/94de2ad3-e0c1-4caf-ad78-5d47bbc83d3d'
         policyDefinitionReferenceId: 'Virtual networks should be protected by Azure DDoS Protection Standard'
         parameters: {
+          effect: {
+            value: 'Audit'
+          }
           ddosPlan: {
-            value: '/subscriptions/781d91ce-e381-4a27-ad7f-e0cbc0a86e39/resourceGroups/secgovdemoaus'
+            value: '/subscriptions/5bf747d8-aeef-42a9-9263-07379c144d5a/resourceGroups/secgovdemoaus/providers/Microsoft.Network/ddosProtectionPlans/secgovdemoaus'
           }
         }
       }

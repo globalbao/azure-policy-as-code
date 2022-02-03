@@ -69,32 +69,6 @@ az deployment group create --resource-group secgovdemoaus --name KV-AUS -f .\dep
 az deployment group create --resource-group secgovdemoaue --name KV-AUE -f .\deploy-aue.bicep -p .\.parameters\parameters-aue-test.json
 ```
 
-## Deploy - sql servers
-```bash
-cd 'C:\Users\JesseLoudon\OneDrive\4_GitHub\GlobalBao\ResourceModules\arm\Microsoft.Sql\servers'
-az account set -s 5bf747d8-aeef-42a9-9263-07379c144d5a
-az deployment group create --resource-group secgovdemoaus --name SQLSVR-AUS -f .\deploy-aus.bicep -p .\.parameters\parameters-aus.json
-az deployment group create --resource-group secgovdemoaue --name SQLSVR-AUE -f .\deploy-aue.bicep -p .\.parameters\parameters-aue.json
-az account set -s 781d91ce-e381-4a27-ad7f-e0cbc0a86e39
-az deployment group create --resource-group secgovdemoaus --name SQLSVR-AUS -f .\deploy-aus.bicep -p .\.parameters\parameters-aus.json
-az deployment group create --resource-group secgovdemoaue --name SQLSVR-AUE -f .\deploy-aue.bicep -p .\.parameters\parameters-aue.json
-```
-
-## Deploy - app services
-```bash
-cd 'C:\Users\JesseLoudon\OneDrive\4_GitHub\GlobalBao\ResourceModules\arm\Microsoft.Web\sites'
-az account set -s 5bf747d8-aeef-42a9-9263-07379c144d5a
-az deployment group create --resource-group secgovdemoaus --name WA-AUS -f .\deploy-aus.bicep -p .\.parameters\wa.parameters-aus.json
-az deployment group create --resource-group secgovdemoaue --name WA-AUE -f .\deploy-aue.bicep -p .\.parameters\wa.parameters-aue.json
-az deployment group create --resource-group secgovdemoaus --name FA-AUS -f .\deploy-aus.bicep -p .\.parameters\fa.parameters-aus.json
-az deployment group create --resource-group secgovdemoaue --name FA-AUE -f .\deploy-aue.bicep -p .\.parameters\fa.parameters-aue.json
-az account set -s 781d91ce-e381-4a27-ad7f-e0cbc0a86e39
-az deployment group create --resource-group secgovdemoaus --name WA-AUS -f .\deploy-aus.bicep -p .\.parameters\wa.parameters-aus.json
-az deployment group create --resource-group secgovdemoaue --name WA-AUE -f .\deploy-aue.bicep -p .\.parameters\wa.parameters-aue.json
-az deployment group create --resource-group secgovdemoaus --name FA-AUS -f .\deploy-aus.bicep -p .\.parameters\fa.parameters-aus.json
-az deployment group create --resource-group secgovdemoaue --name FA-AUE -f .\deploy-aue.bicep -p .\.parameters\fa.parameters-aue.json
-```
-
 ## Deploy - azure policies - dev subscription
 ```bash
 cd 'C:\Users\JesseLoudon\OneDrive\4_GitHub\GlobalBao\azure-policy-as-code\Bicep\demos\security-governance'
