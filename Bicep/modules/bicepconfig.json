@@ -26,9 +26,7 @@
             "region.asazure.windows.net",
             "batch.core.windows.net"
           ],
-          "excludedhosts": [
-            "schema.management.azure.com"
-          ]
+          "excludedhosts": ["schema.management.azure.com"]
         },
         "no-unused-params": {
           "level": "error"
@@ -47,5 +45,10 @@
         }
       }
     }
-  }
+  },
+  "credentialPrecedence": [
+    "AzureCLI"
+    // "AzurePowerShell"
+    // "VisualStudioCode"
+  ]
 }
