@@ -71,7 +71,6 @@ variable "builtin_policies_security_governance" {
     "Azure subscriptions should have a log profile for Activity Log",
     "Email notification to subscription owner for high severity alerts should be enabled",
     "Subscriptions should have a contact email address for security issues",
-    "Enable Azure Security Center on your subscription"
   ]
 }
 
