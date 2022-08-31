@@ -91,7 +91,7 @@ variable "builtin_policies_logging_governance" {
   description = "List of policy definitions (display names) for the logging_governance policyset"
   default = [
     "Deploy - Configure diagnostic settings for Azure Key Vault to Log Analytics workspace",
-    "Configure diagnostic settings for storage accounts to Log Analytics workspace",
+    "Configure diagnostic settings for Storage Accounts to Log Analytics workspace",
     "Deploy - Configure diagnostic settings for Azure Kubernetes Service to Log Analytics workspace",
     "Deploy - Configure diagnostic settings for SQL Databases to Log Analytics workspace"
   ]
