@@ -50,7 +50,7 @@ variable "builtin_policies_iam_governance" {
     "External accounts with write permissions should be removed from your subscription",
     "External accounts with read permissions should be removed from your subscription",
     "External accounts with owner permissions should be removed from your subscription",
-    "MFA should be enabled accounts with write permissions on your subscription",
+    "MFA should be enabled for accounts with write permissions on your subscription",
     "MFA should be enabled on accounts with owner permissions on your subscription",
     "MFA should be enabled on accounts with read permissions on your subscription",
     "There should be more than one owner assigned to your subscription"
