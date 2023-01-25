@@ -44,7 +44,7 @@ variable "builtin_policies_iam_governance" {
   type        = list(any)
   description = "List of built-in policy definitions (display names) for the iam_governance policyset"
   default = [
-    "Audit usage of custom RBAC rules",
+    "Audit usage of custom RBAC roles",
     "Deprecated accounts should be removed from your subscription",
     "Deprecated accounts with owner permissions should be removed from your subscription",
     "External accounts with write permissions should be removed from your subscription",
