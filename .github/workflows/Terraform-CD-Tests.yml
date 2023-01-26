@@ -12,7 +12,7 @@ jobs:
   Terraform-ValidationTests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - name: Validate Terraform
@@ -35,7 +35,7 @@ jobs:
     needs: Terraform-ValidationTests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v1.2.1
         with:
           cli_config_credentials_token: ${{ secrets.TF_TOKEN }}
