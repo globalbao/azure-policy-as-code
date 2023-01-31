@@ -12,7 +12,7 @@ jobs:
   Bicep-ValidationTests:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 0
     - name: ARM TTK
@@ -31,7 +31,7 @@ jobs:
     needs: Bicep-ValidationTests
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Azure Login
       uses: azure/login@v1
       with:
@@ -59,7 +59,7 @@ jobs:
     needs: Bicep-CI-Tests-Sub-Scope
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Azure Login
       uses: azure/login@v1
       with:

@@ -44,13 +44,13 @@ variable "builtin_policies_iam_governance" {
   type        = list(any)
   description = "List of built-in policy definitions (display names) for the iam_governance policyset"
   default = [
-    "Audit usage of custom RBAC rules",
+    "Audit usage of custom RBAC roles",
     "Deprecated accounts should be removed from your subscription",
     "Deprecated accounts with owner permissions should be removed from your subscription",
     "External accounts with write permissions should be removed from your subscription",
     "External accounts with read permissions should be removed from your subscription",
     "External accounts with owner permissions should be removed from your subscription",
-    "MFA should be enabled accounts with write permissions on your subscription",
+    "MFA should be enabled for accounts with write permissions on your subscription",
     "MFA should be enabled on accounts with owner permissions on your subscription",
     "MFA should be enabled on accounts with read permissions on your subscription",
     "There should be more than one owner assigned to your subscription"
@@ -91,7 +91,7 @@ variable "builtin_policies_logging_governance" {
   description = "List of policy definitions (display names) for the logging_governance policyset"
   default = [
     "Deploy - Configure diagnostic settings for Azure Key Vault to Log Analytics workspace",
-    "Configure diagnostic settings for storage accounts to Log Analytics workspace",
+    "Configure diagnostic settings for Storage Accounts to Log Analytics workspace",
     "Deploy - Configure diagnostic settings for Azure Kubernetes Service to Log Analytics workspace",
     "Deploy - Configure diagnostic settings for SQL Databases to Log Analytics workspace"
   ]

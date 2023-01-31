@@ -12,7 +12,7 @@ jobs:
   Terraform-ValidationTests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - name: Validate Terraform
@@ -28,14 +28,14 @@ jobs:
     env:
       TF_IN_AUTOMATION: true
       TF_INPUT: false
-      ARM_CLIENT_ID: ${{ secrets.SP_LAB_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.SP_LAB_SEC }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.SP_LAB_SUB }}
-      ARM_TENANT_ID: ${{ secrets.SP_LAB_TEN }}
+      ARM_CLIENT_ID: ${{ secrets.SP_GLOBALBAO_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.SP_GLOBALBAO_SEC }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.SP_GLOBALBAO_SUB }}
+      ARM_TENANT_ID: ${{ secrets.SP_GLOBALBAO_TEN }}
     needs: Terraform-ValidationTests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v1.2.1
         with:
           cli_config_credentials_token: ${{ secrets.TF_TOKEN }}
