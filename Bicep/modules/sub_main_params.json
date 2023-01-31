@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "assignmentEnforcementMode": {
-      "value": "Default"
+      "value": "DoNotEnforce"
     },
     "assignmentIdentityLocation": {
       "value": "australiaeast"
