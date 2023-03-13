@@ -4,8 +4,8 @@ on:
     branches: [main]
     paths:
       - "**.tf"
-  schedule:
-    - cron: "0 0 * * *" #at the end of every day
+  #schedule:
+    #- cron: "0 0 * * *" #at the end of every day
   workflow_dispatch:
 
 jobs:
