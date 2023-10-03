@@ -13,9 +13,9 @@
     },
     "tagNames": {
       "value": [
-        "CostCenter",
-        "Application",
-        "Environment"
+        "Purpose",
+        "Owner",
+        "ProvisionDate"
       ]
     },
     "tagValue": {
